@@ -30,3 +30,23 @@
 ---
 
 ## 🛠️ The Learning Workflow
+
+```text
+[Pick a Topic] 
+      │
+      ▼
+[Ask Gao/Claude for Materials & Key Questions]
+      │
+      ▼
+[Build a Project / Do Deep Research]
+      │
+      ▼
+[Write a Blog Post / Teach the Concept in English]
+```
+
+---
+
+### 📝 Active Logs & Goals
+
+* Current Focus: [Insert the specific topic or project you are working on right now]
+* Latest Victory: [Record your most recent win, finished article, or fixed bug here]
