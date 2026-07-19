@@ -46,6 +46,31 @@
 
 ---
 
+## The 4 Layers of Key Questions
+
+This structure defines how we break down any new technology or concept into deep, active learning targets.
+
+```text
+📁 Key Questions Framework
+├── 📄 1. The Problem Solver (The Why)
+│   ├── Pain Point: What specific problem does this tool solve?
+│   └── Alternative Cost: What happens if we try to build without it?
+│
+├── 📄 2. Under the Hood (The Core Mechanism)
+│   ├── Mental Model: How does the data/state flow behind the scenes?
+│   └── Lifecycle: What is the sequence of execution?
+│
+├── 📄 3. The Trade-off (The Real World)
+│   ├── Downsides: What are the performance costs or limitations?
+│   └── Anti-Patterns: When is this tool overkill or a bad choice?
+│
+└── 📄 4. The Mental Sandbox (The Active Challenge)
+    ├── Edge Cases: How does the tool behave in complex scenarios?
+    └── Constraints: How do we engineer a solution under strict limits?
+```
+
+---
+
 ### 📝 Active Logs & Goals
 
 * Current Focus: [Insert the specific topic or project you are working on right now]
