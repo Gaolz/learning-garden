@@ -1,87 +1,98 @@
 # What Happens When You Update Your DNS?
 
-* source:  [Julia Evans's article on updating DNS records](https://jvns.ca/blog/how-updating-dns-works/):
-
-## 1. Authoritative vs. Recursive DNS Servers
-
-* **Authoritative DNS Servers (Nameservers):** Hold the actual database mapping domains to IP addresses.
-* **Recursive DNS Servers (e.g., `8.8.8.8`):** Do not store domain ownership data natively. They resolve domain queries by asking authoritative servers and caching the results.
+*Source: [Julia Evans's article on updating DNS records](https://jvns.ca/blog/how-updating-dns-works/)*
 
 ---
 
-## 2. How Recursive Resolution Works (From Scratch)
+## Catalogue
 
-When a recursive DNS server resolves a domain with an empty cache:
+1. [Two Kinds of DNS Servers](#1-two-kinds-of-dns-servers)
+2. [How DNS Resolution Works (Cold Cache)](#2-how-dns-resolution-works-cold-cache)
+3. [Updating an A Record](#3-updating-an-a-record)
+4. [Changing Nameservers](#4-changing-nameservers)
+5. [Key Takeaways](#key-takeaways)
 
-1. **Root Server:** Queries hardcoded root IP addresses to find the Top-Level Domain (TLD) nameservers (e.g., `.com`).
-2. **TLD Server:** Queries the `.com` nameservers to locate the authoritative nameservers for the specific domain.
-3. **Authoritative Server:** Queries the domain’s authoritative nameserver to get the final IP address (A record).
+---
+
+## 1. Two Kinds of DNS Servers
+
+- **Authoritative Nameservers** — own the real domain→IP data.
+- **Recursive Resolvers** (e.g. `8.8.8.8`) — don't own data. They ask authoritative servers and cache answers.
+
+---
+
+## 2. How DNS Resolution Works (Cold Cache)
+
+When a recursive resolver has nothing cached, it walks down 3 levels:
+
+| Step | Who It Asks | What It Gets Back |
+|------|-------------|-------------------|
+| 1 | Root Server | `.com` nameserver IP |
+| 2 | TLD Server (`.com`) | Domain's authoritative nameserver IP |
+| 3 | Authoritative Server | Final A record (IP address) |
 
 ```
 [ Client ]
     │
     ▼
-[ Recursive DNS (e.g., 8.8.8.8) ]
+[ Recursive Resolver (e.g. 8.8.8.8) ]
     │
-    ├─── Step 1: Query Root Server ( . ) ───► [ Root Server ]
-    │                                              │
-    │    ◄─── Returns .com Nameserver IP ──────────┘
+    ├── 1. Ask Root ────► get .com NS ──────► [ Root Server ]
     │
-    ├─── Step 2: Query TLD Server ( .com ) ──► [ TLD Server ]
-    │                                              │
-    │    ◄─── Returns Domain's Nameserver IP ──────┘
+    ├── 2. Ask .com ────► get domain NS ────► [ TLD Server ]
     │
-    └─── Step 3: Query Authoritative Server ─► [ Authoritative Server ]
-                                                   │
-         ◄─── Returns Final A Record (IP Address) ─┘
-
+    └── 3. Ask Domain ─► get IP ────────────► [ Authoritative Server ]
 ```
 
 ---
 
-## 3. Updating an A Record (Same Nameservers)
+## 3. Updating an A Record
 
-* **Propagation Speed:** Updates take effect quickly—often within minutes—once the existing cache expires.
-* **TTL (Time to Live):** Dictates how long recursive servers are allowed to cache a record.
-* **Cache Inconsistency:** During propagation, users may see different results because recursive servers (or load-balanced backends) clear their caches at different times.
-* **Non-Compliant Caches:** Some ISP DNS servers or application-level caches (like the JVM) ignore TTLs and cache IP addresses longer than requested.
+Changing where `blog.example.com` points — but keeping the same nameservers.
+
+- **Fast.** Takes effect once cached TTL expires (often minutes).
+- **TTL** = how long a recursive resolver may cache the record.
+- **Inconsistency** = different resolvers clear cache at different times → some users see old IP, some see new IP.
+- **Rogue caches** — some ISPs or app-level caches (JVM) ignore TTL and hold IPs longer.
 
 ```
-[ Update A Record at Authoritative Server ]
-                   │
-                   ▼
-       Does a cached record exist?
-          ├─── NO  ──► New IP active immediately
-          └─── YES ──► Old IP served until TTL expires
-
+Update A Record
+    │
+    ├── Nothing cached? ──► new IP active right away
+    │
+    └── Cache exists?  ──► old IP served until TTL runs out
 ```
 
 ---
 
-## 4. Changing Nameservers Entirely
+## 4. Changing Nameservers
 
-* **Longer Delays:** Changing domain nameservers can take up to **48 hours** to fully propagate.
-* **Registry Update:** The registrar must notify the TLD nameservers (e.g., `.com`) of the new nameservers.
-* **Higher TTLs:** Parent TLD NS records carry significantly longer TTLs (e.g., 48 hours / 172,800 seconds) compared to standard A records.
+Switching your entire nameserver provider (e.g. from Namecheap to Cloudflare).
+
+- **Slow.** Can take up to **48 hours**.
+- Registrar tells TLD (`.com`) about the new nameservers.
+- TLD-level NS records have much longer TTLs (~48 hours / 172,800 seconds) vs. normal A records.
 
 ```
-[ User Updates Nameservers at Registrar ]
-                   │
-                   ▼
-[ Registrar Notifies TLD Nameserver (e.g., .com) ]
-                   │
-                   ▼
-  [ NS Record Updated (TTL = 24 to 48 Hours) ]
-                   │
-                   ▼
-[ Recursive DNS Caches Refresh Gradually Over 48h ]
-
+User changes NS at registrar
+         │
+         ▼
+Registrar notifies TLD (.com)
+         │
+         ▼
+NS record updated (TTL: 24–48 hours)
+         │
+         ▼
+All resolvers gradually pick up new NS over ~48h
 ```
 
 ---
 
 ## Key Takeaways
 
-* Changing **A records** on existing nameservers is fast (depends on A record TTL).
-* Changing **Nameservers** is slow (depends on TLD NS record TTL, up to 48 hours).
-* Client-side software and non-compliant ISPs can introduce extra caching delays beyond specified TTLs.
+| Change Type | Speed | What Controls It |
+|-------------|-------|------------------|
+| A record (same NS) | Fast (minutes) | A record TTL |
+| Nameservers | Slow (up to 48h) | TLD NS record TTL |
+
+- Rogue ISPs and client-side caches can add extra delays beyond TTL.
