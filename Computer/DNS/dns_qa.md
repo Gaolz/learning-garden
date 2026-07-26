@@ -70,16 +70,16 @@
 
 > 🧙 **Gao:** No, DNS stores many things. Each type has its own record:
 
-```
+```text
 ┌────────┬──────────────────────────────────┐
 │ Record │ Purpose                          │
 ├────────┼──────────────────────────────────┤
-│   A    │ IPv4 address                    │
-│  AAAA  │ IPv6 address                    │
-│   NS   │ Name server pointer             │
-│   MX   │ Mail server address             │
-│  PTR   │ Reverse lookup (IP → name)      │
-│  SOA   │ Domain admin / zone metadata    │
+│   A    │ IPv4 address                     │
+│  AAAA  │ IPv6 address                     │
+│   NS   │ Name server pointer              │
+│   MX   │ Mail server address              │
+│  PTR   │ Reverse lookup (IP → name)       │
+│  SOA   │ Domain admin / zone metadata     │
 └────────┴──────────────────────────────────┘
 ```
 
@@ -114,10 +114,10 @@ You change A record
         │
         ▼
   ┌─────────────────────────┐
-  │  Old IP still in cache?  │
-  │  → Users see old IP      │
-  │  Cache expired?          │
-  │  → Users see new IP      │
+  │  Old IP still in cache? │
+  │  → Users see old IP     │
+  │  Cache expired?         │
+  │  → Users see new IP     │
   └─────────────────────────┘
 ```
 
@@ -156,7 +156,7 @@ You change A record
 
 > 🧙 **Gao:** Yes, but there are two roles:
 
-```
+```text
 ┌─────────────────────────┬────────────────────────────────────┐
 │ Authoritative Server    │ Owns the real data for a domain.   │
 │                         │ "I am the source of truth."        │
@@ -172,7 +172,7 @@ You change A record
 
 > 🧙 **Gao:** It walks down the hierarchy:
 
-```
+```text
    🏔️  ROOT SERVER
    │   "Go ask .com, I know where it lives."
    │
@@ -211,7 +211,7 @@ You change A record
 
 > 🧙 **Gao:** Both.
 
-```
+```text
 ┌─────┬──────────────────────────────────────────┐
 │ UDP │ Default. Fast, lightweight, one packet.  │
 ├─────┼──────────────────────────────────────────┤
@@ -223,7 +223,7 @@ You change A record
 
 ---
 
-```
+```text
 ╔══════════════════════════════════════════════════════════╗
 ║  🧙  Gao's DNS Cheat Sheet                              ║
 ╠══════════════════════════════════════════════════════════╣
