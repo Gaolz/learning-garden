@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tmux show-options:*)",
+      "Bash(rm -rf ~/.oh-my-zsh ~/.p10k*)",
+      "Bash(rm -f ~/.zshrc ~/.zshenv ~/.zlogin ~/.zprofile ~/.zlogout ~/.zshrc.pre-oh-my-zsh ~/.zcompdump* ~/.zsh_history)",
+      "Bash(fish --version)",
+      "Read(//private/etc/**)"
+    ]
+  }
+}
