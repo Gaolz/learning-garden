@@ -1,3 +1,6 @@
+---
+tags: [computer-science, databases, postgresql, roadmap]
+---
 # PostgreSQL 基础与核心功能 Roadmap
 
 这份 Roadmap 专为 PostgreSQL 初学者与应用开发者设计，涵盖了除基础 CRUD（`SELECT`, `INSERT`, `UPDATE`, `DELETE`）之外，在实际业务开发中最常使用、最关键的 **PostgreSQL 原生核心功能**。

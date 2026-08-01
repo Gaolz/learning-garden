@@ -1,3 +1,6 @@
+---
+tags: [english-writing, life, time, essay]
+---
 ## We are only young once
 
 ---

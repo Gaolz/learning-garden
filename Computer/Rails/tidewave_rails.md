@@ -1,3 +1,6 @@
+---
+tags: [computer-science, rails, ruby, mcp, ai-coding, deep-dive]
+---
 # Tidewave Rails — Deep Technical Analysis
 
 > Source: [tidewave-ai/tidewave_rails](https://github.com/tidewave-ai/tidewave_rails)

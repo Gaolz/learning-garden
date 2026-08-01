@@ -1,3 +1,6 @@
+---
+tags: [computer-science, databases, postgresql, roadmap, advanced]
+---
 # PostgreSQL 高级特性与插件进阶 Roadmap
 
 这份 Roadmap 专为 PostgreSQL 开发者与架构师设计，按照**从易到难（入门/进阶/专家/高阶）**的顺序梳理了原生的硬核特性与热门第三方扩展。

@@ -1,3 +1,6 @@
+---
+tags: [computer-science, dns, networking, qa]
+---
 # DNS Q&A: A Cartoon Conversation
 
 *Source: [Julia Evans's article on DNS questions](https://questions.wizardzines.com/dns.html)

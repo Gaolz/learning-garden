@@ -1,3 +1,6 @@
+---
+tags: [computer-science, ruby, rails, zed, lsp, troubleshooting]
+---
 # 在 Zed 编辑器中为 Rails 项目配置 Solargraph 和 RuboCop
 
 ## 问题

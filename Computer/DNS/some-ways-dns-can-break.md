@@ -1,3 +1,6 @@
+---
+tags: [computer-science, dns, networking, troubleshooting]
+---
 ## Some Ways DNS Can Break
 
 * source[some-ways-dns-can-break](https://jvns.ca/blog/2022/01/15/some-ways-dns-can-break/)

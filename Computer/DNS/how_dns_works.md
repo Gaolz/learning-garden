@@ -1,3 +1,6 @@
+---
+tags: [computer-science, dns, networking, cheatsheet]
+---
 # 查询A记录
 dig example.com A
 

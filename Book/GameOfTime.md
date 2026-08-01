@@ -1,3 +1,6 @@
+---
+tags: [book-notes, reading-notes, economics, finance, time]
+---
 # 《时间游戏》阅读框架
 
 ## 第一层：概念底层

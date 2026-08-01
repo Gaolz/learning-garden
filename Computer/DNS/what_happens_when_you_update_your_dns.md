@@ -1,3 +1,6 @@
+---
+tags: [computer-science, dns, networking, tutorial]
+---
 # What Happens When You Update Your DNS?
 
 *Source: [Julia Evans's article on updating DNS records](https://jvns.ca/blog/how-updating-dns-works/)*

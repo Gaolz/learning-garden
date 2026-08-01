@@ -1,3 +1,6 @@
+---
+tags: [computer-science, redis, databases, guide, hands-on]
+---
 # Redis Stage 1 — Hands-On Guide
 
 > **How to use this guide:** Open a terminal next to this file. For each section,

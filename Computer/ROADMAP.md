@@ -1,3 +1,6 @@
+---
+tags: [computer-science, roadmap, learning]
+---
 # Computer Science Learning Roadmap
 
 Status: `todo` | `doing` | `done`

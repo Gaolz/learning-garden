@@ -1,3 +1,6 @@
+---
+tags: [computer-science, redis, databases, caching, roadmap]
+---
 # Redis 学习路线图与核心指南
 
 ---

@@ -1,3 +1,6 @@
+---
+tags: [computer-science, dns, networking, ruby, deep-dive]
+---
 # Building a DNS Resolver from Scratch in Ruby: Deep Dive & Learning Notes
 
 > **Reference Article**: Julia Evans — *[Making a DNS query in Ruby from scratch](https://jvns.ca/blog/2022/11/06/making-a-dns-query-in-ruby-from-scratch/)*

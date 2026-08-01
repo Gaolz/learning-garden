@@ -1,3 +1,6 @@
+---
+tags: [book-notes, reading-notes, finance, wealth, psychology]
+---
 There are a million ways to get wealthy, and plenty of books on how to do so.
 
 But there's only one way to stay wealthy: some combination of frugality and paranoia.
@@ -144,7 +147,6 @@ A good plan doesn't pretend they weren't true, it embraces it and emphasizes roo
 Many bets fail not because they're wrong, but because they were mostly right in a situation that required things to be exactly right. Room for error -- often called margin of safety -- is one of the most underappreciated force in finance. It comes in many forms: A frugal budget, flexible thinking, and a loose timeline -- anything that lets you live happily with a range of outcomes.
 
 It's different from being conservative. Conservative is avoiding a certain level of risk. Margin of safety is raising the odds of success at a given level of risk by increasing your chances of survival. Its magic is that the higher your margin of safety, the smaller your edge needs to be to have a favorable outcome.
-
 
 
 
