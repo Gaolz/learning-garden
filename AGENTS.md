@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## About This Repository
 
@@ -12,9 +12,9 @@ The central operating document is `start.md`, which defines:
 - **Learning Workflow:** Pick topic → get materials & key questions from AI → build/research → write/teach in English.
 - **4-Layer Key Questions Framework:** A structured approach to breaking down any new technology or concept (Why → Core Mechanism → Trade-offs → Mental Sandbox).
 
-## How Claude Should Work Here
+## How Codex Should Work Here
 
-Gariel treats Claude as a **senior developer/tutor**, not a code generator. When helping:
+Gariel treats Codex as a **senior developer/tutor**, not a code generator. When helping:
 
 1. **Teach, don't just do.** Explain the *why* behind solutions. Point out trade-offs, not just answers.
 2. **Ask the key questions.** Before diving into a solution, ask foundational questions to verify Gariel understands the concept — reference the 4-layer framework in `start.md`.

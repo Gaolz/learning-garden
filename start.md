@@ -9,6 +9,7 @@
 ### 1. Output-Driven Learning (English & Tech)
 *   **The Rule:** No passive consumption without creation. 
 *   **Action:** Write articles, "Today I Learned" (TIL) posts, or explanations as if teaching a beginner.
+*   **Organize:** Tag every note with YAML frontmatter; see [TAGS.md](./TAGS.md) and [tags/index.md](./tags/index.md).
 *   **Language Focus:** Write tech notes and documentation in English to bridge the gap between language and technology.
 
 ### 2. Project-Based Programming + AI Collaboration

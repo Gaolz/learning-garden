@@ -1,0 +1,23 @@
+{
+  "Garden markdown note": {
+    "prefix": "garden",
+    "body": [
+      "---",
+      "title: \"${1:Note Name}\"",
+      "tags: [${2:topic, type}]",
+      "---",
+      "",
+      "# ${1:Note Name}",
+      "",
+      "## Why",
+      "",
+      "## Under the Hood",
+      "",
+      "## Trade-offs",
+      "",
+      "## Mental Sandbox",
+      "$0"
+    ],
+    "description": "Insert the learning-garden markdown note template"
+  }
+}
