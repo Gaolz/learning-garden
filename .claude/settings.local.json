@@ -5,7 +5,17 @@
       "Bash(rm -rf ~/.oh-my-zsh ~/.p10k*)",
       "Bash(rm -f ~/.zshrc ~/.zshenv ~/.zlogin ~/.zprofile ~/.zlogout ~/.zshrc.pre-oh-my-zsh ~/.zcompdump* ~/.zsh_history)",
       "Bash(fish --version)",
-      "Read(//private/etc/**)"
+      "Read(//private/etc/**)",
+      "Bash(rbenv version:*)",
+      "Bash(rbenv which:*)",
+      "Bash(gem list:*)",
+      "Bash(brew list:*)",
+      "Bash(ruby --version)",
+      "Read(//Users/gaowanxing/.config/fish/**)",
+      "Bash(gem install:*)",
+      "Read(//Users/gaowanxing/.claude/**)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''Project MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")"
     ]
   }
 }
