@@ -1,0 +1,9 @@
+{
+  "cssTheme": "Blue Topaz",
+  "accentColor": "#6eb0e2",
+  "interfaceFontFamily": "Monaco",
+  "textFontFamily": "Geneva",
+  "baseFontSize": 18,
+  "baseFontSizeAction": true,
+  "translucency": true
+}
