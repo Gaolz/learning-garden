@@ -3,5 +3,6 @@
   "templater-obsidian",
   "obsidian-icon-folder",
   "quickadd",
-  "obsidian-linter"
+  "obsidian-linter",
+  "dataview"
 ]

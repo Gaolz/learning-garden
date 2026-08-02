@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "478d0e4df34e44ab",
+        "id": "088b20596e4585c0",
         "type": "tabs",
         "children": [
           {
-            "id": "760ead830b0f8845",
+            "id": "fe2ab677dc186dc4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "RoadMap/julia-evans-study-roadmap.md",
+                "file": "Programming/Algorithm/Selection-Sort.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "julia-evans-study-roadmap"
+              "title": "Selection-Sort"
             }
           }
         ]
@@ -41,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": true,
+                "autoReveal": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "test",
+                "query": "自律",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -200,42 +200,44 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "760ead830b0f8845",
+  "active": "fe2ab677dc186dc4",
   "lastOpenFiles": [
+    "Programming/Algorithm/Binary-Search.md",
+    "Programming/Ruby/Tidewave-Rails-Deep-Dive.md",
+    "Programming/Ruby/Zed-Solargraph-Setup.md",
+    "Computer/Network/DNS/What-Happens-When-You-Update-DNS.md",
+    "Computer/Network/DNS/Some-Ways-DNS-Can-Break.md",
+    "Computer/Network/DNS/How-DNS-Works.md",
+    "Computer/Network/DNS/DNS-QA-Cartoon-Conversation.md",
+    "Computer/Network/DNS/Building-DNS-Resolver-in-Ruby.md",
+    "Computer/Database/Redis/Redis-Stage1-Hands-On-Guide.md",
+    "Computer/Database/Redis/Redis-Learning-Roadmap.md",
+    "Computer/Database/Postgresql/PostgreSQL-Basic-Roadmap.md",
+    "Computer/Database/Postgresql/PostgreSQL-Advanced-Roadmap.md",
+    "Challenge/自律即自由.md",
+    "Computer/Network/DNS/image/dns_as_library.jpg",
+    "Computer/Network/DNS/image/dns_process.png",
+    "Computer/Network/DNS/image",
+    "Programming/Algorithm/Selection-Sort.md",
+    "RoadMap/Computer-Science-Roadmap.md",
+    "Finance/Company",
+    "CLAUDE.md",
+    "Book/2026/鱼翅与花椒.md",
+    "Language/EN/LindseyGao",
+    "Book/2026/金钱心理学.md",
+    "Book/2026/时间游戏.md",
+    "Book/2026/市场本质.md",
+    "Book/2026/估值原理.md",
     "DailyNotes/2026-08-02.md",
-    "Article/Getting Things Done.md",
-    "RoadMap/julia-evans-study-roadmap.md",
-    "留白/test.md",
-    "DailyNotes/2026-08-01.md",
-    "Templates/Tech Article Note Template.md",
-    "Templates/Daily Note Template.md",
+    "Rest/Sleep/Evening Wind-Down Ritual.md",
+    "Rest/Meditation/Anchor Practice.md",
+    "RandomThoughts/Apple Notes Import.md",
+    "RandomThoughts",
+    "Math",
+    "Exercise/Eye",
     "Templates",
     "Programming/Python",
-    "Programming/Ruby/hello.md",
-    "Progromming/Ruby/hello.md",
     "Progromming/Ruby",
-    "Progromming",
-    "留白",
-    "copilot/copilot-custom-prompts/Clip Web Page.md",
-    "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
-    "copilot/copilot-custom-prompts/Remove URLs.md",
-    "copilot/copilot-custom-prompts/Generate glossary.md",
-    "copilot/copilot-custom-prompts/Generate table of contents.md",
-    "copilot/copilot-custom-prompts/Make longer.md",
-    "copilot/copilot-custom-prompts/Make shorter.md",
-    "copilot/copilot-custom-prompts/Emojify.md",
-    "copilot/copilot-custom-prompts/Explain like I am 5.md",
-    "copilot/copilot-custom-prompts/Simplify.md",
-    "copilot/copilot-custom-prompts/Summarize.md",
-    "copilot/copilot-custom-prompts/Translate to Chinese.md",
-    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
-    "copilot/copilot-custom-prompts",
-    "copilot",
-    "Article",
-    "RoadMap",
-    "Computer/Numpy & Pandas",
-    "欢迎.md"
+    "Progromming"
   ]
 }

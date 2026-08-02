@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "LiBookTemplate",
-      "LiTemplaterIcon",
-      "🐍",
-      "⛰",
-      "🦾"
+      "LiLoader",
+      "LiCircle",
+      "LiXCircle",
+      "🤔",
+      "📐"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -75,5 +75,19 @@
   "Programming/DataStructure": "LiStackVertical",
   "Tourist": "⛰",
   "Programming/Python": "🐍",
-  "Templates": "LiBookTemplate"
+  "Templates": "LiBookTemplate",
+  "Exercise/Eye": "👀",
+  "Math": "📐",
+  "RandomThoughts": "🤔",
+  "Challenge/01 Photo a Day.md": "LiLoader",
+  "Challenge/02 Handwritten Letter.md": "LiCircle",
+  "Challenge/03 Random Bus Adventure.md": "LiCircle",
+  "Challenge/04 Elderly Pace Day.md": "LiCircle",
+  "Challenge/05 Cash Only Day.md": "LiCircle",
+  "Challenge/06 Digital Detox 24h.md": "LiCircle",
+  "Challenge/07 Vegetarian Week.md": "LiCircle",
+  "Challenge/08 Sunrise Wake Up Week.md": "LiCircle",
+  "Challenge/09 Cold Shower Week.md": "LiCircle",
+  "Challenge/10 English Only Day.md": "LiCircle",
+  "Challenge/11 No AV 100 Days.md": "LiLoader"
 }
