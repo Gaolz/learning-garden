@@ -12,8 +12,8 @@ const today = dv.date("now");
 const currentYear = today.year;
 const currentMonth = today.month;
 
-// ===== Helper: build a photo card HTML =====
-function cardHTML(p, compact = false) {
+// ===== Helper: build card DOM element =====
+function createCard(p, compact) {
   const d = p.created;
   const dateStr = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
   const day = String(d.day).padStart(2, '0');
@@ -22,49 +22,112 @@ function cardHTML(p, compact = false) {
   const feeling = p.feeling_text || '';
   const tags = p.tags ? p.tags.filter(t => t !== 'photo') : [];
 
-  // Try to get image from convention path
+  // Build image
   const imgRelPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${dateStr}.jpg`;
-  let imgSrc = '';
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'photo-card-image';
+
   try {
     const imgFile = app.vault.getAbstractFileByPath(imgRelPath);
     if (imgFile) {
-      imgSrc = app.vault.getResourcePath(imgFile);
+      const img = document.createElement('img');
+      img.src = app.vault.getResourcePath(imgFile);
+      img.alt = dateStr;
+      imgWrap.appendChild(img);
+    } else {
+      imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
     }
-  } catch(e) {}
-
-  const imgHTML = imgSrc
-    ? `<img src="${imgSrc}" alt="${dateStr}" />`
-    : `<div class="photo-card-placeholder">📷</div>`;
-
-  const notePath = p.file.path;
-
-  if (compact) {
-    // Compact card for year mode
-    return `
-      <div class="photo-card photo-card-compact" data-path="${notePath}">
-        <div class="photo-card-image">${imgHTML}</div>
-        <div class="photo-card-body">
-          <span class="photo-card-compact-date">${day}</span>
-          ${emoji ? `<span class="photo-card-compact-emoji">${emoji}</span>` : ''}
-          ${location ? `<span class="photo-card-compact-location">${location}</span>` : ''}
-        </div>
-      </div>`;
+  } catch(e) {
+    imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
   }
 
-  // Full card for month mode
-  return `
-    <div class="photo-card" data-path="${notePath}">
-      <div class="photo-card-image">${imgHTML}</div>
-      <div class="photo-card-body">
-        <div class="photo-card-header">
-          <span class="photo-card-date">${dateStr}</span>
-          ${emoji ? `<span class="photo-card-emoji">${emoji}</span>` : ''}
-        </div>
-        ${location ? `<div class="photo-card-location">📍 ${location}</div>` : ''}
-        ${feeling ? `<div class="photo-card-feeling">${feeling}</div>` : ''}
-        ${tags.length ? `<div class="photo-card-tags">${tags.map(t => `<span class="tag-chip">#${t}</span>`).join(' ')}</div>` : ''}
-      </div>
-    </div>`;
+  // Build card
+  const card = document.createElement('div');
+  card.className = compact ? 'photo-card photo-card-compact' : 'photo-card';
+  card.appendChild(imgWrap);
+
+  const body = document.createElement('div');
+  body.className = 'photo-card-body';
+
+  if (compact) {
+    const dateEl = document.createElement('span');
+    dateEl.className = 'photo-card-compact-date';
+    dateEl.textContent = day;
+    body.appendChild(dateEl);
+
+    if (emoji) {
+      const emojiEl = document.createElement('span');
+      emojiEl.className = 'photo-card-compact-emoji';
+      emojiEl.textContent = emoji;
+      body.appendChild(emojiEl);
+    }
+
+    if (location) {
+      const locEl = document.createElement('span');
+      locEl.className = 'photo-card-compact-location';
+      // Show as own div for alignment
+      const locDiv = document.createElement('div');
+      locDiv.className = 'photo-card-compact-location';
+      locDiv.textContent = `📍 ${location}`;
+      body.appendChild(locDiv);
+    }
+  } else {
+    // Header: date + emoji
+    const header = document.createElement('div');
+    header.className = 'photo-card-header';
+
+    const dateEl = document.createElement('span');
+    dateEl.className = 'photo-card-date';
+    dateEl.textContent = dateStr;
+    header.appendChild(dateEl);
+
+    if (emoji) {
+      const emojiEl = document.createElement('span');
+      emojiEl.className = 'photo-card-emoji';
+      emojiEl.textContent = emoji;
+      header.appendChild(emojiEl);
+    }
+
+    body.appendChild(header);
+
+    // Location
+    if (location) {
+      const locEl = document.createElement('div');
+      locEl.className = 'photo-card-location';
+      locEl.textContent = `📍 ${location}`;
+      body.appendChild(locEl);
+    }
+
+    // Feeling
+    if (feeling) {
+      const feelEl = document.createElement('div');
+      feelEl.className = 'photo-card-feeling';
+      feelEl.textContent = feeling;
+      body.appendChild(feelEl);
+    }
+
+    // Tags
+    if (tags.length > 0) {
+      const tagsDiv = document.createElement('div');
+      tagsDiv.className = 'photo-card-tags';
+      tags.forEach(t => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip';
+        chip.textContent = `#${t}`;
+        tagsDiv.appendChild(chip);
+      });
+      body.appendChild(tagsDiv);
+    }
+  }
+
+  card.appendChild(body);
+
+  // Click → open note
+  card.addEventListener('click', () => {
+    app.workspace.openLinkText(p.file.path, '', false);
+  });
+
+  return card;
 }
 
 // ===== Month Mode =====
@@ -77,27 +140,11 @@ const monthPages = dv.pages('#photo')
 if (monthPages.length === 0) {
   dv.paragraph("_No photos this month yet. Take your first photo today!_");
 } else {
-  let html = '<div class="photo-grid photo-grid-month">';
+  const grid = dv.container.createEl('div', { cls: 'photo-grid photo-grid-month' });
   for (const p of monthPages) {
-    html += cardHTML(p);
+    grid.appendChild(createCard(p, false));
   }
-  html += '</div>';
-  dv.paragraph(html);
 }
-
-// ===== Click handler for card opening =====
-dv.paragraph(`
-<script>
-setTimeout(() => {
-  document.querySelectorAll('.photo-card[data-path]').forEach(card => {
-    card.addEventListener('click', function() {
-      const path = this.getAttribute('data-path');
-      app.workspace.openLinkText(path, '', false);
-    });
-  });
-}, 100);
-</script>
-`);
 
 // ===== Year Mode =====
 dv.header(2, `📆 ${currentYear} — All Photos`);
@@ -109,29 +156,11 @@ const yearPages = dv.pages('#photo')
 if (yearPages.length === 0) {
   dv.paragraph("_No photos this year yet._");
 } else {
-  let html = '<div class="photo-grid photo-grid-year">';
+  const grid = dv.container.createEl('div', { cls: 'photo-grid photo-grid-year' });
   for (const p of yearPages) {
-    html += cardHTML(p, true);
+    grid.appendChild(createCard(p, true));
   }
-  html += '</div>';
-  dv.paragraph(html);
 }
-
-// ===== Year mode click handler =====
-dv.paragraph(`
-<script>
-setTimeout(() => {
-  document.querySelectorAll('.photo-card[data-path]').forEach(card => {
-    card.addEventListener('click', function(e) {
-      if (e.target.closest('.photo-card[data-path]') === this) {
-        const path = this.getAttribute('data-path');
-        app.workspace.openLinkText(path, '', false);
-      }
-    });
-  });
-}, 100);
-</script>
-`);
 ```
 
 ## 📊 Stats
@@ -232,11 +261,9 @@ for (let d = start; d <= end; d = d.plus({days: 1})) {
   if (isToday && !hasPhoto) border = '1px dashed #4a8a4a';
 
   const tooltip = `${key}${hasPhoto ? ' - 📷' : ''}${isToday ? ' (today)' : ''}`;
-  const onClick = hasPhoto && photoPagesByDay[key]
-    ? `onclick="app.workspace.openLinkText('${photoPagesByDay[key].file.path}', '', false)" style="cursor:pointer;"`
-    : '';
+  const notePath = hasPhoto && photoPagesByDay[key] ? photoPagesByDay[key].file.path : '';
 
-  html += `<div style="width:14px;height:14px;background:${bg};border:${border};border-radius:2px;" title="${tooltip}" ${onClick}></div>`;
+  html += `<div style="width:14px;height:14px;background:${bg};border:${border};border-radius:2px;" title="${tooltip}" data-note="${notePath}"></div>`;
 }
 
 html += '</div>';
@@ -247,7 +274,19 @@ html += '<span style="color:#1a1a1a;">■</span> no photo &nbsp;';
 html += '<span style="border:1px dashed #4a8a4a;padding:0 2px;">□</span> today (pending)';
 html += '</div>';
 
-dv.paragraph(html);
+const heatmapContainer = dv.container.createEl('div');
+heatmapContainer.innerHTML = html;
+
+// Click handler for heatmap cells (attached via DOM, not stripped)
+heatmapContainer.querySelectorAll('[data-note]').forEach(cell => {
+  const notePath = cell.getAttribute('data-note');
+  if (notePath) {
+    cell.style.cursor = 'pointer';
+    cell.addEventListener('click', () => {
+      app.workspace.openLinkText(notePath, '', false);
+    });
+  }
+});
 ```
 
 ## 🔗 Quick Links
