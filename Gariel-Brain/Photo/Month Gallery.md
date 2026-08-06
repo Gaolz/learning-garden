@@ -11,12 +11,52 @@ cssclass: photo-index
 >
 > One photo a day. A place, a face, a feeling, a tag — each day worth remembering.
 
-> [[Year Gallery|📆 年度画廊 / Year Gallery →]] &nbsp;|&nbsp; [[../../Templates/Photo Note Template|📷 添加今日照片 / Add Today]]
+> [[Year Gallery|📆 年度画廊 / Year Gallery →]]
 
 ```dataviewjs
-const today = dv.date("now");
-const currentYear = today.year;
-const currentMonth = today.month;
+// ===== Quick-action: Open or Create Today's Photo =====
+const now = new Date();
+const pad = (n) => String(n).padStart(2, '0');
+const todayStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+const todayYear = now.getFullYear();
+const todayMonth = pad(now.getMonth() + 1);
+const notePath = `Photo/${todayYear}/${todayMonth}/${todayStr}.md`;
+
+const btnRow = dv.container.createEl('div');
+btnRow.style.cssText = 'display:flex;gap:10px;align-items:center;margin-bottom:16px;';
+
+const btn = document.createElement('button');
+btn.textContent = '📷 今日照片 / Today';
+btn.style.cssText = 'padding:6px 16px;font-size:14px;cursor:pointer;border-radius:6px;border:1px solid var(--interactive-accent);background:var(--interactive-accent);color:var(--text-on-accent);';
+btn.addEventListener('click', async () => {
+  const file = app.vault.getAbstractFileByPath(notePath);
+  if (!file) {
+    // Create from template
+    const template = app.vault.getAbstractFileByPath('Templates/Photo Note Template.md');
+    if (template) {
+      let content = await app.vault.read(template);
+      content = content
+        .replace(/<% tp\.date\.now\("YYYY-MM-DD"\) %>/g, todayStr)
+        .replace(/<% tp\.date\.now\("YYYY"\) %>/g, String(todayYear))
+        .replace(/<% tp\.date\.now\("MM"\) %>/g, todayMonth);
+      const dir = app.vault.getAbstractFileByPath(`Photo/${todayYear}/${todayMonth}`);
+      if (!dir) await app.vault.createFolder(`Photo/${todayYear}/${todayMonth}`);
+      await app.vault.create(notePath, content);
+    }
+  }
+  app.workspace.openLinkText(notePath, '', false);
+});
+btnRow.appendChild(btn);
+
+const status = document.createElement('span');
+status.style.cssText = 'font-size:12px;color:var(--text-muted);';
+const exists = app.vault.getAbstractFileByPath(notePath);
+status.textContent = exists ? '✅ 已记录 / Recorded' : '点击创建今日照片 / Click to create';
+btnRow.appendChild(status);
+
+// ===== Gallery =====
+const currentYear = todayYear;
+const currentMonth = now.getMonth() + 1;
 const monthNames = ['一月/Jan','二月/Feb','三月/Mar','四月/Apr','五月/May','六月/Jun','七月/Jul','八月/Aug','九月/Sep','十月/Oct','十一月/Nov','十二月/Dec'];
 
 // ===== Helper: parse date fields from created string =====

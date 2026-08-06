@@ -13,23 +13,37 @@ tags:
 
 ## 📷 每日一拍 / Photo of the Day
 
-![[Photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>]]
-
-> <%*
+<%*
 const today = tp.date.now("YYYY-MM-DD");
 const year = tp.date.now("YYYY");
 const month = tp.date.now("MM");
 const notePath = `Photo/${year}/${month}/${today}.md`;
-const imgPath = `assets/photo/${year}/${month}/${today}.jpg`;
+const noteDir = `Photo/${year}/${month}`;
 
-const file = app.vault.getAbstractFileByPath(notePath);
-if (!file) {
-  tR += `📷 [点此创建今日照片 / Click to create today's photo](${notePath})`;
-  tR += `\n> 图片放在 / Image: \`${imgPath}\``;
-} else {
-  tR += `✅ 今日照片已记录 / Photo recorded`;
+const existingFile = app.vault.getAbstractFileByPath(notePath);
+if (!existingFile) {
+  // Auto-create today's photo note from template
+  const templateFile = tp.file.find_tfile("Photo Note Template");
+  if (templateFile) {
+    let content = await app.vault.read(templateFile);
+    content = content
+      .replace(/<% tp\.date\.now\("YYYY-MM-DD"\) %>/g, today)
+      .replace(/<% tp\.date\.now\("YYYY"\) %>/g, year)
+      .replace(/<% tp\.date\.now\("MM"\) %>/g, month);
+
+    // Ensure directory exists
+    const dir = app.vault.getAbstractFileByPath(noteDir);
+    if (!dir) {
+      await app.vault.createFolder(noteDir);
+    }
+    await app.vault.create(notePath, content);
+  }
 }
 %>
+
+![[Photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>]]
+
+> 点击上方卡片进入当日照片页面 / Click the card above to open today's photo page
 
 ---
 
