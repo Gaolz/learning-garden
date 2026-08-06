@@ -24,8 +24,9 @@ When you create a photo note for the day, it will embed inline in your daily not
 
 ## Browse & Search
 
-- **Gallery** — Open `Photo/INDEX.md` for month grid + year heatmap + filters
-- **Modal Preview** — Cmd/Ctrl + hover any photo link to see the full photo + metadata popup
+- **Month Gallery** — `Photo/INDEX.md` — all photos this month, full cards (4 per row)
+- **Year Gallery** — `Photo/Year.md` — all photos this year, compact cards (7 per row) + heatmap + stats
+- **Modal Preview** — Cmd/Ctrl + hover any photo link in your daily note
 - **Filter by Tag** — Use INDEX.md tag table or `FROM #photo WHERE contains(tags, "nature")`
 - **By Location** — INDEX.md auto-groups all photos by location
 - **By Mood** — INDEX.md shows mood distribution
