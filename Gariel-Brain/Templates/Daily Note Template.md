@@ -11,9 +11,25 @@ tags:
 
 ---
 
-## 📷 每日一拍
+## 📷 每日一拍 / Photo of the Day
 
 ![[Photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>]]
+
+> <%*
+const today = tp.date.now("YYYY-MM-DD");
+const year = tp.date.now("YYYY");
+const month = tp.date.now("MM");
+const notePath = `Photo/${year}/${month}/${today}.md`;
+const imgPath = `assets/photo/${year}/${month}/${today}.jpg`;
+
+const file = app.vault.getAbstractFileByPath(notePath);
+if (!file) {
+  tR += `📷 [点此创建今日照片 / Click to create today's photo](${notePath})`;
+  tR += `\n> 图片放在 / Image: \`${imgPath}\``;
+} else {
+  tR += `✅ 今日照片已记录 / Photo recorded`;
+}
+%>
 
 ---
 

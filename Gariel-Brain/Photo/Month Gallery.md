@@ -11,7 +11,7 @@ cssclass: photo-index
 >
 > One photo a day. A place, a face, a feeling, a tag — each day worth remembering.
 
-> [[Year Gallery|📆 年度画廊 / Year Gallery →]]
+> [[Year Gallery|📆 年度画廊 / Year Gallery →]] &nbsp;|&nbsp; [[../../Templates/Photo Note Template|📷 添加今日照片 / Add Today]]
 
 ```dataviewjs
 const today = dv.date("now");
