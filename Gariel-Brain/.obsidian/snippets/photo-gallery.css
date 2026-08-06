@@ -1,48 +1,148 @@
 /* Photo Gallery — Card Grid Styling */
 
-/* ===== Dataview Table → Card Grid ===== */
-.photo-index .table-view-table {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+/* ===== Grid Layouts ===== */
+.photo-grid {
+  display: grid;
   gap: 12px;
+  width: 100%;
 }
 
-.photo-index .table-view-table thead {
-  display: none;
+/* Month mode: 4 cards per row, auto-fit to screen */
+.photo-grid-month {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
-.photo-index .table-view-table tbody {
-  display: contents;
+/* Year mode: 7 cards per row (compact), auto-fit to screen */
+.photo-grid-year {
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
 }
 
-.photo-index .table-view-table tr {
-  display: flex;
-  flex-direction: column;
+/* ===== Card Base ===== */
+.photo-card {
   border: 1px solid var(--background-modifier-border);
   border-radius: 10px;
   overflow: hidden;
   background: var(--background-secondary);
-  transition: box-shadow 0.15s ease;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
 }
 
-.photo-index .table-view-table tr:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+.photo-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
 }
 
-.photo-index .table-view-table td {
-  padding: 4px 10px;
-  border: none;
-  font-size: 12px;
+/* ===== Card Image ===== */
+.photo-card-image {
+  width: 100%;
+  overflow: hidden;
 }
 
-.photo-index .table-view-table td:first-child {
-  padding-top: 8px;
-  font-size: 14px;
+.photo-card-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-card-placeholder {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-modifier-border);
+  font-size: 48px;
+  opacity: 0.3;
+}
+
+/* ===== Card Body (full card — month mode) ===== */
+.photo-card-body {
+  padding: 8px 10px 10px;
+}
+
+.photo-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.photo-card-date {
+  font-size: 13px;
   font-weight: 600;
+  color: var(--text-normal);
 }
 
-.photo-index .table-view-table td:last-child {
-  padding-bottom: 10px;
+.photo-card-emoji {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.photo-card-location {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.photo-card-feeling {
+  font-size: 12px;
+  color: var(--text-faint);
+  font-style: italic;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.photo-card-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.tag-chip {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* ===== Compact Card (year mode) ===== */
+.photo-card-compact .photo-card-image img {
+  height: 90px;
+}
+
+.photo-card-compact .photo-card-placeholder {
+  height: 90px;
+  font-size: 28px;
+}
+
+.photo-card-compact .photo-card-body {
+  padding: 4px 6px 6px;
+}
+
+.photo-card-compact-date {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.photo-card-compact-emoji {
+  font-size: 16px;
+  float: right;
+}
+
+.photo-card-compact-location {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== Hover Preview Popup → Photo Lightbox ===== */
