@@ -2,22 +2,6 @@
   "choices": [
     {
       "id": "2960ebb2-a1c2-4da7-a5e8-aa6791dcfdec",
-      "name": "Photo: Process Drop",
-      "type": "Macro",
-      "command": true,
-      "id": "photo-process-drop-001",
-      "macros": [
-        {
-          "type": "UserScript",
-          "id": "photo-process-drop-script",
-          "settings": {
-            "userScript": "scripts/process-photo-drop.js"
-          }
-        }
-      ]
-    },
-    {
-      "id": "2960ebb2-a1c2-4da7-a5e8-aa6791dcfdec",
       "name": "Capture idea",
       "type": "Capture",
       "command": true,
