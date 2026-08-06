@@ -1,0 +1,74 @@
+/* Photo Gallery — Card Grid Styling */
+
+/* ===== Dataview Table → Card Grid ===== */
+.photo-index .table-view-table {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.photo-index .table-view-table thead {
+  display: none;
+}
+
+.photo-index .table-view-table tbody {
+  display: contents;
+}
+
+.photo-index .table-view-table tr {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--background-secondary);
+  transition: box-shadow 0.15s ease;
+}
+
+.photo-index .table-view-table tr:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.photo-index .table-view-table td {
+  padding: 4px 10px;
+  border: none;
+  font-size: 12px;
+}
+
+.photo-index .table-view-table td:first-child {
+  padding-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.photo-index .table-view-table td:last-child {
+  padding-bottom: 10px;
+}
+
+/* ===== Hover Preview Popup → Photo Lightbox ===== */
+.popover.hover-popover {
+  max-width: 650px;
+  max-height: 85vh;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.popover.hover-popover .markdown-embed {
+  padding: 0;
+}
+
+.popover.hover-popover .markdown-embed img {
+  max-height: 450px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.popover.hover-popover .markdown-embed h1 {
+  font-size: 16px;
+  padding: 8px 16px 0;
+}
+
+.popover.hover-popover .markdown-embed table {
+  margin: 8px 16px 12px;
+  font-size: 12px;
+}

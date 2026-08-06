@@ -5,5 +5,8 @@
   "textFontFamily": "Geneva",
   "baseFontSize": 18,
   "baseFontSizeAction": true,
-  "translucency": true
+  "translucency": true,
+  "enabledCssSnippets": [
+    "photo-gallery"
+  ]
 }
