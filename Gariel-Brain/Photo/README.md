@@ -24,12 +24,9 @@ When you create a photo note for the day, it will embed inline in your daily not
 
 ## Browse & Search
 
-- **Month Gallery** — `Photo/INDEX.md` — all photos this month, full cards (4 per row)
-- **Year Gallery** — `Photo/Year.md` — all photos this year, compact cards (7 per row) + heatmap + stats
+- **Month Gallery / 月度画廊** — `Photo/Month Gallery.md` — all photos this month, full cards (4 per row)
+- **Year Gallery / 年度画廊** — `Photo/Year Gallery.md` — all photos this year, compact cards (7 per row) + heatmap + stats
 - **Modal Preview** — Cmd/Ctrl + hover any photo link in your daily note
-- **Filter by Tag** — Use INDEX.md tag table or `FROM #photo WHERE contains(tags, "nature")`
-- **By Location** — INDEX.md auto-groups all photos by location
-- **By Mood** — INDEX.md shows mood distribution
 
 ## Frontmatter Fields
 
@@ -61,10 +58,10 @@ Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md   ← Photo note
 assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg  ← Image file
 ```
 
-## Tips
+## Tips / 贴士
 
-- Photos auto-order by date on INDEX
-- Year heatmap shows your consistency at a glance
-- Missing a day is fine — empty cells on the heatmap are part of your story
-- Use `feeling_text` as a micro-journal entry
-- Tag generously — better to have 5 tags than to lose a photo you can't find later
+- Photos auto-order by date on Month Gallery / 照片按日期自动排序
+- Year heatmap shows your consistency at a glance / 年度热力图一眼看穿坚持程度
+- Missing a day is fine — empty cells are part of your story / 漏拍没关系，空格也是故事
+- Use `feeling_text` as a micro-journal entry / 用心情文字写微型日记
+- Tag generously — 5 tags better than losing a photo / 多打标签，好过以后找不到

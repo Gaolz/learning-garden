@@ -5,9 +5,13 @@ tags:
 cssclass: photo-index
 ---
 
-# 📆 Photo Gallery — This Year
+# 📆 年度画廊 / Photo Gallery — This Year
 
-> [[INDEX|📅 Month Gallery →]]
+> 一整年的画面，全部在这里。每一天一个小卡片，拼出你的 365 天。
+>
+> Every photo you took this year, laid out on one page. Each small card = one day of your life.
+
+> [[Month Gallery|📅 月度画廊 / Month Gallery →]]
 
 ```dataviewjs
 const today = dv.date("now");
@@ -67,7 +71,7 @@ const thisYear = dv.pages('#photo')
   .sort(p => p.created, 'asc');
 
 if (thisYear.length === 0) {
-  dv.paragraph("_No photos this year yet._");
+  dv.paragraph("_今年还没有照片。从今天开始吧！ / No photos this year yet. Start today!_");
 } else {
   const grid = dv.container.createEl('div', { cls: 'photo-grid photo-grid-year' });
   for (const p of thisYear) {
@@ -76,7 +80,7 @@ if (thisYear.length === 0) {
 }
 ```
 
-## 📊 Stats
+## 📊 统计 / Stats
 
 ```dataview
 TABLE WITHOUT ID
@@ -98,7 +102,7 @@ GROUP BY feeling_emoji
 SORT length(rows) DESC
 ```
 
-## 📆 Year Heatmap
+## 📆 年度热力图 / Year Heatmap
 
 ```dataviewjs
 const year = 2026;
@@ -151,9 +155,9 @@ for (let d = start; d <= end; d = d.plus({days: 1})) {
 html += '</div>';
 
 html += '<div style="margin-top: 8px; font-size: 11px; color: #888;">';
-html += '<span style="color:#4a8a4a;">■</span> has photo &nbsp;';
-html += '<span style="color:#1a1a1a;">■</span> no photo &nbsp;';
-html += '<span style="border:1px dashed #4a8a4a;padding:0 2px;">□</span> today';
+html += '<span style="color:#4a8a4a;">■</span> 有照片 / has photo &nbsp;';
+html += '<span style="color:#1a1a1a;">■</span> 没有 / no photo &nbsp;';
+html += '<span style="border:1px dashed #4a8a4a;padding:0 2px;">□</span> 今天 / today';
 html += '</div>';
 
 const heatmapContainer = dv.container.createEl('div');
@@ -169,3 +173,13 @@ heatmapContainer.querySelectorAll('[data-note]').forEach(cell => {
   }
 });
 ```
+
+## 💡 使用贴士 / Tips
+
+| English | 中文 |
+|---------|------|
+| Each card = one day. Click to open full note | 每张卡片 = 一天生活。点击打开完整笔记 |
+| Green dot in heatmap = you took a photo that day | 热力图绿点 = 那天你拍了照片 |
+| Empty days are normal — life isn't a perfect streak | 空白天数很正常 —— 生活不是完美的连续打卡 |
+| Stats auto-group by location and mood | 统计按地点和心情自动分组 |
+| Come back at end of year to see your visual journal | 年底回来看看你的视觉日记 |

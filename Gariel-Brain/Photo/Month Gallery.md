@@ -5,9 +5,13 @@ tags:
 cssclass: photo-index
 ---
 
-# 📷 Photo Gallery — This Month
+# 📷 每月一拍 / Photo of the Month
 
-> [[Year|📆 Year Gallery →]]
+> 每天一张照片，记录生活里有温度的画面。一张照片 + 地点 + 谁 + 心情 + 标签 = 一个不会被遗忘的日子。
+>
+> One photo a day. A place, a face, a feeling, a tag — each day worth remembering.
+
+> [[Year Gallery|📆 年度画廊 / Year Gallery →]]
 
 ```dataviewjs
 const today = dv.date("now");
@@ -73,7 +77,7 @@ const thisMonth = dv.pages('#photo')
   .sort(p => p.created, 'asc');
 
 if (thisMonth.length === 0) {
-  dv.paragraph("_No photos this month yet. Take your first photo today!_");
+  dv.paragraph("_这个月还没有照片。今天拍第一张吧！ / No photos this month yet. Take your first photo today!_");
 } else {
   const grid = dv.container.createEl('div', { cls: 'photo-grid photo-grid-month' });
   for (const p of thisMonth) {
@@ -82,10 +86,13 @@ if (thisMonth.length === 0) {
 }
 ```
 
-## 💡 Tips
+## 💡 使用贴士 / Tips
 
-- **New photo**: create from `[[../../Templates/Photo Note Template|Photo Note Template]]` → save to `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md`
-- **Image** goes in `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg` — auto-detected
-- **Tags**: scene (`nature`, `city`, `home`), people (`family`, `friends`), activity (`sports`, `cooking`)
-- **Moods**: 😊🧘🌧️⚡🔥❤️😢😤🎉🤔😴🥳
-- **Auto-update**: new note → card appears, nothing to configure
+| English | 中文 |
+|---------|------|
+| **New photo**: create from `[[../../Templates/Photo Note Template\|Photo Note Template]]` → save to `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md` | **新建照片**：从模板创建 → 保存到 `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md` |
+| **Image** goes in `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg` | **图片**放在 `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg` |
+| **Tags**: scene (`nature` `city` `home`), people (`family` `friends`), activity (`sports` `cooking`) | **标签**：场景（自然/城市/家里）、人物（家人/朋友）、活动（运动/烹饪） |
+| **Moods**: 😊🧘🌧️⚡🔥❤️😢😤🎉🤔😴🥳 | **心情表情**：开心/平静/低落/能量/热爱/伤心/生气/庆祝/思考/困/满足 |
+| **Auto-update**: new note → card appears, nothing to configure | **自动更新**：新笔记建好，卡片自动出现 |
+| Click any card → opens full photo note | 点击任意卡片 → 打开照片笔记 |
