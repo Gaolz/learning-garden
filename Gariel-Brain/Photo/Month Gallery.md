@@ -79,21 +79,22 @@ function createCard(p) {
   const feeling = p.feeling_text || '';
   const tags = p.tags ? p.tags.filter(t => t !== 'photo') : [];
 
-  const imgRelPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${dateStr}.jpg`;
+  // Try flat path (drag-drop) first, then subfolder path
+  const flatPath = `assets/photo/${dateStr}.jpg`;
+  const subPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${dateStr}.jpg`;
+  let imgFile = null;
+  try { imgFile = app.vault.getAbstractFileByPath(flatPath); } catch(e) {}
+  if (!imgFile) { try { imgFile = app.vault.getAbstractFileByPath(subPath); } catch(e) {} }
+
   const imgWrap = document.createElement('div');
   imgWrap.className = 'photo-card-image';
 
-  try {
-    const imgFile = app.vault.getAbstractFileByPath(imgRelPath);
-    if (imgFile) {
-      const img = document.createElement('img');
-      img.src = app.vault.getResourcePath(imgFile);
-      img.alt = dateStr;
-      imgWrap.appendChild(img);
-    } else {
-      imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
-    }
-  } catch(e) {
+  if (imgFile) {
+    const img = document.createElement('img');
+    img.src = app.vault.getResourcePath(imgFile);
+    img.alt = dateStr;
+    imgWrap.appendChild(img);
+  } else {
     imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
   }
 

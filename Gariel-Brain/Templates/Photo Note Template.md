@@ -12,11 +12,10 @@ tags:
 
 # 📷 <% tp.date.now("YYYY-MM-DD") %>
 
-![[assets/photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>.jpg]]
+![[<% tp.date.now("YYYY-MM-DD") %>.jpg]]
 
-> 💡 **拖拽图片到这里** → 图片自动保存到 `assets/photo/` → 重命名为 `<% tp.date.now("YYYY-MM-DD") %>.jpg` → 自动显示在上方
->
-> 💡 **Drag & drop image here** → auto-saved to `assets/photo/` → rename to `<% tp.date.now("YYYY-MM-DD") %>.jpg` → appears above
+> 💡 拖拽图片到这里 → 重命名为 `<% tp.date.now("YYYY-MM-DD") %>.jpg` → 自动显示
+> 💡 Drag image here → rename to `<% tp.date.now("YYYY-MM-DD") %>.jpg` → auto-appears
 
 ---
 | 属性 | 值 |

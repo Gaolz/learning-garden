@@ -11,61 +11,49 @@ tags:
 
 ---
 
-## 📷 每日一拍 / Photo of the Day
+## 📷 每日一拍
 
 ![[Photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>]]
 
-> 点击上方卡片进入当日照片页面 / Click the card above to open today's photo page
-
 <%*
-// Auto-create today's photo note if it doesn't exist
-const today = tp.date.now("YYYY-MM-DD");
-const year = tp.date.now("YYYY");
-const month = tp.date.now("MM");
-const notePath = `Photo/${year}/${month}/${today}.md`;
-
+// Auto-create today's photo note silently
+const t = tp.date.now("YYYY-MM-DD");
+const y = tp.date.now("YYYY");
+const m = tp.date.now("MM");
+const np = `Photo/${y}/${m}/${t}.md`;
 try {
-  const existingFile = app.vault.getAbstractFileByPath(notePath);
-  if (!existingFile) {
-    // Ensure directory exists
-    const dirPath = `Photo/${year}/${month}`;
-    const dir = app.vault.getAbstractFileByPath(dirPath);
-    if (!dir) {
-      await app.vault.createFolder(dirPath);
-    }
-    // Create photo note with pre-filled frontmatter
-    const content = [
-      '---',
-      'type: photo',
-      `created: ${today}`,
-      'location:',
-      'who:',
-      '  - 自己',
-      'feeling_emoji:',
-      'feeling_text:',
-      'tags:',
-      '  - photo',
-      '---',
-      '',
-      `# 📷 ${today}`,
-      '',
-      `![[assets/photo/${year}/${month}/${today}.jpg]]`,
-      '',
-      '---',
-      '| 属性 | 值 |',
-      '|------|-----|',
-      '| 📍 **Location** | `= this.location` |',
-      '| 👤 **Who** | `= this.who` |',
-      '| 😊 **Feeling** | `= this.feeling_emoji` |',
-      '| 💭 **Notes** | `= this.feeling_text` |',
-      '| 🏷️ **Tags** | `= this.tags` |',
-      ''
-    ].join('\n');
-    await app.vault.create(notePath, content);
+  if (!app.vault.getAbstractFileByPath(np)) {
+    const dp = `Photo/${y}/${m}`;
+    if (!app.vault.getAbstractFileByPath(dp)) await app.vault.createFolder(dp);
+    await app.vault.create(np, `---
+type: photo
+created: ${t}
+location:
+who:
+  - 自己
+feeling_emoji:
+feeling_text:
+tags:
+  - photo
+---
+
+# 📷 ${t}
+
+![[${t}.jpg]]
+
+> 💡 拖拽图片到这里 / Drag image here → 重命名为 ${t}.jpg / rename to ${t}.jpg
+
+---
+| 属性 | 值 |
+|------|-----|
+| 📍 **Location** | \`= this.location\` |
+| 👤 **Who** | \`= this.who\` |
+| 😊 **Feeling** | \`= this.feeling_emoji\` |
+| 💭 **Notes** | \`= this.feeling_text\` |
+| 🏷️ **Tags** | \`= this.tags\` |
+`);
   }
-} catch(e) {
-  // Silently fail — photo note will still work if created manually
-}
+} catch(e) {}
 %>
 
 ---
