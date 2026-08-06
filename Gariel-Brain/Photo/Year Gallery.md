@@ -14,8 +14,7 @@ cssclass: photo-index
 > [[Month Gallery|📅 月度画廊 / Month Gallery →]]
 
 ```dataviewjs
-const today = dv.date("now");
-const currentYear = today.year;
+const currentYear = new Date().getFullYear();
 
 // ===== Helper: parse date fields from created string =====
 function parseDate(p) {
@@ -73,7 +72,7 @@ function createCompactCard(p) {
   return card;
 }
 
-// ===== Helper: heatmap =====
+// ===== Helper: heatmap (uses vanilla Date, no dv.date) =====
 function buildHeatmap(year, pages) {
   const photoDays = new Set();
   const photoPagesByDay = {};
@@ -84,8 +83,9 @@ function buildHeatmap(year, pages) {
     photoPagesByDay[key] = p;
   }
 
-  const now = dv.date("now");
-  const todayStr = `${now.year}-${String(now.month).padStart(2, '0')}-${String(now.day).padStart(2, '0')}`;
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const todayStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
   const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 
   const container = document.createElement('div');
@@ -105,14 +105,15 @@ function buildHeatmap(year, pages) {
   const grid = document.createElement('div');
   grid.style.cssText = 'display:flex;gap:3px;flex-wrap:wrap;max-width:120px;';
 
-  const start = dv.date(`${year}-01-01`);
-  const end = dv.date(`${year}-12-31`);
+  const startDate = new Date(year, 0, 1);
+  const endDate = new Date(year, 11, 31);
+  const nowTime = now.getTime();
 
-  for (let d = start; d <= end; d = d.plus({days: 1})) {
-    const key = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
+  for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+    const key = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
     const hasPhoto = photoDays.has(key);
     const isToday = key === todayStr;
-    const isFuture = d > now;
+    const isFuture = d.getTime() > nowTime;
 
     const cell = document.createElement('div');
     cell.style.cssText = `width:14px;height:14px;border-radius:2px;`;
