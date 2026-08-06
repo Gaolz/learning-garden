@@ -69,8 +69,9 @@ function createCard(p) {
   return card;
 }
 
-// ===== This Month =====
-dv.header(2, `📅 ${currentYear} / ${String(currentMonth).padStart(2, '0')}`);
+// ===== This Month (full cards) =====
+const monthNames = ['一月/Jan','二月/Feb','三月/Mar','四月/Apr','五月/May','六月/Jun','七月/Jul','八月/Aug','九月/Sep','十月/Oct','十一月/Nov','十二月/Dec'];
+dv.header(2, `📅 ${currentYear} / ${String(currentMonth).padStart(2, '0')} — ${monthNames[currentMonth - 1]}`);
 
 const thisMonth = dv.pages('#photo')
   .where(p => p.created && p.created.year === currentYear && p.created.month === currentMonth)
@@ -84,15 +85,48 @@ if (thisMonth.length === 0) {
     grid.appendChild(createCard(p));
   }
 }
+
+// ===== Earlier Months (compact list) =====
+const allMonths = dv.pages('#photo')
+  .where(p => p.created && p.created.year === currentYear)
+  .groupBy(p => p.created.month)
+  .sort(g => g.key, 'desc');
+
+const earlierMonths = allMonths.filter(g => g.key !== currentMonth);
+
+if (earlierMonths.length > 0) {
+  dv.header(3, '往期月份 / Earlier Months');
+
+  const chipContainer = dv.container.createEl('div');
+  chipContainer.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;';
+
+  for (const group of earlierMonths) {
+    const month = group.key;
+    const count = group.rows.length;
+    const monthLabel = monthNames[month - 1];
+
+    const chip = document.createElement('span');
+    chip.className = 'month-chip';
+    chip.innerHTML = `📅 ${String(month).padStart(2, '0')} · ${count} 张`;
+    chip.title = `${monthLabel}: ${count} photos`;
+
+    chip.addEventListener('click', () => {
+      // Navigate to Year Gallery which shows all photos sorted by date
+      app.workspace.openLinkText('Photo/Year Gallery.md', '', false);
+    });
+
+    chipContainer.appendChild(chip);
+  }
+}
 ```
 
 ## 💡 使用贴士 / Tips
 
-| English | 中文 |
-|---------|------|
+| English                                                                                                                                 | 中文                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | **New photo**: create from `[[../../Templates/Photo Note Template\|Photo Note Template]]` → save to `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md` | **新建照片**：从模板创建 → 保存到 `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md` |
-| **Image** goes in `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg` | **图片**放在 `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg` |
-| **Tags**: scene (`nature` `city` `home`), people (`family` `friends`), activity (`sports` `cooking`) | **标签**：场景（自然/城市/家里）、人物（家人/朋友）、活动（运动/烹饪） |
-| **Moods**: 😊🧘🌧️⚡🔥❤️😢😤🎉🤔😴🥳 | **心情表情**：开心/平静/低落/能量/热爱/伤心/生气/庆祝/思考/困/满足 |
-| **Auto-update**: new note → card appears, nothing to configure | **自动更新**：新笔记建好，卡片自动出现 |
-| Click any card → opens full photo note | 点击任意卡片 → 打开照片笔记 |
+| **Image** goes in `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg`                                                                           | **图片**放在 `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg`     |
+| **Tags**: scene (`nature` `city` `home`), people (`family` `friends`), activity (`sports` `cooking`)                                    | **标签**：场景（自然/城市/家里）、人物（家人/朋友）、活动（运动/烹饪）                  |
+| **Moods**: 😊🧘🌧️⚡🔥❤️😢😤🎉🤔😴🥳                                                                                                     | **心情表情**：开心/平静/低落/能量/热爱/伤心/生气/庆祝/思考/困/满足                 |
+| **Auto-update**: new note → card appears, nothing to configure                                                                          | **自动更新**：新笔记建好，卡片自动出现                                    |
+| Click any card → opens full photo note                                                                                                  | 点击任意卡片 → 打开照片笔记                                          |
