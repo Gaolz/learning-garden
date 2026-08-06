@@ -19,7 +19,7 @@ const currentYear = today.year;
 
 // ===== Helper: compact card =====
 function createCompactCard(p) {
-  const d = p.created;
+  const d = dv.date(p.created);
   const dateStr = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
   const mmdd = `${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
   const emoji = p.feeling_emoji || '';
@@ -68,7 +68,8 @@ function buildHeatmap(year, pages) {
   const photoDays = new Set();
   const photoPagesByDay = {};
   for (const p of pages) {
-    const key = `${p.created.year}-${String(p.created.month).padStart(2, '0')}-${String(p.created.day).padStart(2, '0')}`;
+    const cd = dv.date(p.created);
+    const key = `${cd.year}-${String(cd.month).padStart(2, '0')}-${String(cd.day).padStart(2, '0')}`;
     photoDays.add(key);
     photoPagesByDay[key] = p;
   }
@@ -141,7 +142,7 @@ const allPages = dv.pages('#photo')
   .where(p => p.created)
   .sort(p => p.created, 'asc');
 
-const yearGroups = allPages.groupBy(p => p.created.year).sort(g => g.key, 'desc');
+const yearGroups = allPages.groupBy(p => dv.date(p.created).year).sort(g => g.key, 'desc');
 
 // ===== Year chip bar =====
 const barRow = dv.container.createEl('div');

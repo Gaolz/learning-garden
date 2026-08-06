@@ -21,7 +21,7 @@ const monthNames = ['一月/Jan','二月/Feb','三月/Mar','四月/Apr','五月/
 
 // ===== Helper: full card =====
 function createCard(p) {
-  const d = p.created;
+  const d = dv.date(p.created);
   const dateStr = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
   const emoji = p.feeling_emoji || '';
   const location = p.location || '';
@@ -72,10 +72,10 @@ function createCard(p) {
 
 // ===== Gather all months that have photos =====
 const allPages = dv.pages('#photo')
-  .where(p => p.created && p.created.year === currentYear)
+  .where(p => p.created && dv.date(p.created).year === currentYear)
   .sort(p => p.created, 'asc');
 
-const monthGroups = allPages.groupBy(p => p.created.month).sort(g => g.key, 'asc');
+const monthGroups = allPages.groupBy(p => dv.date(p.created).month).sort(g => g.key, 'asc');
 
 // ===== Month chip bar =====
 const barRow = dv.container.createEl('div');
