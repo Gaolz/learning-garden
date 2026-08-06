@@ -14,8 +14,8 @@ tags:
 
 ![[assets/photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>.jpg]]
 
-> 💡 拖拽图片到这里 → Cmd+Shift+P 运行 `Process Photo Drop` → 自动重命名并归类
-> 💡 Drag image here → Cmd+Shift+P run `Process Photo Drop` → auto-rename & organize
+> 💡 拖拽图片到这里 → `Cmd+P` → 运行 `Photo: Process Drop` → 自动重命名归类到 assets/photo/YYYY/MM/
+> 💡 Drag image here → `Cmd+P` → run `Photo: Process Drop` → auto-rename & move to assets/photo/YYYY/MM/
 
 ---
 | 属性 | 值 |

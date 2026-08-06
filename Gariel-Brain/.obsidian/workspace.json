@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "088b20596e4585c0",
+        "id": "c18077d37cc14ff6",
         "type": "tabs",
         "children": [
           {
-            "id": "fe2ab677dc186dc4",
+            "id": "5529fe4d3cb1cb48",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Photo/Year Gallery.md",
+                "file": "Photo/2026/08/2026-08-06.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Year Gallery"
+              "title": "2026-08-06"
             }
           }
         ]
@@ -200,10 +200,20 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fe2ab677dc186dc4",
+  "active": "5529fe4d3cb1cb48",
   "lastOpenFiles": [
+    "scripts/process-photo-drop.js",
+    "scripts",
+    "Templates/Process Photo Drop.md",
+    "assets/photo/110.jpg",
+    "Photo/2026/08/2026-08-06.md",
     "Photo/Month Gallery.md",
+    "DailyNotes/2026-08-06.md",
+    "未命名 1.canvas",
+    "未命名.canvas",
+    "Templates/Photo Note Template.md",
     "Photo/README.md",
+    "DailyNotes/2026-08-02.md",
     "Photo/Year Gallery.md",
     "Photo/2026/06/2026-06-10.md",
     "assets/photo/2026/07/2026-07-18.jpg",
@@ -217,7 +227,6 @@
     "assets/photo/2026/06",
     "Photo/2026/07",
     "Photo/2026/06",
-    "DailyNotes/2026-08-06.md",
     "DailyNotes/2026-08-01.md",
     "Photo/INDEX.md",
     "Photo/Year.md",
@@ -226,26 +235,20 @@
     "Photo/2026/08/2026-08-03.md",
     "Photo/2026/08/2026-08-02.md",
     "Photo/2026/08/2026-08-01.md",
-    "Templates/Photo Note Template.md",
     "assets/photo/2026/08",
     "assets/photo/2026/08/2026-08-01.jpg",
     "assets/photo/2026/08/2026-08-02.jpg",
     "assets/photo/2026/08/2026-08-03.jpg",
     "assets/photo/2026/08/2026-08-04.jpg",
     "109.jpg",
-    "108.jpg",
     "assets/photo/2026/08",
     "assets/photo/2026",
-    "DailyNotes/2026-08-02.md",
     "Challenge/01 Photo a Day.md",
     "Photo/2026/08",
     "Photo/2026",
-    "assets/photo",
     "Programming/Algorithm/Selection-Sort.md",
     "Programming/Algorithm/Binary-Search.md",
     "Programming/Ruby/Tidewave-Rails-Deep-Dive.md",
-    "Programming/Ruby/Zed-Solargraph-Setup.md",
-    "Computer/Network/DNS/What-Happens-When-You-Update-DNS.md",
-    "Computer/Network/DNS/Some-Ways-DNS-Can-Break.md"
+    "Programming/Ruby/Zed-Solargraph-Setup.md"
   ]
 }

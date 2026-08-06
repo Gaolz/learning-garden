@@ -41,8 +41,8 @@ tags:
 
 ![[assets/photo/${y}/${m}/${t}.jpg]]
 
-> 💡 拖拽图片到这里 → 运行 `Process Photo Drop` 自动重命名归类
-> 💡 Drag image here → run `Process Photo Drop` to auto-rename & organize
+> 💡 拖拽图片 → `Cmd+P` `Photo: Process Drop` → 自动归类
+> 💡 Drag image → `Cmd+P` `Photo: Process Drop` → auto organize
 
 ---
 | 属性 | 值 |
