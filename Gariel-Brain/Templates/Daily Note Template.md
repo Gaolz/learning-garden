@@ -39,9 +39,10 @@ tags:
 
 # 📷 ${t}
 
-![[${t}.jpg]]
+![[assets/photo/${y}/${m}/${t}.jpg]]
 
-> 💡 拖拽图片到这里 / Drag image here → 重命名为 ${t}.jpg / rename to ${t}.jpg
+> 💡 拖拽图片到这里 → 运行 `Process Photo Drop` 自动重命名归类
+> 💡 Drag image here → run `Process Photo Drop` to auto-rename & organize
 
 ---
 | 属性 | 值 |

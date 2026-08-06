@@ -12,10 +12,10 @@ tags:
 
 # 📷 <% tp.date.now("YYYY-MM-DD") %>
 
-![[<% tp.date.now("YYYY-MM-DD") %>.jpg]]
+![[assets/photo/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>/<% tp.date.now("YYYY-MM-DD") %>.jpg]]
 
-> 💡 拖拽图片到这里 → 重命名为 `<% tp.date.now("YYYY-MM-DD") %>.jpg` → 自动显示
-> 💡 Drag image here → rename to `<% tp.date.now("YYYY-MM-DD") %>.jpg` → auto-appears
+> 💡 拖拽图片到这里 → Cmd+Shift+P 运行 `Process Photo Drop` → 自动重命名并归类
+> 💡 Drag image here → Cmd+Shift+P run `Process Photo Drop` → auto-rename & organize
 
 ---
 | 属性 | 值 |

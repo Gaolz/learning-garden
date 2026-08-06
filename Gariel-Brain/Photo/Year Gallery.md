@@ -34,22 +34,21 @@ function createCompactCard(p) {
   const emoji = p.feeling_emoji || '';
   const location = p.location || '';
 
-  // Try flat path (drag-drop) first, then subfolder path
-  const flatPath = `assets/photo/${d.full}.jpg`;
-  const subPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${d.full}.jpg`;
-  let imgFile = null;
-  try { imgFile = app.vault.getAbstractFileByPath(flatPath); } catch(e) {}
-  if (!imgFile) { try { imgFile = app.vault.getAbstractFileByPath(subPath); } catch(e) {} }
-
+  const imgPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${d.full}.jpg`;
   const imgWrap = document.createElement('div');
   imgWrap.className = 'photo-card-image';
 
-  if (imgFile) {
-    const img = document.createElement('img');
-    img.src = app.vault.getResourcePath(imgFile);
-    img.alt = d.full;
-    imgWrap.appendChild(img);
-  } else {
+  try {
+    const imgFile = app.vault.getAbstractFileByPath(imgPath);
+    if (imgFile) {
+      const img = document.createElement('img');
+      img.src = app.vault.getResourcePath(imgFile);
+      img.alt = d.full;
+      imgWrap.appendChild(img);
+    } else {
+      imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
+    }
+  } catch(e) {
     imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
   }
 
