@@ -1,0 +1,71 @@
+<h2>Photo INDEX — Gallery Dashboard</h2>
+<p class="subtitle">Two gallery modes: Month Grid and Year Timeline</p>
+
+<div class="section">
+  <h3>📅 Month Mode (default)</h3>
+  <p class="subtitle">Current month. Show all photos as card grid, date-ascending.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+  <div style="background: #2d3a2d; border-radius: 10px; padding: 24px; text-align: center; color: #d4c5a9;">
+    <div style="font-size: 28px;">🌅</div>
+    <div style="font-size: 11px; margin-top: 4px; opacity: 0.7;">08-01</div>
+  </div>
+  <div style="background: #2d3a2d; border-radius: 10px; padding: 24px; text-align: center; color: #d4c5a9;">
+    <div style="font-size: 28px;">☕</div>
+    <div style="font-size: 11px; margin-top: 4px; opacity: 0.7;">08-02</div>
+  </div>
+  <div style="background: #2d3a2d; border-radius: 10px; padding: 24px; text-align: center; color: #d4c5a9;">
+    <div style="font-size: 28px;">🍜</div>
+    <div style="font-size: 11px; margin-top: 4px; opacity: 0.7;">08-03</div>
+  </div>
+  <div style="background: #2d3a2d; border-radius: 10px; padding: 24px; text-align: center; color: #d4c5a9;">
+    <div style="font-size: 28px;">🌧️</div>
+    <div style="font-size: 11px; margin-top: 4px; opacity: 0.7;">08-04</div>
+  </div>
+  <div style="background: #1a2d1a; border-radius: 10px; padding: 24px; text-align: center; color: #a0b0a0; border: 1px dashed #3a5a3a;">
+    <div style="font-size: 20px; opacity: 0.5;">📷</div>
+    <div style="font-size: 11px; margin-top: 4px; opacity: 0.4;">Today</div>
+  </div>
+  <div style="background: #1a2d1a; border-radius: 10px; padding: 24px; text-align: center; color: #a0b0a0; border: 1px dashed #3a5a3a;">
+    <div style="font-size: 20px; opacity: 0.3;">+</div>
+    <div style="font-size: 11px; margin-top: 4px; opacity: 0.3;">08-06</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>📆 Year Mode</h3>
+  <p class="subtitle">Full year heatmap-style grid. Each cell = one day. Colored if photo exists.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; margin-bottom: 8px;">
+  <div style="font-size: 8px; color: #999;">J</div><div style="font-size: 8px; color: #999;">F</div><div style="font-size: 8px; color: #999;">M</div><div style="font-size: 8px; color: #999;">A</div><div style="font-size: 8px; color: #999;">M</div><div style="font-size: 8px; color: #999;">J</div><div style="font-size: 8px; color: #999;">J</div><div style="font-size: 8px; color: #999;">A</div><div style="font-size: 8px; color: #999;">S</div><div style="font-size: 8px; color: #999;">O</div><div style="font-size: 8px; color: #999;">N</div><div style="font-size: 8px; color: #999;">D</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px;">
+  <div style="background: #3a5a3a; aspect-ratio: 1; border-radius: 2px;" title="Aug 1"></div>
+  <div style="background: #3a5a3a; aspect-ratio: 1; border-radius: 2px;" title="Aug 2"></div>
+  <div style="background: #3a5a3a; aspect-ratio: 1; border-radius: 2px;" title="Aug 3"></div>
+  <div style="background: #3a5a3a; aspect-ratio: 1; border-radius: 2px;" title="Aug 4"></div>
+  <div style="background: #1a2d1a; aspect-ratio: 1; border-radius: 2px; border: 1px dashed #3a5a3a;" title="Today"></div>
+  <div style="background: #111; aspect-ratio: 1; border-radius: 2px;" title="No photo"></div>
+  <div style="background: #111; aspect-ratio: 1; border-radius: 2px;" title="No photo"></div>
+</div>
+<div style="margin-top: 8px; display: flex; gap: 16px; font-size: 11px; color: #888;">
+  <span>🟩 = has photo</span>
+  <span>⬛ = no photo</span>
+  <span>⬜ = today, pending</span>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>Toggle Behavior</h3>
+  <ul style="list-style: none; padding: 0;">
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">📅 <strong>Month Grid</strong> — Default view. Shows all cards of current month. Prev/Next month buttons.</li>
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">📆 <strong>Year Heatmap</strong> — Toggle to see full year. Click any green cell → jump to that day's card.</li>
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">🏷️ <strong>Filter bar</strong> — Tag filter across both modes (e.g., click #nature → only nature photos in grid).</li>
+    <li style="padding: 6px 0;">🔍 <strong>Search</strong> — Full-text search across location, feeling_text, and who fields via Dataview.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <p class="subtitle">Both modes live on <code>Photo/INDEX.md</code>. Month grid = default. Year heatmap = toggle tab.</p>
+</div>

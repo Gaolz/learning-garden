@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/gaowanxing/Gariel/learning-garden/Gariel-Brain/Photo)",
+      "Bash(mkdir -p /Users/gaowanxing/Gariel/learning-garden/Gariel-Brain/assets/photo)",
+      "Bash(touch /Users/gaowanxing/Gariel/learning-garden/Gariel-Brain/Photo/.gitkeep)",
+      "Bash(touch /Users/gaowanxing/Gariel/learning-garden/Gariel-Brain/assets/photo/.gitkeep)"
+    ]
+  }
+}

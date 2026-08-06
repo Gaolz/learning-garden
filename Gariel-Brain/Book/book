@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+TEMPLATE="$SCRIPT_DIR/00_Templates/template_book.md"
+READINGS_DIR="$SCRIPT_DIR/01_Readings"
+INDEX="$SCRIPT_DIR/INDEX.md"
+FOCUS_FILE="$SCRIPT_DIR/.current_book"
+TODAY=$(date +%Y-%m-%d)
+
+# ── helpers ──────────────────────────────────────────────
+
+_safe_name() {
+    echo "$1" | sed 's/[\/:*?"<>|]/-/g'
+}
+
+# ── cmd: help ────────────────────────────────────────────
+
+cmd_help() {
+    cat <<'EOF'
+📚 book — 双线拆书笔记管理工具
+
+Usage:
+  book new    "书名" ["作者"]     创建新书笔记，自动更新 INDEX.md
+  book focus  ["书名"]           设定/查看当前在读的书（章节内容自动写入此书）
+  book list                      列出所有读书笔记
+  book help                      显示此帮助
+
+双线拆书原理:
+  第一条线（宏观骨架线）: 全书缘起 ➔ 脉络发展 ➔ 终局落脚
+                       回答"作者为什么要写 → 怎么推演 → 结论是什么"
+  第二条线（章节问题线）: 每章 核心问题 ➔ 推进思路 ➔ 解决方案 ➔ 正反评估
+                       强制问题导向，不是摘抄，是对话
+
+工作流:
+  1. book new "XXX" "作者"       → 创建笔记
+  2. 逐章填写「第二条线」        → 核心问题 ➔ 推演 ➔ 解法 ➔ 正反
+  3. 读完后填「第一条线」        → 缘起 ➔ 发展 ➔ 终局
+  4. 手动移条目到「已完结」      → 编辑 INDEX.md
+
+文件结构:
+  Book/
+  ├── book                     ← 本工具
+  ├── 00_Templates/
+  │   └── template_book.md     ← 笔记模板
+  ├── 01_Readings/
+  │   └── <书名>.md            ← 各书笔记
+  └── INDEX.md                 ← 总书单索引
+EOF
+}
+
+# ── cmd: new ─────────────────────────────────────────────
+
+cmd_new() {
+    local title="${1:?Usage: book new \"书名\" [\"作者\"]}"
+    local author="${2:-}"
+    local name
+    name=$(_safe_name "$title")
+    local note_file="$READINGS_DIR/${name}.md"
+
+    if [ -f "$note_file" ]; then
+        echo "❌ 笔记已存在: $note_file"
+        exit 1
+    fi
+
+    # Generate note from template
+    sed -e "s|{{title}}|${title}|g" \
+        -e "s|{{author}}|${author}|g" \
+        -e "s|{{date}}|${TODAY}|g" \
+        "$TEMPLATE" > "$note_file"
+
+    # Append to INDEX.md — insert after "阅读中" table separator
+    local rel_path="${note_file#$SCRIPT_DIR/}"
+    local insert_after
+    insert_after=$(grep -n '## 阅读中' "$INDEX" | head -1 | cut -d: -f1)
+    insert_after=$((insert_after + 3))
+
+    local entry="| 《${title}》 | ${author} | ${TODAY} | [笔记](${rel_path}) |"
+    sed -i '' "${insert_after}a\\
+${entry}
+" "$INDEX"
+
+    # Update INDEX timestamp
+    sed -i '' "s/_Last updated:.*/_Last updated: ${TODAY}_/" "$INDEX"
+
+    # Auto-focus the newly created book
+    echo "$title" > "$FOCUS_FILE"
+
+    echo "✅ 笔记已创建: $note_file"
+    echo "✅ INDEX.md 已更新"
+    echo "✅ 已自动聚焦: 《${title}》"
+}
+
+# ── cmd: focus ───────────────────────────────────────────
+
+cmd_focus() {
+    local title="${1:-}"
+    if [ -z "$title" ]; then
+        if [ -f "$FOCUS_FILE" ]; then
+            echo "📖 当前在读: $(cat "$FOCUS_FILE")"
+        else
+            echo "📖 当前在读: (未设定，用 book focus \"书名\" 设定)"
+        fi
+        return
+    fi
+
+    local name
+    name=$(_safe_name "$title")
+    local note_file="$READINGS_DIR/${name}.md"
+
+    if [ ! -f "$note_file" ]; then
+        echo "❌ 笔记不存在: $note_file"
+        echo "   先用 book new \"${title}\" 创建"
+        exit 1
+    fi
+
+    echo "$title" > "$FOCUS_FILE"
+    echo "✅ 已聚焦: 《${title}》"
+    echo "   之后说章节内容时，我会默认写入这本书的笔记"
+}
+
+# ── cmd: list ────────────────────────────────────────────
+
+cmd_list() {
+    echo "📚 所有读书笔记:"
+    echo ""
+    if [ -d "$READINGS_DIR" ] && ls "$READINGS_DIR"/*.md >/dev/null 2>&1; then
+        local current=""
+        [ -f "$FOCUS_FILE" ] && current=$(cat "$FOCUS_FILE")
+        for f in "$READINGS_DIR"/*.md; do
+            local bname
+            bname=$(basename "$f" .md)
+            if [ "$bname" = "$current" ]; then
+                printf "  📖 %s ← 当前在读\n" "$bname"
+            else
+                printf "  📖 %s\n" "$bname"
+            fi
+        done
+    else
+        echo "  (暂无笔记)"
+    fi
+}
+
+# ── dispatch ─────────────────────────────────────────────
+
+case "${1:-help}" in
+    help|--help|-h)  cmd_help ;;
+    new)             shift; cmd_new "$@" ;;
+    focus|f)         shift; cmd_focus "$@" ;;
+    list|ls)         cmd_list ;;
+    *)               echo "❌ 未知命令: $1"; echo ""; cmd_help; exit 1 ;;
+esac

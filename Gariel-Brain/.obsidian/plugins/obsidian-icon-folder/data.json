@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "🖼",
+      "LiImages",
       "LiLoader",
       "LiCircle",
-      "LiXCircle",
-      "🤔",
-      "📐"
+      "LiXCircle"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -89,5 +89,7 @@
   "Challenge/08 Sunrise Wake Up Week.md": "LiCircle",
   "Challenge/09 Cold Shower Week.md": "LiCircle",
   "Challenge/10 English Only Day.md": "LiCircle",
-  "Challenge/11 No AV 100 Days.md": "LiLoader"
+  "Challenge/11 No AV 100 Days.md": "LiLoader",
+  "assets": "LiImages",
+  "Photo": "🖼"
 }

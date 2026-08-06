@@ -19,10 +19,21 @@ const currentYear = today.year;
 const currentMonth = today.month;
 const monthNames = ['一月/Jan','二月/Feb','三月/Mar','四月/Apr','五月/May','六月/Jun','七月/Jul','八月/Aug','九月/Sep','十月/Oct','十一月/Nov','十二月/Dec'];
 
+// ===== Helper: parse date fields from created string =====
+function parseDate(p) {
+  const s = String(p.created);
+  return {
+    year: parseInt(s.slice(0, 4)),
+    month: parseInt(s.slice(5, 7)),
+    day: parseInt(s.slice(8, 10)),
+    full: s.slice(0, 10)
+  };
+}
+
 // ===== Helper: full card =====
 function createCard(p) {
-  const d = dv.date(p.created);
-  const dateStr = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
+  const d = parseDate(p);
+  const dateStr = d.full;
   const emoji = p.feeling_emoji || '';
   const location = p.location || '';
   const feeling = p.feeling_text || '';
@@ -72,17 +83,17 @@ function createCard(p) {
 
 // ===== Gather all months that have photos =====
 const allPages = dv.pages('#photo')
-  .where(p => p.created && dv.date(p.created).year === currentYear)
+  .where(p => p.created && String(p.created).slice(0, 4) === String(currentYear))
   .sort(p => p.created, 'asc');
 
-const monthGroups = allPages.groupBy(p => dv.date(p.created).month).sort(g => g.key, 'asc');
+const monthGroups = allPages.groupBy(p => String(p.created).slice(5, 7)).sort(g => g.key, 'asc');
 
 // ===== Month chip bar =====
 const barRow = dv.container.createEl('div');
 barRow.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;';
 
 for (const group of monthGroups) {
-  const m = group.key;
+  const m = parseInt(group.key);
   const count = group.rows.length;
   const isCurrent = m === currentMonth;
 
@@ -99,7 +110,7 @@ for (const group of monthGroups) {
 const gridsWrapper = dv.container.createEl('div');
 
 for (const group of monthGroups) {
-  const m = group.key;
+  const m = parseInt(group.key);
   const isCurrent = m === currentMonth;
   const monthLabel = monthNames[m - 1];
 

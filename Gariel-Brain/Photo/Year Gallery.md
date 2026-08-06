@@ -17,15 +17,25 @@ cssclass: photo-index
 const today = dv.date("now");
 const currentYear = today.year;
 
+// ===== Helper: parse date fields from created string =====
+function parseDate(p) {
+  const s = String(p.created);
+  return {
+    year: parseInt(s.slice(0, 4)),
+    month: parseInt(s.slice(5, 7)),
+    day: parseInt(s.slice(8, 10)),
+    full: s.slice(0, 10)
+  };
+}
+
 // ===== Helper: compact card =====
 function createCompactCard(p) {
-  const d = dv.date(p.created);
-  const dateStr = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
+  const d = parseDate(p);
+  const imgRelPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${d.full}.jpg`;
   const mmdd = `${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
   const emoji = p.feeling_emoji || '';
   const location = p.location || '';
 
-  const imgRelPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${dateStr}.jpg`;
   const imgWrap = document.createElement('div');
   imgWrap.className = 'photo-card-image';
 
@@ -34,7 +44,7 @@ function createCompactCard(p) {
     if (imgFile) {
       const img = document.createElement('img');
       img.src = app.vault.getResourcePath(imgFile);
-      img.alt = dateStr;
+      img.alt = d.full;
       imgWrap.appendChild(img);
     } else {
       imgWrap.innerHTML = '<div class="photo-card-placeholder">📷</div>';
@@ -68,8 +78,8 @@ function buildHeatmap(year, pages) {
   const photoDays = new Set();
   const photoPagesByDay = {};
   for (const p of pages) {
-    const cd = dv.date(p.created);
-    const key = `${cd.year}-${String(cd.month).padStart(2, '0')}-${String(cd.day).padStart(2, '0')}`;
+    const d = parseDate(p);
+    const key = `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
     photoDays.add(key);
     photoPagesByDay[key] = p;
   }
@@ -142,14 +152,19 @@ const allPages = dv.pages('#photo')
   .where(p => p.created)
   .sort(p => p.created, 'asc');
 
-const yearGroups = allPages.groupBy(p => dv.date(p.created).year).sort(g => g.key, 'desc');
+const yearGroups = allPages.groupBy(p => String(p.created).slice(0, 4)).sort(g => g.key, 'desc');
+
+// Guard: no pages found
+if (yearGroups.length === 0) {
+  dv.paragraph("_No photos yet. Start today! / 还没有照片，从今天开始吧！_");
+} else {
 
 // ===== Year chip bar =====
 const barRow = dv.container.createEl('div');
 barRow.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;';
 
 for (const group of yearGroups) {
-  const y = group.key;
+  const y = parseInt(group.key);
   const count = group.rows.length;
   const isCurrent = y === currentYear;
 
@@ -166,7 +181,7 @@ for (const group of yearGroups) {
 const contentWrapper = dv.container.createEl('div');
 
 for (const group of yearGroups) {
-  const y = group.key;
+  const y = parseInt(group.key);
   const isCurrent = y === currentYear;
 
   const yearSection = document.createElement('div');
@@ -209,17 +224,17 @@ barRow.querySelectorAll('.month-chip').forEach(chip => {
   chip.addEventListener('click', () => {
     const targetYear = parseInt(chip.getAttribute('data-year'));
 
-    // Update chip active state
     barRow.querySelectorAll('.month-chip').forEach(c => c.classList.remove('month-chip-active'));
     chip.classList.add('month-chip-active');
 
-    // Show/hide year sections
     contentWrapper.querySelectorAll('[data-year-section]').forEach(s => {
       const sy = parseInt(s.getAttribute('data-year-section'));
       s.style.display = sy === targetYear ? 'block' : 'none';
     });
   });
 });
+
+} // end guard
 ```
 
 ## 📊 统计 / Stats

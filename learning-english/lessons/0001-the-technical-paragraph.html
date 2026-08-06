@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1: The Technical Paragraph</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>Lesson 1: The Technical Paragraph</h1>
+<p class="lead">The atomic unit of all technical writing. Master this, and blog posts, documentation, and design docs all become easier.</p>
+
+<h2>Why This Matters</h2>
+<p>
+Most developers who learn English as a second language think they need perfect grammar before they can write. They don't. What they need is <strong>structure</strong>. A well-structured paragraph with imperfect grammar communicates more than a grammatically perfect paragraph with no structure.
+</p>
+<p>
+Every piece of technical writing — a blog post, a README, a design doc — is built from paragraphs. If you can write one clear technical paragraph, you can write ten. If you can write ten, you can write a post.
+</p>
+
+<h2>The Pattern: Claim → Evidence → Implication</h2>
+<p>
+Good technical paragraphs follow a three-part structure:
+</p>
+
+<ol>
+  <li><strong>Claim</strong> — state your point directly. No warm-up.</li>
+  <li><strong>Evidence</strong> — back it with a concrete example, data point, or code snippet.</li>
+  <li><strong>Implication</strong> — tell the reader why they should care.</li>
+</ol>
+
+<p>Here is the pattern in action:</p>
+
+<div class="practice-box">
+  <p><strong>Claim:</strong> Caching at the edge dramatically reduces latency for global users.</p>
+  <p><strong>Evidence:</strong> When we moved our static assets from a single-region origin server to a CDN with 200+ edge locations, P95 latency for users in Asia dropped from 2.1s to 340ms.</p>
+  <p><strong>Implication:</strong> If your user base is geographically distributed, a CDN is not optional — single-region serving will cost you real users.</p>
+</div>
+
+<div class="callout">
+  <strong>Key insight</strong>
+  Notice the paragraph starts with the point, not the setup. Many non-native writers feel they need to "warm up" with background. In technical English, lead with the claim. The reader is busy and will decide in the first sentence whether to keep reading.
+</div>
+
+<h2>What "Concrete" Means</h2>
+<p>
+The Evidence step is where non-native writers most often go wrong. Instead of a concrete example, they write another abstract sentence. Compare:
+</p>
+
+<table>
+  <tr><th>Vague (weak)</th><th>Concrete (strong)</th></tr>
+  <tr>
+    <td>"This approach improves performance significantly."</td>
+    <td>"This approach cut page load time from 4.2s to 1.1s."</td>
+  </tr>
+  <tr>
+    <td>"Many developers find this tool useful."</td>
+    <td>"The tool has 12,000 GitHub stars and is used by teams at Stripe and Shopify."</td>
+  </tr>
+  <tr>
+    <td>"The old implementation had problems with scale."</td>
+    <td>"The old implementation crashed at 500 concurrent connections."</td>
+  </tr>
+</table>
+
+<p>
+Ask yourself: <em>could another writer write the same sentence about a completely different thing?</em> If yes, it's too vague. Add numbers, names, or specific outcomes.
+</p>
+
+<h2>Practice: Write Your Own</h2>
+
+<div class="practice-box">
+  <p><strong>Your turn.</strong> Pick a technical concept you know well — a tool, a pattern, a bug you fixed, a library you use. Write one paragraph following Claim → Evidence → Implication.</p>
+  <p>Write it in a text file, a note, or directly in your terminal. Then come back and check it against the guidelines below.</p>
+  <p>If you want feedback, paste it into this conversation and the agent will review it.</p>
+</div>
+
+<h2>Self-Check Guidelines</h2>
+
+<ol>
+  <li>Does the first sentence state the point directly — no warm-up?</li>
+  <li>Does the second part include something specific (a number, a name, a before/after)?</li>
+  <li>Does the last line answer "so what?" — why the reader should care?</li>
+  <li>If you remove the Evidence sentence, does the paragraph lose its power? (It should.)</li>
+</ol>
+
+<h2>Primary Source</h2>
+<p>Read: <a href="https://coderslingo.com/blog/english-for-developer-content-creation/">English for Developer Content Creation — CodersLingo</a>, especially the section "Writing Technical Blog Posts" on the predictable structure developers expect.</p>
+
+<h2>Reference</h2>
+<p>See <a href="../reference/blog-post-structure.html">Blog Post Structure Reference</a> for the full anatomy of a technical blog post, built from paragraphs like this one.</p>
+
+<hr>
+
+<p><em>Questions about this lesson? Something unclear? Ask the agent. The agent is your teacher — use it to check your practice paragraph, clarify the pattern, or dive deeper into any example.</em></p>
+
+<p class="lead">
+  <a href="../learning-records/0001-baseline.md">← Learning Record: Baseline</a> &nbsp;|&nbsp;
+  <a href="../MISSION.md">Mission</a> &nbsp;|&nbsp;
+  <a href="../RESOURCES.md">Resources</a>
+</p>
+
+</body>
+</html>

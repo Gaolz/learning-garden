@@ -1,0 +1,100 @@
+<h2>Updated Gallery + Modal Preview</h2>
+<p class="subtitle">Cards show photo thumbnails. Click opens modal overlay — no page jump.</p>
+
+<div class="section">
+  <h3>📅 Month Grid (with thumbnails)</h3>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 24px;">
+  <div style="border-radius: 10px; overflow: hidden; background: #1e1e1e; border: 1px solid #333; cursor: pointer;" onclick="toggleSelect(this)" data-choice="card1">
+    <div style="background: linear-gradient(135deg, #d4a574, #8b6b4a); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 40px;">🌅</div>
+    <div style="padding: 8px 10px;">
+      <div style="font-size: 12px; font-weight: 600; color: #ccc;">08-01</div>
+      <div style="font-size: 10px; color: #888;">📍 崇州</div>
+    </div>
+  </div>
+  <div style="border-radius: 10px; overflow: hidden; background: #1e1e1e; border: 1px solid #333; cursor: pointer;" onclick="toggleSelect(this)" data-choice="card2">
+    <div style="background: linear-gradient(135deg, #6b8b6b, #4a6a4a); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 40px;">☕</div>
+    <div style="padding: 8px 10px;">
+      <div style="font-size: 12px; font-weight: 600; color: #ccc;">08-02</div>
+      <div style="font-size: 10px; color: #888;">📍 成都</div>
+    </div>
+  </div>
+  <div style="border-radius: 10px; overflow: hidden; background: #1e1e1e; border: 1px solid #333; cursor: pointer;" onclick="toggleSelect(this)" data-choice="card3">
+    <div style="background: linear-gradient(135deg, #d4a574, #c49464); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 40px;">🍜</div>
+    <div style="padding: 8px 10px;">
+      <div style="font-size: 12px; font-weight: 600; color: #ccc;">08-03</div>
+      <div style="font-size: 10px; color: #888;">📍 春熙路</div>
+    </div>
+  </div>
+  <div style="border-radius: 10px; overflow: hidden; background: #1e1e1e; border: 1px solid #333; cursor: pointer;" onclick="toggleSelect(this)" data-choice="card4">
+    <div style="background: linear-gradient(135deg, #5a6a7a, #4a5a6a); height: 100px; display: flex; align-items: center; justify-content: center; font-size: 40px;">🌧️</div>
+    <div style="padding: 8px 10px;">
+      <div style="font-size: 12px; font-weight: 600; color: #ccc;">08-04</div>
+      <div style="font-size: 10px; color: #888;">📍 桤木河</div>
+    </div>
+  </div>
+  <div style="border-radius: 10px; overflow: hidden; background: #1e1e1e; border: 1px dashed #444;">
+    <div style="height: 100px; display: flex; align-items: center; justify-content: center; font-size: 24px; opacity: 0.3;">+</div>
+    <div style="padding: 8px 10px;">
+      <div style="font-size: 12px; color: #555;">Today</div>
+      <div style="font-size: 10px; color: #444;">No photo yet</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>🖼️ Modal Preview (on card click)</h3>
+  <p class="subtitle">Overlays on top of gallery. Does NOT navigate away from INDEX.</p>
+</div>
+
+<div class="mockup">
+  <div class="mockup-header">Modal Preview — Click Any Card</div>
+  <div class="mockup-body" style="padding: 0;">
+    <div style="background: #1a1a1a; padding: 20px; border-radius: 0;">
+      <!-- Dark overlay backdrop simulation -->
+      <div style="background: rgba(0,0,0,0.85); border-radius: 12px; padding: 0; max-width: 600px; margin: 0 auto; overflow: hidden;">
+        <!-- Photo large -->
+        <div style="background: linear-gradient(135deg, #d4a574, #8b6b4a, #5a4a3a); height: 280px; display: flex; align-items: center; justify-content: center; font-size: 80px;">🌅</div>
+        <!-- Metadata bar -->
+        <div style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin: 0; color: #fff;">2026-08-01</h3>
+            <span style="font-size: 40px;">🧘</span>
+          </div>
+          <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <span style="background: #333; padding: 2px 10px; border-radius: 12px; font-size: 12px; color: #ccc;">📍 崇州·桤木河湿地公园</span>
+            <span style="background: #333; padding: 2px 10px; border-radius: 12px; font-size: 12px; color: #ccc;">👤 自己</span>
+          </div>
+          <p style="color: #aaa; font-style: italic; margin: 0 0 12px 0;">雨后空气很干净，水稻田里有白鹭</p>
+          <div style="display: flex; gap: 6px;">
+            <span style="background: #2a3a2a; padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #6a9a6a;">#nature</span>
+            <span style="background: #2a3a2a; padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #6a9a6a;">#peaceful</span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal controls -->
+      <div style="display: flex; justify-content: center; gap: 16px; margin-top: 12px;">
+        <span style="color: #888; font-size: 24px; cursor: pointer;">◀</span>
+        <span style="color: #888; font-size: 18px;">1 / 31</span>
+        <span style="color: #888; font-size: 24px; cursor: pointer;">▶</span>
+        <span style="color: #666; font-size: 24px; margin-left: 24px; cursor: pointer;">✕</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 16px;">
+  <h3>Modal Behavior</h3>
+  <ul style="list-style: none; padding: 0;">
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">🖱️ Click any card → modal overlay opens on same page</li>
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">◀ ▶ Arrow keys or buttons → prev/next day photo</li>
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">✕ or Esc or click backdrop → close modal, back to gallery</li>
+    <li style="padding: 6px 0; border-bottom: 1px solid #eee;">📱 Large photo + full metadata below</li>
+    <li style="padding: 6px 0;">🔗 "Open note" link at bottom of modal → jump to full note (optional escape hatch)</li>
+  </ul>
+</div>
+
+<div class="section" style="margin-top: 16px;">
+  <p class="subtitle">Click any card above to simulate selection. Tell me what to adjust.</p>
+</div>

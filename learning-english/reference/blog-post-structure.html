@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reference: Blog Post Structure</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<h1>Blog Post Structure</h1>
+<p class="lead">Quick-reference card for writing technical blog posts in English.</p>
+
+<h2>The Skeleton</h2>
+<p>Every technical blog post follows this structure:</p>
+
+<ol>
+  <li><strong>Hook</strong> (1-2 sentences) — the problem or promise that grabs the reader</li>
+  <li><strong>Context</strong> (1 short paragraph) — why this matters now</li>
+  <li><strong>Solution</strong> (the body) — steps, code, explanations broken into Claim→Evidence→Implication paragraphs</li>
+  <li><strong>Conclusion</strong> (2-3 sentences) — what you learned, what the reader should do next</li>
+</ol>
+
+<h2>Title Patterns</h2>
+
+<table>
+  <tr><th>Pattern</th><th>Example</th></tr>
+  <tr><td>How to X</td><td>"How to Set Up Hot Reload for a Go + Docker Dev Environment"</td></tr>
+  <tr><td>X vs Y: When to Use Each</td><td>"REST vs GraphQL: When to Use Each"</td></tr>
+  <tr><td>I Built X and Learned Y</td><td>"I Built a CI/CD Pipeline From Scratch and Learned These 3 Things"</td></tr>
+  <tr><td>Why We Moved From X to Y</td><td>"Why We Moved From Redis to SQLite for Our Job Queue"</td></tr>
+</table>
+
+<h2>Voice: What "Conversational" Means</h2>
+
+<table>
+  <tr><th>Avoid (academic)</th><th>Prefer (conversational)</th></tr>
+  <tr><td>"One might consider implementing..."</td><td>"You could implement this by..."</td></tr>
+  <tr><td>"It is noteworthy that..."</td><td>(Just state the thing. Skip this phrase.)</td></tr>
+  <tr><td>"In conclusion, it can be stated that..."</td><td>"The takeaway:" or "Bottom line:"</td></tr>
+  <tr><td>"The aforementioned approach..."</td><td>"This approach..."</td></tr>
+  <tr><td>Do not use contractions.</td><td>Use contractions (don't, it's, you're). They sound human.</td></tr>
+</table>
+
+<h2>Code Blocks: The Pattern</h2>
+
+<p>Every code block gets three things:</p>
+<ol>
+  <li><strong>Before</strong> — one sentence setting up what the code does</li>
+  <li><strong>The code</strong> — self-contained, runnable if possible</li>
+  <li><strong>After</strong> — one sentence pointing out what to notice</li>
+</ol>
+
+<h2>Tense &amp; Voice Quick Reference</h2>
+
+<table>
+  <tr><th>Section</th><th>Tense</th><th>Example</th></tr>
+  <tr><td>Context/Background</td><td>Present or Past</td><td>"We currently run three separate caches."</td></tr>
+  <tr><td>Proposed Solution / Tutorial Steps</td><td>Future/Imperative</td><td>"We will add a Redis layer." / "Install the package:"</td></tr>
+  <tr><td>Trade-offs / Explanation</td><td>Present</td><td>"This introduces a new dependency."</td></tr>
+  <tr><td>Takeaway / Conclusion</td><td>Present or Imperative</td><td>"Start small. Ship early. Measure."</td></tr>
+</table>
+
+<h2>Common Mistakes (Non-Native Writers)</h2>
+
+<ul>
+  <li><strong>No TL;DR.</strong> Busy readers scan the title and first paragraph to decide if they'll read. Lead with the point.</li>
+  <li><strong>Overusing passive voice.</strong> "It was decided" hides who decided. Say "we decided" or "I chose."</li>
+  <li><strong>Too many ideas.</strong> One post = one main idea. Scope is your friend.</li>
+  <li><strong>Explaining code twice.</strong> Good code + one clear sentence of explanation. Not two paragraphs.</li>
+</ul>
+
+<hr>
+
+<p class="lead">
+  <a href="../lessons/0001-the-technical-paragraph.html">← Lesson 1: The Technical Paragraph</a> &nbsp;|&nbsp;
+  <a href="../MISSION.md">Mission</a>
+</p>
+
+</body>
+</html>

@@ -15,7 +15,8 @@
       "Bash(gem install:*)",
       "Read(//Users/gaowanxing/.claude/**)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''Project MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''Project MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
+      "mcp__plugin_ecc_github__get_file_contents"
     ]
   }
 }
