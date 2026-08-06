@@ -54,6 +54,22 @@ const exists = app.vault.getAbstractFileByPath(notePath);
 status.textContent = exists ? '✅ 已记录 / Recorded' : '点击创建今日照片 / Click to create';
 btnRow.appendChild(status);
 
+// ===== Location search =====
+const searchRow = dv.container.createEl('div');
+searchRow.style.cssText = 'display:flex;gap:10px;align-items:center;margin-bottom:12px;';
+
+const searchInput = document.createElement('input');
+searchInput.type = 'text';
+searchInput.placeholder = '🔍 搜索地点... 如：崇州 / 成都 / 泰国';
+searchInput.style.cssText = 'padding:4px 10px;border-radius:6px;border:1px solid var(--background-modifier-border);background:var(--background-primary);color:var(--text-normal);font-size:13px;width:220px;';
+searchRow.appendChild(searchInput);
+
+const clearBtn = document.createElement('button');
+clearBtn.textContent = '✕';
+clearBtn.style.cssText = 'padding:2px 8px;font-size:12px;cursor:pointer;border-radius:4px;border:1px solid var(--background-modifier-border);background:var(--background-secondary);color:var(--text-muted);display:none;';
+clearBtn.addEventListener('click', () => { searchInput.value = ''; searchInput.dispatchEvent(new Event('input')); });
+searchRow.appendChild(clearBtn);
+
 // ===== Gallery =====
 const currentYear = todayYear;
 const currentMonth = now.getMonth() + 1;
@@ -74,17 +90,22 @@ function parseDate(p) {
 function createCard(p) {
   const d = parseDate(p);
   const dateStr = d.full;
-  const emoji = p.feeling_emoji || '';
   const location = p.location || '';
-  const feeling = p.feeling_text || '';
+  const feeling = p.feeling || p.feeling_text || '';
   const tags = p.tags ? p.tags.filter(t => t !== 'photo') : [];
 
-  const imgPath = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${dateStr}.jpg`;
+  const imgBase = `assets/photo/${d.year}/${String(d.month).padStart(2, '0')}/${dateStr}`;
+  const extensions = ['jpg','jpeg','png','gif','webp'];
+  let imgFile = null;
+  for (const ext of extensions) {
+    imgFile = app.vault.getAbstractFileByPath(`${imgBase}.${ext}`);
+    if (imgFile) break;
+  }
+
   const imgWrap = document.createElement('div');
   imgWrap.className = 'photo-card-image';
 
   try {
-    const imgFile = app.vault.getAbstractFileByPath(imgPath);
     if (imgFile) {
       const img = document.createElement('img');
       img.src = app.vault.getResourcePath(imgFile);
@@ -99,6 +120,7 @@ function createCard(p) {
 
   const card = document.createElement('div');
   card.className = 'photo-card';
+  card.setAttribute('data-location', location.toLowerCase());
   card.appendChild(imgWrap);
 
   const body = document.createElement('div');
@@ -106,7 +128,6 @@ function createCard(p) {
   body.innerHTML = `
     <div class="photo-card-header">
       <span class="photo-card-date">${dateStr}</span>
-      ${emoji ? `<span class="photo-card-emoji">${emoji}</span>` : ''}
     </div>
     ${location ? `<div class="photo-card-location">📍 ${location}</div>` : ''}
     ${feeling ? `<div class="photo-card-feeling">${feeling}</div>` : ''}
@@ -180,6 +201,22 @@ for (const group of monthGroups) {
   gridsWrapper.appendChild(gridContainer);
 }
 
+// ===== Location filter =====
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  const keywords = q ? q.split(/\s+/) : [];
+  clearBtn.style.display = q ? 'inline-block' : 'none';
+  gridsWrapper.querySelectorAll('.photo-card').forEach(card => {
+    const loc = card.getAttribute('data-location') || '';
+    if (keywords.length === 0) {
+      card.style.display = '';
+    } else {
+      const match = keywords.some(kw => loc.includes(kw));
+      card.style.display = match ? '' : 'none';
+    }
+  });
+});
+
 // ===== Chip click: switch month =====
 barRow.querySelectorAll('.month-chip').forEach(chip => {
   chip.addEventListener('click', () => {
@@ -205,6 +242,6 @@ barRow.querySelectorAll('.month-chip').forEach(chip => {
 | **New photo**: create from `[[../../Templates/Photo Note Template\|Photo Note Template]]` → save to `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md` | **新建照片**：从模板创建 → 保存到 `Photo/<YYYY>/<MM>/<YYYY-MM-DD>.md` |
 | **Image** goes in `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg`                                                                           | **图片**放在 `assets/photo/<YYYY>/<MM>/<YYYY-MM-DD>.jpg`     |
 | **Tags**: scene (`nature` `city` `home`), people (`family` `friends`), activity (`sports` `cooking`)                                    | **标签**：场景（自然/城市/家里）、人物（家人/朋友）、活动（运动/烹饪）                  |
-| **Moods**: 😊🧘🌧️⚡🔥❤️😢😤🎉🤔😴🥳                                                                                                     | **心情表情**：开心/平静/低落/能量/热爱/伤心/生气/庆祝/思考/困/满足                 |
+| **Search**: type location keyword (e.g. "崇州") in the search box to filter                                                           | **搜索**：在搜索框输入地点关键词（如"崇州"）过滤照片                              |
 | **Auto-update**: new note → card appears, nothing to configure                                                                          | **自动更新**：新笔记建好，卡片自动出现                                    |
 | Click any card → opens full photo note                                                                                                  | 点击任意卡片 → 打开照片笔记                                          |

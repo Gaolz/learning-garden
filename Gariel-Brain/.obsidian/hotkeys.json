@@ -8,7 +8,8 @@
       "key": "C"
     }
   ],
-  "quickadd:choice:photo-process-drop-001": [
+  "quickadd:choice:photo-process-drop-001": [],
+  "templater-obsidian:Templates/Process Photo Drop.md": [
     {
       "modifiers": [
         "Mod",

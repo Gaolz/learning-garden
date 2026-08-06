@@ -17,7 +17,6 @@ tags:
 - [浏览与搜索 / Browse & Search](#-浏览与搜索--browse--search)
 - [属性说明 / Frontmatter Fields](#-属性说明--frontmatter-fields)
 - [标签规范 / Tag Conventions](#-标签规范--tag-conventions)
-- [心情表情 / Mood Emoji Presets](#-心情表情--mood-emoji-presets)
 - [目录结构 / Directory Structure](#-目录结构--directory-structure)
 - [贴士 / Tips](#-贴士--tips)
 
@@ -66,10 +65,9 @@ When you create a photo note for the day, it renders as a card inside your daily
 |-----------|:---:|---------|--------------|
 | `type` | √ | `photo` | Dataview 数据源过滤 / Source filter |
 | `created` | √ | 当天 today | 排序键，ISO 格式 / Sort key (YYYY-MM-DD) |
-| `location` | — | — | 拍摄地点 / Where was this taken |
+| `location` | — | — | 拍摄地点，空格分隔层级。例：`成都 崇州 元通古镇`。搜索"崇州"即匹配 / Space-separated hierarchy. Search by any word |
 | `who` | — | `[自己]` | 照片中的人 / People in the photo |
-| `feeling_emoji` | — | — | 心情表情 / Mood emoji |
-| `feeling_text` | — | — | 心情描述 / Free-text reflection |
+| `feeling` | — | — | 心情描述（纯文字）/ How you felt, free text |
 | `tags` | √ | `[photo]` | 必须包含 `photo` + 自定义标签 / Must include `photo` |
 
 ---
@@ -84,12 +82,6 @@ When you create a photo note for the day, it renders as a card inside your daily
 | **人物 / People** | `self` `family` `friends` `colleagues` |
 | **活动 / Activity** | `work` `sports` `music` `reading` `cooking` `walking` |
 | **心情 / Mood** | `peaceful` `energetic` `melancholy` `joyful` `thoughtful` |
-
----
-
-## 😊 心情表情 / Mood Emoji Presets
-
-😊 开心 · 🧘 平静 · 🌧️ 低落 · ⚡ 能量 · 🔥 热爱 · ❤️ 感动 · 😢 伤心 · 😤 生气 · 🎉 庆祝 · 🤔 思考 · 😴 疲惫 · 🥳 满足
 
 ---
 
@@ -119,6 +111,7 @@ assets/photo/
 | Photos auto-order by date — no manual maintenance | 照片按日期自动排列，无需手动维护 |
 | Year heatmap shows your rhythm at a glance | 年度热力图，一眼看出记录节奏 |
 | Missing days are normal — empty cells are part of your story | 漏拍很正常，空格也是你生活的一部分 |
-| Use `feeling_text` as a micro-journal: one sentence = one memory | 用心情文字写微型日记：一句话 = 一段回忆 |
+| Use `feeling` as a micro-journal: one sentence = one memory | 用 feeling 写微型日记：一句话 = 一段回忆 |
+| Search photos by location: type any word (e.g. "崇州") to filter | 按地点搜索：输入任意词语（如"崇州"）过滤照片 |
 | Tag generously — 5 tags are better than losing a photo forever | 多打标签，宁多勿少，好过以后找不到 |
 | No social sharing — these photos are for you | 不发朋友圈，不选角度，只为自己记录 |
