@@ -17,6 +17,7 @@ cssclass: photo-index
 const today = dv.date("now");
 const currentYear = today.year;
 const currentMonth = today.month;
+const monthNames = ['一月/Jan','二月/Feb','三月/Mar','四月/Apr','五月/May','六月/Jun','七月/Jul','八月/Aug','九月/Sep','十月/Oct','十一月/Nov','十二月/Dec'];
 
 // ===== Helper: full card =====
 function createCard(p) {
@@ -69,55 +70,81 @@ function createCard(p) {
   return card;
 }
 
-// ===== This Month (full cards) =====
-const monthNames = ['一月/Jan','二月/Feb','三月/Mar','四月/Apr','五月/May','六月/Jun','七月/Jul','八月/Aug','九月/Sep','十月/Oct','十一月/Nov','十二月/Dec'];
-dv.header(2, `📅 ${currentYear} / ${String(currentMonth).padStart(2, '0')} — ${monthNames[currentMonth - 1]}`);
-
-const thisMonth = dv.pages('#photo')
-  .where(p => p.created && p.created.year === currentYear && p.created.month === currentMonth)
+// ===== Gather all months that have photos =====
+const allPages = dv.pages('#photo')
+  .where(p => p.created && p.created.year === currentYear)
   .sort(p => p.created, 'asc');
 
-if (thisMonth.length === 0) {
-  dv.paragraph("_这个月还没有照片。今天拍第一张吧！ / No photos this month yet. Take your first photo today!_");
-} else {
-  const grid = dv.container.createEl('div', { cls: 'photo-grid photo-grid-month' });
-  for (const p of thisMonth) {
-    grid.appendChild(createCard(p));
-  }
+const monthGroups = allPages.groupBy(p => p.created.month).sort(g => g.key, 'asc');
+
+// ===== Month chip bar =====
+const barRow = dv.container.createEl('div');
+barRow.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;';
+
+for (const group of monthGroups) {
+  const m = group.key;
+  const count = group.rows.length;
+  const isCurrent = m === currentMonth;
+
+  const chip = document.createElement('span');
+  chip.className = isCurrent ? 'month-chip month-chip-active' : 'month-chip';
+  chip.setAttribute('data-month', m);
+  chip.innerHTML = `📅 ${String(m).padStart(2, '0')} · ${count} 张`;
+  chip.title = `${monthNames[m - 1]}: ${count} photos`;
+
+  barRow.appendChild(chip);
 }
 
-// ===== Earlier Months (compact list) =====
-const allMonths = dv.pages('#photo')
-  .where(p => p.created && p.created.year === currentYear)
-  .groupBy(p => p.created.month)
-  .sort(g => g.key, 'desc');
+// ===== All month grids (hidden except active) =====
+const gridsWrapper = dv.container.createEl('div');
 
-const earlierMonths = allMonths.filter(g => g.key !== currentMonth);
+for (const group of monthGroups) {
+  const m = group.key;
+  const isCurrent = m === currentMonth;
+  const monthLabel = monthNames[m - 1];
 
-if (earlierMonths.length > 0) {
-  dv.header(3, '往期月份 / Earlier Months');
+  const gridContainer = document.createElement('div');
+  gridContainer.setAttribute('data-month-grid', m);
+  gridContainer.style.display = isCurrent ? 'block' : 'none';
 
-  const chipContainer = dv.container.createEl('div');
-  chipContainer.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;';
+  const header = document.createElement('h3');
+  header.style.marginTop = '0';
+  header.innerHTML = `📅 ${currentYear} / ${String(m).padStart(2, '0')} — ${monthLabel}`;
+  gridContainer.appendChild(header);
 
-  for (const group of earlierMonths) {
-    const month = group.key;
-    const count = group.rows.length;
-    const monthLabel = monthNames[month - 1];
+  if (group.rows.length === 0) {
+    const empty = document.createElement('p');
+    empty.innerHTML = '_这个月还没有照片 / No photos this month._';
+    empty.style.color = 'var(--text-muted)';
+    gridContainer.appendChild(empty);
+  } else {
+    const grid = document.createElement('div');
+    grid.className = 'photo-grid photo-grid-month';
+    for (const p of group.rows) {
+      grid.appendChild(createCard(p));
+    }
+    gridContainer.appendChild(grid);
+  }
 
-    const chip = document.createElement('span');
-    chip.className = 'month-chip';
-    chip.innerHTML = `📅 ${String(month).padStart(2, '0')} · ${count} 张`;
-    chip.title = `${monthLabel}: ${count} photos`;
+  gridsWrapper.appendChild(gridContainer);
+}
 
-    chip.addEventListener('click', () => {
-      // Navigate to Year Gallery which shows all photos sorted by date
-      app.workspace.openLinkText('Photo/Year Gallery.md', '', false);
+// ===== Chip click: switch month =====
+barRow.querySelectorAll('.month-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const targetMonth = parseInt(chip.getAttribute('data-month'));
+
+    // Update chip active state
+    barRow.querySelectorAll('.month-chip').forEach(c => c.classList.remove('month-chip-active'));
+    chip.classList.add('month-chip-active');
+
+    // Show/hide grids
+    gridsWrapper.querySelectorAll('[data-month-grid]').forEach(g => {
+      const gm = parseInt(g.getAttribute('data-month-grid'));
+      g.style.display = gm === targetMonth ? 'block' : 'none';
     });
-
-    chipContainer.appendChild(chip);
-  }
-}
+  });
+});
 ```
 
 ## 💡 使用贴士 / Tips

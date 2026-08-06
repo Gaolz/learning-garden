@@ -131,6 +131,13 @@
   border-color: var(--interactive-accent);
 }
 
+.month-chip-active {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+  font-weight: 600;
+}
+
 /* ===== Compact Card (year mode) ===== */
 .photo-card-compact .photo-card-image img {
   height: 90px;
