@@ -40,7 +40,25 @@
       "Bash(agent-browser skills:*)",
       "Bash(git add:*)",
       "Bash(git -C Cook remote -v)",
-      "Bash(git -C learning-code remote -v)"
+      "Bash(git -C learning-code remote -v)",
+      "Read(//home/garielgao/.tmux/**)",
+      "Read(//home/garielgao/.config/tmux/**)",
+      "Read(//tmp/**)",
+      "Read(//home/garielgao/**)",
+      "WebFetch(domain:github.com)",
+      "Bash(fzf --version)",
+      "Bash(bat --version)",
+      "Bash(sudo apt-get update -qq)",
+      "Bash(sudo apt-get install -y fzf bat)",
+      "Bash(git clone *)",
+      "Bash(dpkg -l fzf bat)",
+      "Bash(tmux source *)",
+      "Bash(~/.tmux/plugins/tpm/bin/install_plugins *)",
+      "Bash(tmux list-keys *)",
+      "Bash(tmux run-shell *)",
+      "Bash(tmux display-message *)",
+      "Bash(tmux source-file *)",
+      "Bash(git commit:*)"
     ]
   }
 }
