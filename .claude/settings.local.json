@@ -16,7 +16,25 @@
       "Read(//Users/gaowanxing/.claude/**)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''Project MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
-      "mcp__plugin_ecc_github__get_file_contents"
+      "mcp__plugin_ecc_github__get_file_contents",
+      "Read(//home/garielgao/.tmux/**)",
+      "Read(//home/garielgao/.config/tmux/**)",
+      "Read(//tmp/**)",
+      "Read(//home/garielgao/**)",
+      "WebFetch(domain:github.com)",
+      "Bash(fzf --version)",
+      "Bash(bat --version)",
+      "Bash(sudo apt-get update -qq)",
+      "Bash(sudo apt-get install -y fzf bat)",
+      "Bash(git clone *)",
+      "Bash(dpkg -l fzf bat)",
+      "Bash(tmux source *)",
+      "Bash(~/.tmux/plugins/tpm/bin/install_plugins *)",
+      "WebSearch",
+      "Bash(tmux list-keys *)",
+      "Bash(tmux run-shell *)",
+      "Bash(tmux display-message *)",
+      "Bash(tmux source-file *)"
     ]
   }
 }
