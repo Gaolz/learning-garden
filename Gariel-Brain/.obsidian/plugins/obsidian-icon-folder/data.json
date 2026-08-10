@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiCircleCheckBig",
       "📔",
       "🖼",
       "LiImages",
-      "LiLoader",
-      "LiCircle"
+      "LiLoader"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -79,7 +79,7 @@
   "Exercise/Eye": "👀",
   "Math": "📐",
   "RandomThoughts": "🤔",
-  "Challenge/01 Photo a Day.md": "LiLoader",
+  "Challenge/01 Photo a Day.md": "LiCircleCheckBig",
   "Challenge/02 Handwritten Letter.md": "LiCircle",
   "Challenge/03 Random Bus Adventure.md": "LiCircle",
   "Challenge/04 Elderly Pace Day.md": "LiCircle",

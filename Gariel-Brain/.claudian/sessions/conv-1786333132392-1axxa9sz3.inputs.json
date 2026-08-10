@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "conversationId": "conv-1786333132392-1axxa9sz3",
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "msg-1786333132685-j2tzgt3",
+      "userTurnOrdinal": 1,
+      "state": "accepted",
+      "localMessageId": "msg-1786333132386-avvlrve",
+      "timestamp": 1786333132386,
+      "rawDisplayText": "hello",
+      "canonicalText": "hello",
+      "context": {
+        "currentNote": {
+          "path": "DailyNotes/2026-08-10.md"
+        }
+      },
+      "images": [],
+      "contentDigest": "20ac08c292d63b2c7c5fd643cc588461ab80929dc11c1cbaa881ec6d9a981db9",
+      "providerUserMessageId": "fe978609-42a4-4eb9-adca-2ca27ed9f0e1",
+      "providerAssistantMessageId": "6c1acf06-91ab-4a5c-9f01-6969fd48ba92"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1786333182910-w68813h",
+      "userTurnOrdinal": 2,
+      "state": "accepted",
+      "localMessageId": "msg-1786333182906-mb6skmn",
+      "timestamp": 1786333182906,
+      "rawDisplayText": "which model do you use",
+      "canonicalText": "which model do you use",
+      "images": [],
+      "contentDigest": "367fd28fcb0fa3d2cce3c78887c6f34c59a5ae1f025bb9eee363837af0abec38",
+      "providerUserMessageId": "de9cb2a4-959d-4135-9033-2e983e50ed53",
+      "providerAssistantMessageId": "e17d1527-e591-4b3a-9dcc-6b6301bc620f"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1786334055927-kcm7m0q",
+      "userTurnOrdinal": 3,
+      "state": "accepted",
+      "localMessageId": "msg-1786334055918-fl8a21n",
+      "timestamp": 1786334055918,
+      "rawDisplayText": "@Rest/Information-Ecosystem.md 关于阅读，那种大部头的书籍（比如：静静的顿河，中间需配合其他短小的书籍交叉着看）。要不然一本就有四百页，全文总共四本，读起来非常有难度",
+      "canonicalText": "@Rest/Information-Ecosystem.md 关于阅读，那种大部头的书籍（比如：静静的顿河，中间需配合其他短小的书籍交叉着看）。要不然一本就有四百页，全文总共四本，读起来非常有难度",
+      "images": [],
+      "contentDigest": "c067b870781118c78be516aad1f88fb781662935234d8dfca67bfbab40554567",
+      "providerUserMessageId": "062f9aa4-97ff-470f-8efd-10cab3ca2fee",
+      "providerAssistantMessageId": "06a003ca-2ddf-4c7c-9373-1deb24bc2ccc"
+    }
+  ]
+}
