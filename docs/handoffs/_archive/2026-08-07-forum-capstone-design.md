@@ -2,7 +2,7 @@
 created: 2026-08-07T08:00:00Z
 branch: mike
 trigger: manual
-restored: false
+restored: true
 topic: forum-capstone-design
 ---
 
@@ -47,3 +47,4 @@ None — design phase only.
 - VPS provider? (Hetzner or DigitalOcean — user hasn't specified)
 - Domain name for the forum?
 - Any existing Rails 8 project to reference, or greenfield?
+restored_at: 2026-08-07T02:25:26Z

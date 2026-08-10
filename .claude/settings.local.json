@@ -16,7 +16,31 @@
       "Read(//Users/gaowanxing/.claude/**)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); mcps=d.get\\(''''mcpServers'''',{}\\); print\\(f''''Project MCP servers: {len\\(mcps\\)}''''\\); [print\\(f''''  {k}''''\\) for k in mcps]\")",
-      "mcp__plugin_ecc_github__get_file_contents"
+      "mcp__plugin_ecc_github__get_file_contents",
+      "Bash(ruby:*)",
+      "Bash(printf 'Content-Length: 139\\\\r\\\\n\\\\r\\\\n{\"\"\"\"jsonrpc\"\"\"\":\"\"\"\"2.0\"\"\"\",\"\"\"\"method\"\"\"\":\"\"\"\"initialize\"\"\"\",\"\"\"\"id\"\"\"\":1,\"\"\"\"params\"\"\"\":{\"\"\"\"processId\"\"\"\":null,\"\"\"\"rootUri\"\"\"\":\"\"\"\"file:///Users/gaowanxing/Gariel/learning-garden\"\"\"\",\"\"\"\"capabilities\"\"\"\":{}}}')",
+      "Bash(timeout 8 solargraph stdio)",
+      "Bash(echo \"EXIT=$?\")",
+      "Read(//Users/gaowanxing/Library/Logs/Zed/**)",
+      "Bash(ls /Users/gaowanxing/Gariel/learning-garden/Gemfile*)",
+      "Read(//Users/gaowanxing/Gariel/source-reading/**)",
+      "Bash(timeout 8 bash -c 'printf \"\"Content-Length: 139\\\\r\\\\n\\\\r\\\\n{\\\\\"\"jsonrpc\\\\\"\":\\\\\"\"2.0\\\\\"\",\\\\\"\"method\\\\\"\":\\\\\"\"initialize\\\\\"\",\\\\\"\"id\\\\\"\":1,\\\\\"\"params\\\\\"\":{\\\\\"\"processId\\\\\"\":null,\\\\\"\"rootUri\\\\\"\":\\\\\"\"file:///Users/gaowanxing/Gariel/learning-garden\\\\\"\",\\\\\"\"capabilities\\\\\"\":{}}}\"\" | solargraph stdio 2>&1')",
+      "Bash(gem contents:*)",
+      "Bash(bundle exec:*)",
+      "Bash(env)",
+      "Bash(echo \"RUBYOPT=$RUBYOPT\")",
+      "Bash(echo \"RUBYLIB=$RUBYLIB\")",
+      "Bash(echo \"GEM_PATH=$GEM_PATH\")",
+      "Bash(echo \"GEM_HOME=$GEM_HOME\")",
+      "Bash(echo \"BUNDLE_GEMFILE=$BUNDLE_GEMFILE\")",
+      "Bash(timeout 5 solargraph socket --port=0)",
+      "WebSearch",
+      "Bash(bundle install:*)",
+      "Read(//Users/gaowanxing/.agents/skills/agent-browser/**)",
+      "Bash(agent-browser skills:*)",
+      "Bash(git add:*)",
+      "Bash(git -C Cook remote -v)",
+      "Bash(git -C learning-code remote -v)"
     ]
   }
 }

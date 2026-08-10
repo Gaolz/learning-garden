@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "📔",
       "🖼",
       "LiImages",
       "LiLoader",
-      "LiCircle",
-      "LiXCircle"
+      "LiCircle"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -91,5 +91,6 @@
   "Challenge/10 English Only Day.md": "LiCircle",
   "Challenge/11 No AV 100 Days.md": "LiLoader",
   "assets": "LiImages",
-  "Photo": "🖼"
+  "Photo": "🖼",
+  "Programming/CodeReading": "📔"
 }

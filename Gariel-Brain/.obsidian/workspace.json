@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Photo/2026/06/2026-06-10.md",
+                "file": "Challenge/01 Photo a Day.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-06-10"
+              "title": "01 Photo a Day"
+            }
+          },
+          {
+            "id": "c83d8cd4418ea220",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rest/Sleep/Evening Wind-Down Ritual.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Evening Wind-Down Ritual"
             }
           }
         ]
@@ -55,7 +69,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:photo",
+                "query": "递归",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -83,7 +97,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 329.0168762207031
   },
   "right": {
     "id": "6c4d696463714be5",
@@ -202,52 +216,53 @@
   },
   "active": "3b4ecfdacebfe4f1",
   "lastOpenFiles": [
+    "Challenge/11 No AV 100 Days.md",
+    "DailyNotes/2026-08-09.md",
     "Photo/Year Gallery.md",
-    "Photo/2026/08/2026-08-04.md",
-    "Photo/2026/08/2026-08-05.md",
-    "Photo/2026/08/2026-08-06.md",
     "Photo/Month Gallery.md",
+    "Photo/2026/08/2026-08-09.md",
+    "assets/photo/2026/08/2026-08-09.jpg",
+    "Programming/CodeReading/httparty/httparty-module-inheritable-attrs.md",
+    "Programming/CodeReading/httparty/httparty-MOC.md",
+    "Programming/CodeReading/httparty/httparty-request-pipeline.md",
+    "Rest/Sleep/Evening Wind-Down Ritual.md",
+    "Rest/Meditation/Anchor Practice.md",
+    "DailyNotes/2026-08-08.md",
+    "Photo/2026/08/2026-08-08.md",
+    "Photo/2026/08/2026-08-07.md",
+    "assets/photo/2026/08/2026-08-08.jpg",
+    "DailyNotes/2026-08-08.jpg",
+    "assets/photo/2026/08/2026-08-07.jpg",
     "Photo/2026/08/2026-08-01.md",
-    "Photo/2026/08/2026-08-02.md",
-    "Photo/2026/08/2026-08-03.md",
+    "DailyNotes/2026-08-07.md",
+    "httparty data flow.md",
+    "Programming/CodeReading/httparty/httparty-dsl-layer.md",
+    "Programming/Algorithm/递归.md",
+    "Programming/Algorithm/Binary-Search.md",
+    "Programming/CodeReading/httparty/source/website/css/common.css",
+    "Programming/CodeReading/httparty/source/website/index.html",
+    "Programming/CodeReading/httparty/source/website/css",
+    "Programming/CodeReading/httparty/source/website",
+    "Programming/CodeReading/httparty/source/spec/fixtures/ssl/generated/server.key",
+    "Programming/CodeReading/httparty/source/spec/fixtures/ssl/generated/server.crt",
+    "Programming/CodeReading/httparty/source/spec/fixtures/ssl/generated/selfsigned.crt",
+    "Programming/CodeReading/httparty/source/spec/fixtures/ssl/generated/ca.key",
+    "Programming/CodeReading/httparty/source/spec/fixtures/ssl/generated/ca.crt",
+    "Programming/CodeReading/httparty/source/spec/fixtures/ssl/generated/bogushost.crt",
+    "Programming/CodeReading/httparty/source/spec/fixtures/tiny.gif",
+    "Programming/CodeReading/httparty/source/examples/README.md",
+    "Programming/CodeReading/httparty/source/docs/README.md",
+    "Programming/CodeReading/httparty/source/README.md",
+    "Programming/CodeReading/httparty/source/Changelog.md",
+    "Programming/CodeReading/httparty/source/CONTRIBUTING.md",
+    "Templates/Tech Article Note Template.md",
+    "Programming/CodeReading/httparty/httparty-patterns.md",
     "assets/photo/2026/08/2026-08-01.jpg",
-    "DailyNotes/2026-08-05.md",
     "assets/photo/110.jpg",
     "assets/photo/2026/08/2026-08-05.jpeg",
-    "Untitled.md",
-    "DailyNotes/2026-08-06.md",
     "assets/photo/2026/08/2026-08-06.jpg",
-    "Templates/Process Photo Drop.md",
-    "scripts/process-photo-drop.js",
-    "scripts",
     "未命名 1.canvas",
     "未命名.canvas",
-    "Templates/Photo Note Template.md",
-    "Photo/README.md",
-    "DailyNotes/2026-08-02.md",
-    "Photo/2026/06/2026-06-10.md",
-    "assets/photo/2026/07/2026-07-18.jpg",
-    "assets/photo/2026/07/2026-07-05.jpg",
-    "assets/photo/2026/06/2026-06-20.jpg",
-    "assets/photo/2026/06/2026-06-10.jpg",
-    "Photo/2026/07/2026-07-18.md",
-    "Photo/2026/07/2026-07-05.md",
-    "Photo/2026/06/2026-06-20.md",
-    "assets/photo/2026/07",
-    "assets/photo/2026/06",
-    "Photo/2026/07",
-    "Photo/2026/06",
-    "DailyNotes/2026-08-01.md",
-    "Photo/INDEX.md",
-    "Photo/Year.md",
-    "Programming/Algorithm/递归.md",
-    "assets/photo/2026/08",
-    "assets/photo/2026/08/2026-08-02.jpg",
-    "assets/photo/2026/08/2026-08-03.jpg",
-    "assets/photo/2026/08",
-    "assets/photo/2026",
-    "Challenge/01 Photo a Day.md",
-    "Photo/2026/08",
-    "Programming/Algorithm/Selection-Sort.md"
+    "assets/photo/2026/07/2026-07-18.jpg"
   ]
 }
