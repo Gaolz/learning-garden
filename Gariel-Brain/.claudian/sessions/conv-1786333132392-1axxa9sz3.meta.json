@@ -4,7 +4,7 @@
   "title": "Greeting conversation, no task yet. Title:\n\n**\"...",
   "titleGenerationStatus": "success",
   "createdAt": 1786333132398,
-  "lastActivityAt": 1786334071091,
+  "lastActivityAt": 1786348688075,
   "sessionId": "bd5ad11f-2327-4e6f-8ea2-a0427f19e91d",
   "selectedModel": "claude-code/deepseek-v4-flash",
   "providerState": {
@@ -12,11 +12,11 @@
   },
   "usage": {
     "model": "deepseek-v4-flash",
-    "inputTokens": 2847,
+    "inputTokens": 164,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 44416,
+    "cacheReadInputTokens": 62464,
     "contextWindow": 200000,
-    "contextTokens": 47263,
-    "percentage": 24
+    "contextTokens": 62628,
+    "percentage": 31
   }
 }

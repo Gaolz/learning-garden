@@ -1,5 +1,5 @@
 {
-  "cssTheme": "Blue Topaz",
+  "cssTheme": "Obsidian Nord",
   "accentColor": "#6eb0e2",
   "interfaceFontFamily": "Monaco",
   "textFontFamily": "Geneva",
@@ -8,5 +8,6 @@
   "translucency": true,
   "enabledCssSnippets": [
     "photo-gallery"
-  ]
+  ],
+  "theme": "obsidian"
 }
