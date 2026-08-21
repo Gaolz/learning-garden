@@ -174,6 +174,20 @@
       "contentDigest": "741e1dc821952ad42bd5bf73162fde2ce935bb72635da612b832ec05debc9d48",
       "providerUserMessageId": "0f3954bc-de6b-42aa-898a-257cbafa1a2d",
       "providerAssistantMessageId": "614d5ee9-fa29-440e-b876-6551a8bbe025"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "msg-1787296708389-ri0ssgb",
+      "userTurnOrdinal": 13,
+      "state": "accepted",
+      "localMessageId": "msg-1787296708364-qhwupql",
+      "timestamp": 1787296708364,
+      "rawDisplayText": "为什么 obsidian 侧边栏的目录下，不限时 ruby 文件，即后缀名 rb 的文件没有展示出来",
+      "canonicalText": "为什么 obsidian 侧边栏的目录下，不限时 ruby 文件，即后缀名 rb 的文件没有展示出来",
+      "images": [],
+      "contentDigest": "8768cb6502b836c1a0350c74ffe10f028957a0d4f57725c123febda9dc9d8bd2",
+      "providerUserMessageId": "73b2a263-00e4-438c-bbc2-362b316c61ea",
+      "providerAssistantMessageId": "72b78156-8dd3-47cd-9d20-aad018d39ac1"
     }
   ]
 }

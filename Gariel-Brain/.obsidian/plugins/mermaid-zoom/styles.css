@@ -1,0 +1,100 @@
+/* Mermaid Zoom Plugin Styles */
+
+/* Inline decoration — the plugin never touches layout. Obsidian's native
+   .mermaid rendering owns sizing and dark-mode inversion; we only add
+   appearance classes and a fullscreen trigger. */
+.mermaid-zoom-ready {
+	position: relative;
+}
+
+.mermaid-zoom-align-left {
+	text-align: left;
+}
+
+.mermaid-zoom-align-center {
+	text-align: center;
+}
+
+.mermaid-zoom-align-right {
+	text-align: right;
+}
+
+.mermaid-zoom-bordered {
+	border: 1px dashed var(--background-modifier-border);
+	border-radius: 4px;
+}
+
+/* Fullscreen trigger floating at the block's bottom-right corner — kept
+   clear of Obsidian's own code-block action icons at the top-right. */
+.mermaid-zoom-ready .mermaid-zoom-fullscreen-btn {
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	z-index: 100;
+}
+
+/* Fullscreen modal */
+.mermaid-zoom-modal-wrapper {
+	cursor: grab;
+}
+
+.mermaid-zoom-modal-wrapper.dragging {
+	cursor: grabbing;
+}
+
+.mermaid-zoom-modal-wrapper svg {
+	display: block;
+}
+
+/* Keep stroke width constant under zoom scaling. Without this, fit-to-view
+   (which scales the diagram down) makes connector lines thin and faint.
+   non-scaling-stroke renders strokes at a fixed screen width regardless of
+   the transform scale, so lines stay crisp at any zoom level. */
+.mermaid-zoom-modal-wrapper svg * {
+	vector-effect: non-scaling-stroke;
+}
+
+/* Mermaid ships with a light "default" theme (dark text, light node fills).
+   Native blocks get Obsidian's own dark-mode invert; the cloned svg inside
+   the modal does not, so re-apply the standard invert here. invert flips
+   light<->dark, hue-rotate(180deg) keeps colors natural. */
+.theme-dark .mermaid-zoom-modal-wrapper svg {
+	filter: invert(1) hue-rotate(180deg);
+}
+
+.mermaid-zoom-icon-btn {
+	width: 26px;
+	height: 26px;
+	padding: 4px;
+	border: none;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.72;
+}
+
+/* setIcon() ships Lucide SVGs at 24px; fit them to the 18px content box
+   (26px minus padding). Also keeps hand-built inline icons consistent. */
+.mermaid-zoom-icon-btn svg {
+	width: 18px;
+	height: 18px;
+}
+
+.mermaid-zoom-icon-btn:hover,
+.mermaid-zoom-icon-btn:active {
+	background: rgba(0, 0, 0, 0.06);
+	color: var(--text-normal);
+	opacity: 1;
+}
+
+/* Close button in the modal control bar. Compound selector keeps
+   specificity above .mermaid-zoom-icon-btn:hover so the red tint wins,
+   reading as a destructive/dismiss affordance distinct from zoom controls. */
+.mermaid-zoom-icon-btn.mermaid-zoom-modal-close:hover {
+	background: var(--background-modifier-error);
+	color: var(--text-on-accent);
+}
