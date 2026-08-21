@@ -9,11 +9,12 @@ Status: `todo` | `doing` | `done`
 
 ## Foundational Layer
 
-1. [ ] **Data Structures** `todo`
-   - Arrays, Linked Lists, Stacks, Queues
-   - Hash Tables
-   - Trees (Binary Tree, BST, Trie, Heap)
-   - Graphs (DFS, BFS, Topological Sort)
+1. [ ] **Data Structures** `doing`
+   - [x] Linked Lists（2026-08-14：[[Programming/DataStructure/Linked-List]] + LeetCode #2 [[Programming/LeetCode/add_two_numbers]]）
+   - [ ] Arrays, Stacks, Queues
+   - [ ] Hash Tables
+   - [ ] Trees (Binary Tree, BST, Trie, Heap)
+   - [ ] Graphs (DFS, BFS, Topological Sort)
 
 2. [ ] **Algorithm** `todo`
    - Sorting (Quick, Merge, Heap, Counting)
