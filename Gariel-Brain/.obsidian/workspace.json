@@ -8,49 +8,34 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3b4ecfdacebfe4f1",
+            "id": "4a648b2f398f6afa",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Photo/Month Gallery.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Month Gallery"
-            }
-          },
-          {
-            "id": "b8e3239d70d6f8cd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "生活 SOP.md",
+                "file": "DailyNotes/2026-08-26.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "生活 SOP"
+              "title": "2026-08-26"
             }
           },
           {
-            "id": "69ae9ca861dd39c8",
+            "id": "e60c448e328f6a25",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/CodeReading/httparty/httparty-source-code-book/README.md",
+                "file": "Book/01_Readings/时间游戏.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "时间游戏"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -84,7 +69,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "sop",
+                "query": "roadmap",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -112,8 +97,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 329.0168762207031,
-    "collapsed": true
+    "width": 329.0168762207031
   },
   "right": {
     "id": "6c4d696463714be5",
@@ -234,7 +218,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -255,37 +239,41 @@
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "69ae9ca861dd39c8",
+  "active": "4a648b2f398f6afa",
   "lastOpenFiles": [
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/00-how-to-read-a-ruby-gem.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/README.md",
-    "生活 SOP.md",
+    "Photo/2026/08/2026-08-26.md",
+    "DailyNotes/2026-08-26.md",
     "Photo/Month Gallery.md",
+    "assets/photo/2026/08/2026-08-26.jpg",
+    "Book/01_Readings/时间游戏.md",
+    "Templates/Daily Note Template.md",
+    "DailyNotes/2026-08-24.md",
+    "DailyNotes/2026-08-25.md",
+    "Photo/2026/08/2026-08-25.md",
+    "assets/photo/2026/08/2026-08-25.jpg",
+    "Photo/2026/08/2026-08-20.md",
     "Photo/Year Gallery.md",
+    "Photo/2026/08/2026-08-23.md",
+    "DailyNotes/2026-08-23.md",
+    "assets/photo/2026/08/2026-08-23.jpg",
+    "Photo/2026/08/2026-08-24.md",
+    "assets/photo/2026/08/2026-08-24.jpg",
+    "DailyNotes/2026-08-21.md",
+    "Programming/CodeReading/httparty/httparty-source-code-book/README.md",
+    "Book/2026/时间游戏.md",
+    "生活 SOP.md",
+    "Photo/2026/08/2026-08-21.md",
+    "assets/photo/2026/08/2026-08-21.jpeg",
+    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/00-how-to-read-a-ruby-gem.md",
     "🏠 我的知识宇宙.md",
     "Programming/CodeReading/httparty/httparty-source-code-book/chapters/01-http-without-httparty.md",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/01_net_http_get.md",
     "DailyNotes/2026-08-20.md",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/03_facade_and_forwarding.md",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/02_trace_httparty_get.md",
-    "Programming/CodeReading/httparty/httparty-dsl-layer.md",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/03_facade_and_forwarding.rb",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/02_trace_httparty_get.rb",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/01_net_http_get.rb",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/24-teach-it.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/23-evaluate-the-abstraction.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/22-build-miniparty.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/21-annotated-end-to-end-trace.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/20-tests-as-documentation.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/19-failures-and-retries.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/18-authentication.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/17-redirects.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/16-response-facade.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/15-select-and-run-parser.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/14-normalize-response-bytes.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/13-stream-response-body.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/12-send-and-receive.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/11-configure-connection.md",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples",
     "Programming/CodeReading/httparty/httparty-source-code-book/chapters",
     "Programming/CodeReading/httparty/httparty-source-code-book",
@@ -294,11 +282,6 @@
     "assets/photo/2026/08/2026-08-16.jpg",
     "assets/photo/2026/08/2026-08-09.jpeg",
     "assets/photo/2026/08/2026-08-09.jpg",
-    "assets/photo/2026/08/2026-08-14.png",
-    "assets/photo/2026/08/2026-08-13.jpg",
-    "assets/photo/2026/08/2026-08-11.png",
-    "assets/photo/2026/08/2026-08-11.jpeg",
-    "assets/photo/2026/08/2026-08-10.jpeg",
     "Programming/CodeReading/httparty/source/website/css/common.css",
     "Programming/CodeReading/httparty/source/website/index.html",
     "Programming/CodeReading/httparty/source/website/css",
