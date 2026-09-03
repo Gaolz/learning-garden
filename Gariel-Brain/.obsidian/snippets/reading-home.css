@@ -1,0 +1,31 @@
+/* 仅作用于设置了 cssclasses: reading-home 的阅读主页。 */
+.reading-home {
+  background-image:
+    linear-gradient(rgba(252, 247, 239, 0.84), rgba(252, 247, 239, 0.9)),
+    url("../../assets/photo/2026/09/2026-09-02.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.theme-dark .reading-home {
+  background-image:
+    linear-gradient(rgba(28, 25, 23, 0.86), rgba(28, 25, 23, 0.91)),
+    url("../../assets/photo/2026/09/2026-09-02.jpg");
+}
+
+.reading-home .markdown-preview-sizer,
+.reading-home .cm-sizer {
+  background: color-mix(in srgb, var(--background-primary) 84%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-muted) 18%, transparent);
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(63, 48, 36, 0.12);
+  margin-block: 24px;
+  padding: 24px 32px 48px;
+}
+
+.reading-home .callout {
+  background-color: color-mix(in srgb, var(--background-primary) 88%, transparent);
+  backdrop-filter: blur(8px);
+}

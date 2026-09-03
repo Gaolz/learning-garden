@@ -1,0 +1,191 @@
+filters:
+  and:
+    - file.inFolder("Book/01_Readings")
+    - file.ext == "md"
+    - note["类型"] == "book"
+formulas:
+  reading_year: if(note["结束日期"], note["结束日期"].year, if(note["开始日期"], note["开始日期"].year, ""))
+  reading_month: if(note["结束日期"], note["结束日期"].format("MM"), if(note["开始日期"], note["开始日期"].format("MM"), ""))
+  reading_period: if(note["开始日期"], note["开始日期"].format("YYYY-MM-DD") + " → " + if(note["结束日期"], note["结束日期"].format("YYYY-MM-DD"), "阅读中"), "")
+  author_translator: if(note["译者"], note["作者"] + " / " + note["译者"], note["作者"])
+properties:
+  note["序号"]:
+    displayName: 序号
+  formula.reading_year:
+    displayName: 阅读年份
+  formula.reading_month:
+    displayName: 阅读月份
+  formula.reading_period:
+    displayName: 阅读日期段
+  file.name:
+    displayName: 书名
+  formula.author_translator:
+    displayName: 作者 / 译者
+  note["状态"]:
+    displayName: 状态
+  note["评分"]:
+    displayName: 评分
+views:
+  - type: table
+    name: 当前阅读
+    filters:
+      and:
+        - note["状态"] == "阅读中"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 教育
+    filters: note["分类"] == "教育"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+    sort:
+      - property: formula.reading_year
+        direction: DESC
+      - property: note["序号"]
+        direction: DESC
+  - type: table
+    name: 计算机
+    filters: note["分类"] == "计算机"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 财经
+    filters: note["分类"] == "财经"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 传记
+    filters: note["分类"] == "传记"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 历史
+    filters: note["分类"] == "历史"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 文学
+    filters: note["分类"] == "文学"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 哲学
+    filters: note["分类"] == "哲学"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 社会科学
+    filters: note["分类"] == "社会科学"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 心理学
+    filters: note["分类"] == "心理学"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 自然科学
+    filters: note["分类"] == "自然科学"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 艺术
+    filters: note["分类"] == "艺术"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]
+  - type: table
+    name: 生活与健康
+    filters: note["分类"] == "生活与健康"
+    order:
+      - note["序号"]
+      - formula.reading_year
+      - formula.reading_month
+      - formula.reading_period
+      - file.name
+      - formula.author_translator
+      - note["状态"]
+      - note["评分"]

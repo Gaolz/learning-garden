@@ -8,34 +8,35 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4a648b2f398f6afa",
+            "id": "2664d31ef0107a48",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DailyNotes/2026-08-26.md",
-                "mode": "source",
+                "file": "Programming/CodeReading/httparty/httparty-source-code-book/chapters/00-how-to-read-a-ruby-gem.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-08-26"
+              "title": "00-how-to-read-a-ruby-gem"
             }
           },
           {
-            "id": "e60c448e328f6a25",
+            "id": "6a7da9a886278ad9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Book/01_Readings/时间游戏.md",
+                "file": "DailyNotes/2026-09-03.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "时间游戏"
+              "title": "2026-09-03"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -69,7 +70,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "roadmap",
+                "query": "时间游戏",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -97,7 +98,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 329.0168762207031
+    "width": 435.350830078125,
+    "collapsed": true
   },
   "right": {
     "id": "6c4d696463714be5",
@@ -218,7 +220,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -239,53 +241,54 @@
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "4a648b2f398f6afa",
+  "active": "6a7da9a886278ad9",
   "lastOpenFiles": [
-    "Photo/2026/08/2026-08-26.md",
-    "DailyNotes/2026-08-26.md",
-    "Photo/Month Gallery.md",
-    "assets/photo/2026/08/2026-08-26.jpg",
-    "Book/01_Readings/时间游戏.md",
-    "Templates/Daily Note Template.md",
-    "DailyNotes/2026-08-24.md",
-    "DailyNotes/2026-08-25.md",
-    "Photo/2026/08/2026-08-25.md",
-    "assets/photo/2026/08/2026-08-25.jpg",
-    "Photo/2026/08/2026-08-20.md",
-    "Photo/Year Gallery.md",
-    "Photo/2026/08/2026-08-23.md",
-    "DailyNotes/2026-08-23.md",
-    "assets/photo/2026/08/2026-08-23.jpg",
-    "Photo/2026/08/2026-08-24.md",
-    "assets/photo/2026/08/2026-08-24.jpg",
-    "DailyNotes/2026-08-21.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/README.md",
-    "Book/2026/时间游戏.md",
-    "生活 SOP.md",
-    "Photo/2026/08/2026-08-21.md",
-    "assets/photo/2026/08/2026-08-21.jpeg",
+    "docs/superpowers/specs/2026-09-04-gariel-brain-personal-os-design.md",
+    "docs/superpowers/specs",
+    "docs/superpowers",
+    "docs",
+    "Photo/2026/09/2026-09-03.md",
+    "DailyNotes/2026-09-03.md",
+    "assets/photo/2026/09/2026-09-03.jpg",
+    "Book/阅读主页.md",
+    "Rest/Meditation/Anchor Practice.md",
+    "Book/01_Readings/未命名.md",
+    "Book/阅读书库.base",
+    "Book/SKILL.md",
+    "DailyNotes/2026-08-30.md",
+    "Null.md",
+    "DailyNotes/2026-09-02.md",
+    "Photo/2026/09/2026-09-02.md",
+    "assets/photo/2026-08-31.jpg",
+    "assets/photo/2026/09/2026-09-02.jpg",
+    "assets/photo/2026/09",
+    "assets/photo/2026/08/2026-08-31.jpg",
     "Programming/CodeReading/httparty/httparty-source-code-book/chapters/00-how-to-read-a-ruby-gem.md",
-    "🏠 我的知识宇宙.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters/01-http-without-httparty.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/examples/01_net_http_get.md",
-    "DailyNotes/2026-08-20.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/examples/03_facade_and_forwarding.md",
-    "Programming/CodeReading/httparty/httparty-source-code-book/examples/02_trace_httparty_get.md",
+    "Photo/2026/09",
+    "Photo/2026/08/2026-08-31.md",
+    "Photo/Month Gallery.md",
+    "Photo/Year Gallery.md",
+    "Photo/2026/08/2026-08-30.md",
+    "assets/photo/2026/08/2026-08-30.jpg",
+    "DailyNotes/2026-08-31.md",
+    "DailyNotes/2026-08-29.md",
+    "Programming/CodeReading/httparty/httparty-source-code-book/README.md",
+    "Book/01_Readings/时间游戏.md",
+    "Book/01_Readings/时间游戏.md.tmp.9759.1788071209413",
+    "Article/不增不减.md",
+    "Photo/2026/08/2026-08-29.md",
+    "assets/photo/2026/08/2026-08-29.jpg",
+    "DailyNotes/2026-08-26.md",
+    "DailyNotes/2026-08-27.md",
+    "Photo/2026/08/2026-08-27.md",
+    "assets/photo/2026/08/2026-08-27.jpg",
+    "DailyNotes/2026-08-28.md",
+    "assets/photo/2026/08/2026-08-28.jpg",
+    "assets/photo/2026/08/2026-08-26.jpg",
+    "assets/photo/2026/08/2026-08-25.jpg",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/03_facade_and_forwarding.rb",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/02_trace_httparty_get.rb",
     "Programming/CodeReading/httparty/httparty-source-code-book/examples/01_net_http_get.rb",
-    "Programming/CodeReading/httparty/httparty-source-code-book/examples",
-    "Programming/CodeReading/httparty/httparty-source-code-book/chapters",
-    "Programming/CodeReading/httparty/httparty-source-code-book",
-    "assets/photo/2026/08/2026-08-19.jpg",
-    "assets/photo/2026/08/2026-08-18.png",
-    "assets/photo/2026/08/2026-08-16.jpg",
-    "assets/photo/2026/08/2026-08-09.jpeg",
-    "assets/photo/2026/08/2026-08-09.jpg",
-    "Programming/CodeReading/httparty/source/website/css/common.css",
-    "Programming/CodeReading/httparty/source/website/index.html",
-    "Programming/CodeReading/httparty/source/website/css",
-    "Programming/CodeReading/httparty/source/website",
     "未命名 1.canvas",
     "未命名.canvas"
   ]

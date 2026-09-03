@@ -1,13 +1,14 @@
 {
-  "cssTheme": "Obsidian Nord",
+  "cssTheme": "OnePage",
   "accentColor": "#6eb0e2",
   "interfaceFontFamily": "Monaco",
   "textFontFamily": "Geneva",
-  "baseFontSize": 18,
+  "baseFontSize": 16,
   "baseFontSizeAction": true,
   "translucency": true,
   "enabledCssSnippets": [
-    "photo-gallery"
+    "photo-gallery",
+    "reading-home"
   ],
   "theme": "obsidian"
 }
