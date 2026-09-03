@@ -1,0 +1,66 @@
+const test = require("node:test");
+const assert = require("node:assert/strict");
+const model = require("../task-model");
+
+const block = [
+  "- [ ] 完成 Rails 登录验证",
+  "  [task_id:: 20260904-091500-auth]",
+  "  [date:: 2026-09-04]",
+  "  [module:: programming-english]",
+  "  [priority:: P1]",
+  "  [goal:: [[完成 Rails 项目身份认证]]]",
+  "  [custom:: keep-me]"
+].join("\n");
+
+test("parseTasks returns typed values and preserves the raw block", () => {
+  const [task] = model.parseTasks(`# 2026-09 Tasks\n\n${block}\n`);
+  assert.equal(task.title, "完成 Rails 登录验证");
+  assert.equal(task.done, false);
+  assert.equal(task.fields.priority, "P1");
+  assert.equal(task.fields.goal, "[[完成 Rails 项目身份认证]]");
+  assert.equal(task.raw, block);
+});
+
+test("replaceField preserves unknown fields", () => {
+  const changed = model.replaceField(block, "priority", "P2");
+  assert.match(changed, /\[priority:: P2\]/);
+  assert.match(changed, /\[custom:: keep-me\]/);
+});
+
+test("toggleCheckbox changes only the checkbox marker", () => {
+  const changed = model.toggleCheckbox(block, true);
+  assert.match(changed, /^- \[x\] 完成 Rails 登录验证/);
+  assert.match(changed, /\[custom:: keep-me\]/);
+});
+
+test("formatTask emits the canonical multiline format", () => {
+  const text = model.formatTask({
+    title: "读书 20 分钟",
+    task_id: "id-1",
+    date: "2026-09-04",
+    module: "reading",
+    priority: "P2"
+  });
+  assert.equal(text, [
+    "- [ ] 读书 20 分钟",
+    "  [task_id:: id-1]",
+    "  [date:: 2026-09-04]",
+    "  [module:: reading]",
+    "  [priority:: P2]"
+  ].join("\n"));
+});
+
+test("validateTask rejects invalid modules and malformed links", () => {
+  const modules = new Set(["reading"]);
+  assert.throws(() => model.validateTask({ title: "x", date: "2026-09-04", module: "missing", priority: "P2" }, modules), /module/);
+  assert.throws(() => model.validateTask({ title: "x", date: "2026-09-04", module: "reading", priority: "P2", output: "../escape" }, modules), /output/);
+});
+
+test("validateTask requires a stable task id", () => {
+  assert.throws(() => model.validateTask({ title: "x", date: "2026-09-04", module: "reading", priority: "P2" }, new Set(["reading"])), /task_id/);
+});
+
+test("paths cannot escape PersonalOS Tasks", () => {
+  assert.equal(model.monthPath("2026-09-04"), "PersonalOS/Tasks/2026/2026-09.md");
+  assert.throws(() => model.assertTaskPath("../DailyNotes/2026-09-04.md"), /outside/);
+});
