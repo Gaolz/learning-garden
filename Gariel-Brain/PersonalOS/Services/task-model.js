@@ -4,6 +4,10 @@ const FIELD = /^\s{2}\[([a-z_]+)::\s*((?:\[\[[^\]]+\]\]|[^\]])*)\]\s*$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const PRIORITIES = new Set(["P1", "P2", "P3"]);
 
+function assertSingleLine(value, name) {
+  if (value !== undefined && /[\r\n]/.test(String(value))) throw new Error(`${name} cannot contain a line break`);
+}
+
 function splitBlocks(source) {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks = [];
@@ -31,12 +35,16 @@ function parseTasks(source) {
 
 function formatTask(input) {
   const ordered = ["task_id", "date", "module", "priority", "goal", "output", "started_at"];
+  assertSingleLine(input.title, "title");
+  for (const key of ordered) assertSingleLine(input[key], key);
   const lines = [`- [${input.done ? "x" : " "}] ${input.title.trim()}`];
   for (const key of ordered) if (input[key]) lines.push(`  [${key}:: ${input[key]}]`);
   return lines.join("\n");
 }
 
 function replaceField(block, key, value) {
+  assertSingleLine(key, "key");
+  assertSingleLine(value, "value");
   const pattern = new RegExp(`^  \\[${key}::.*\\]$`, "m");
   return pattern.test(block) ? block.replace(pattern, `  [${key}:: ${value}]`) : `${block}\n  [${key}:: ${value}]`;
 }
@@ -50,6 +58,7 @@ function validLink(value) {
 }
 
 function validateTask(input, enabledModules) {
+  for (const key of ["title", "task_id", "date", "module", "priority", "goal", "output", "started_at"]) assertSingleLine(input[key], key);
   if (!input.title || !input.title.trim()) throw new Error("title is required");
   if (!DATE.test(input.date)) throw new Error("date must be YYYY-MM-DD");
   if (!enabledModules.has(input.module)) throw new Error("module is not enabled");

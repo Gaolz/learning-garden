@@ -60,6 +60,12 @@ test("validateTask requires a stable task id", () => {
   assert.throws(() => model.validateTask({ title: "x", date: "2026-09-04", module: "reading", priority: "P2" }, new Set(["reading"])), /task_id/);
 });
 
+test("validateTask rejects multiline titles and task ids", () => {
+  const valid = { title: "x", task_id: "id-1", date: "2026-09-04", module: "reading", priority: "P2" };
+  assert.throws(() => model.validateTask({ ...valid, title: "x\n- [ ] injected" }, new Set(["reading"])), /line break/);
+  assert.throws(() => model.validateTask({ ...valid, task_id: "id-1\r\nnext" }, new Set(["reading"])), /line break/);
+});
+
 test("paths cannot escape PersonalOS Tasks", () => {
   assert.equal(model.monthPath("2026-09-04"), "PersonalOS/Tasks/2026/2026-09.md");
   assert.throws(() => model.assertTaskPath("../DailyNotes/2026-09-04.md"), /outside/);
