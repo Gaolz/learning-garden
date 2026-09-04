@@ -7,19 +7,13 @@ async function loadModule(name) {
   return module.exports;
 }
 
-function dailyHighlights(source) {
-  return source.split(/\r?\n/)
-    .filter(line => /(成果输出|Output|阻碍|Blocker|下一步|Next)/i.test(line))
-    .map(line => line.replace(/^\s*[-*]\s*(?:\[[ xX]\]\s*)?/, "").trim())
-    .filter(line => /[:：]\s*\S/.test(line));
-}
-
 const taskModel = await loadModule("task-model");
 const reviewModel = await loadModule("review-model");
-const range = reviewModel.dateRange(input.kind, input.anchor);
+const anchor = reviewModel.normalizeAnchor(input.anchor);
+const range = reviewModel.dateRange(input.kind, anchor);
 const taskFiles = app.vault.getFiles().filter(file =>
   /^PersonalOS\/Tasks\/\d{4}\/\d{4}-\d{2}\.md$/.test(file.path)
-);
+).sort((left, right) => left.path < right.path ? -1 : left.path > right.path ? 1 : 0);
 const tasks = [];
 for (const file of taskFiles) tasks.push(...taskModel.parseTasks(await app.vault.read(file)));
 const summary = reviewModel.summarize(tasks, range);
@@ -27,10 +21,10 @@ const dailyFiles = app.vault.getFiles().filter(file =>
   /^DailyNotes\/\d{4}-\d{2}-\d{2}\.md$/.test(file.path) &&
   file.basename >= range.start &&
   file.basename <= range.end
-);
+).sort((left, right) => left.path < right.path ? -1 : left.path > right.path ? 1 : 0);
 const daily = [];
 for (const file of dailyFiles) {
-  daily.push({ file, highlights: dailyHighlights(await app.vault.read(file)) });
+  daily.push({ file, highlights: reviewModel.dailyHighlights(await app.vault.read(file)) });
 }
 
 dv.header(2, input.kind === "week" ? "本周自动摘要" : "本月自动摘要");

@@ -3,6 +3,10 @@
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const iso = date => date.toISOString().slice(0, 10);
 
+function normalizeAnchor(anchor) {
+  return anchor?.toISODate?.() ?? String(anchor);
+}
+
 function parseDate(value) {
   if (!DATE.test(String(value))) throw new Error("date must be a valid YYYY-MM-DD");
   const date = new Date(`${value}T00:00:00Z`);
@@ -14,7 +18,7 @@ function parseDate(value) {
 
 function dateRange(kind, anchor) {
   if (kind !== "week" && kind !== "month") throw new Error("kind must be week or month");
-  const date = parseDate(anchor);
+  const date = parseDate(normalizeAnchor(anchor));
   if (kind === "week") {
     const start = new Date(date);
     start.setUTCDate(date.getUTCDate() - ((date.getUTCDay() + 6) % 7));
@@ -36,6 +40,11 @@ function summarize(tasks, range) {
   const selected = tasks.filter(task => {
     const date = task?.fields?.date;
     return DATE.test(String(date)) && date >= range.start && date <= range.end;
+  }).sort((left, right) => {
+    if (left.fields.date !== right.fields.date) return left.fields.date < right.fields.date ? -1 : 1;
+    const leftId = String(left.fields.task_id || left.title);
+    const rightId = String(right.fields.task_id || right.title);
+    return leftId < rightId ? -1 : leftId > rightId ? 1 : 0;
   });
   const modules = {};
   for (const task of selected) {
@@ -52,4 +61,12 @@ function summarize(tasks, range) {
   };
 }
 
-module.exports = { dateRange, summarize };
+function dailyHighlights(source) {
+  return String(source).split(/\r?\n/).flatMap(line => {
+    const content = line.replace(/^\s*[-*]\s*(?:\[[ xX]\]\s*)?/, "").trim();
+    const match = content.match(/^\*{0,2}(?:成果输出|Output|阻碍|Blocker|下一步|Next)\s*[:：]\*{0,2}\s*(.*?)\s*$/i);
+    return match?.[1] ? [match[1]] : [];
+  });
+}
+
+module.exports = { dailyHighlights, dateRange, normalizeAnchor, summarize };

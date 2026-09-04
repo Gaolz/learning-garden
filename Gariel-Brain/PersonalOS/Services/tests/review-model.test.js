@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { dateRange, summarize } = require("../review-model");
+const { dailyHighlights, dateRange, normalizeAnchor, summarize } = require("../review-model");
 
 const task = (id, date, module, priority, done) => ({
   title: id,
@@ -29,6 +29,12 @@ test("dateRange rejects unsupported kinds and invalid calendar dates", () => {
   }
 });
 
+test("Luxon-like Dataview anchors normalize before strict date validation", () => {
+  const anchor = { toISODate: () => "2026-09-04", toString: () => "September 4" };
+  assert.equal(normalizeAnchor(anchor), "2026-09-04");
+  assert.deepEqual(dateRange("week", anchor), { start: "2026-08-31", end: "2026-09-06" });
+});
+
 test("summary counts modules and daily main completion", () => {
   const summary = summarize([
     task("a", "2026-09-01", "reading", "P1", true),
@@ -47,4 +53,24 @@ test("summary counts modules and daily main completion", () => {
 test("summary rejects malformed or reversed ranges", () => {
   assert.throws(() => summarize([], { start: "2026-02-30", end: "2026-03-01" }), /valid YYYY-MM-DD/);
   assert.throws(() => summarize([], { start: "2026-09-06", end: "2026-08-31" }), /start must not be after end/);
+});
+
+test("carryover is chronological regardless of task-file traversal order", () => {
+  const summary = summarize([
+    task("later", "2026-09-03", "reading", "P2", false),
+    task("same-z", "2026-09-01", "reading", "P2", false),
+    task("same-a", "2026-09-01", "reading", "P2", false)
+  ], { start: "2026-09-01", end: "2026-09-30" });
+  assert.deepEqual(summary.carryover.map(item => item.fields.task_id), ["same-a", "same-z", "later"]);
+});
+
+test("Daily Note highlights return payloads and ignore empty Markdown placeholders", () => {
+  const source = [
+    "- [ ] **成果输出：**",
+    "- [x] **成果输出：** 完成 [[Personal OS]]",
+    "- **Blocker:** 睡眠不足",
+    "下一步：整理复盘",
+    "普通内容"
+  ].join("\n");
+  assert.deepEqual(dailyHighlights(source), ["完成 [[Personal OS]]", "睡眠不足", "整理复盘"]);
 });
