@@ -1643,14 +1643,7 @@ Expected: first test FAIL because the archived file does not yet exist.
 
 - [ ] **Step 4: Update exact backlinks and archive the page**
 
-For each file printed in Step 1, replace only:
-
-```text
-[[00 Home/Personal OS]]
-[[00 Home/Personal OS]]
-```
-
-with:
+For each file printed in Step 1, replace only the old-home wiki-link targets matched by the scan (the `我的知识宇宙` target, with or without the house icon) with:
 
 ```text
 [[00 Home/Personal OS]]

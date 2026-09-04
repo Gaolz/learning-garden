@@ -99,7 +99,7 @@ Gariel-Brain/
 
 过渡顺序：
 
-1. 扫描 Vault 内指向 `[[00 Home/Personal OS]]` 的链接。
+1. 扫描 Vault 内指向旧首页文件 `🏠 我的知识宇宙.md` 的精确 wiki-link（含图标与不含图标两种形式）。
 2. 如存在反向链接，先列出并仅将这些入口更新为 `[[00 Home/Personal OS]]`。
 3. 将旧首页移动到 `Archive/旧首页/🏠 我的知识宇宙.md`。
 4. 验证 Personal OS 首页和主要内部链接。

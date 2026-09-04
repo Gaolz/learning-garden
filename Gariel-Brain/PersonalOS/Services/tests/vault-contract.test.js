@@ -3,10 +3,30 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
+const os = require("node:os");
 const path = require("node:path");
 
 const vault = path.resolve(__dirname, "../../..");
 const read = relativePath => fs.readFileSync(path.join(vault, relativePath), "utf8");
+const oldHomeLink = /\[\[(?:🏠 )?我的知识宇宙(?:\||\]\])/;
+
+function findExactOldHomeBacklinks(root) {
+  const matches = [];
+  const visit = directory => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const file = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        visit(file);
+        continue;
+      }
+      const relative = path.relative(root, file).split(path.sep).join("/");
+      if (!entry.isFile() || !relative.endsWith(".md") || relative === "Archive/旧首页/🏠 我的知识宇宙.md") continue;
+      if (oldHomeLink.test(fs.readFileSync(file, "utf8"))) matches.push(relative);
+    }
+  };
+  visit(root);
+  return matches.sort();
+}
 
 test("the new home exists and the old home is recoverably archived", () => {
   assert.ok(fs.existsSync(path.join(vault, "00 Home/Personal OS.md")));
@@ -14,19 +34,24 @@ test("the new home exists and the old home is recoverably archived", () => {
   assert.equal(fs.existsSync(path.join(vault, "🏠 我的知识宇宙.md")), false);
 });
 
-test("all exact old-home backlinks have transitioned to the Personal OS home", () => {
-  const expectedBacklinks = [
-    "Tourist/石刻之旅计划.md",
-    "生活 SOP.md",
-    "docs/superpowers/specs/2026-09-04-gariel-brain-personal-os-design.md",
-    "docs/superpowers/plans/2026-09-04-gariel-brain-personal-os.md",
-    "DailyNotes/2026-08-20.md"
-  ];
-  for (const file of expectedBacklinks) {
-    const source = read(file);
-    assert.doesNotMatch(source, /\[\[(?:🏠 )?我的知识宇宙(?:\||\]\])/);
-    assert.match(source, /\[\[00 Home\/Personal OS\]\]/);
-  }
+test("all exact old-home backlinks have transitioned across the Vault", () => {
+  assert.deepEqual(findExactOldHomeBacklinks(vault), []);
+});
+
+test("old-home backlink scan catches both link forms in nested Markdown", t => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "personal-os-backlinks-"));
+  t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(fixture, "nested", "deeper"), { recursive: true });
+  fs.mkdirSync(path.join(fixture, "Archive", "旧首页"), { recursive: true });
+  fs.writeFileSync(path.join(fixture, "nested", "one.md"), "[[🏠 我的知识宇宙]]\n");
+  fs.writeFileSync(path.join(fixture, "nested", "deeper", "two.md"), "[[我的知识宇宙|旧首页]]\n");
+  fs.writeFileSync(path.join(fixture, "nested", "ignored.txt"), "[[我的知识宇宙]]\n");
+  fs.writeFileSync(path.join(fixture, "Archive", "旧首页", "🏠 我的知识宇宙.md"), "[[我的知识宇宙]]\n");
+
+  assert.deepEqual(findExactOldHomeBacklinks(fixture), [
+    "nested/deeper/two.md",
+    "nested/one.md"
+  ]);
 });
 
 test("the four entry pages and review interfaces remain connected", () => {
