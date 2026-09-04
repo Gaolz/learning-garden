@@ -1,0 +1,204 @@
+.personal-os.markdown-preview-view {
+  --pos-ink: #2e372f;
+  --pos-muted: #778078;
+  --pos-sage: #71836b;
+  --pos-paper: #fffdf8;
+  --pos-cream: #f8f6ee;
+  --pos-line: #dfe4dc;
+  --pos-gold: #c58e52;
+  background: var(--pos-cream);
+  color: var(--pos-ink);
+}
+
+.personal-os.markdown-source-view {
+  --pos-ink: #2e372f;
+  --pos-muted: #778078;
+  --pos-sage: #71836b;
+  --pos-paper: #fffdf8;
+  --pos-cream: #f8f6ee;
+  --pos-line: #dfe4dc;
+  --pos-gold: #c58e52;
+  background: var(--pos-cream);
+  color: var(--pos-ink);
+}
+
+.personal-os.markdown-preview-view .markdown-preview-sizer {
+  max-width: 980px;
+}
+
+.personal-os .personal-os-dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  color: var(--pos-ink);
+}
+
+.personal-os .personal-os-dashboard .pos-top,
+.personal-os .personal-os-dashboard .pos-hero,
+.personal-os .personal-os-dashboard .pos-main,
+.personal-os .personal-os-dashboard .pos-others,
+.personal-os .personal-os-dashboard .pos-capture,
+.personal-os .personal-os-dashboard .pos-shortcuts,
+.personal-os .personal-os-dashboard .pos-week,
+.personal-os .personal-os-dashboard .pos-diagnostics {
+  grid-column: 1 / -1;
+}
+
+.personal-os .personal-os-dashboard .pos-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--pos-muted);
+  font-size: 0.9rem;
+}
+
+.personal-os .personal-os-dashboard .pos-hero {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.25rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--pos-gold) 45%, transparent);
+  border-radius: 24px;
+  background:
+    linear-gradient(90deg, rgba(255, 253, 248, 0.94), rgba(255, 253, 248, 0.4)),
+    url("../../PersonalOS/Assets/home-hero.png") center / cover no-repeat;
+  box-shadow: 0 16px 40px rgba(46, 55, 47, 0.08);
+}
+
+.personal-os .personal-os-dashboard .pos-hero h1 {
+  max-width: 16ch;
+  margin: 0;
+  color: var(--pos-ink);
+  font-family: ui-serif, Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.08;
+}
+
+.personal-os .personal-os-dashboard .pos-hero p {
+  max-width: 34rem;
+  margin: 1rem 0 0;
+  color: var(--pos-sage);
+}
+
+.personal-os .personal-os-dashboard .pos-card {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--pos-line);
+  border-radius: 16px;
+  background: var(--pos-paper);
+  box-shadow: 0 6px 20px rgba(46, 55, 47, 0.05);
+}
+
+.personal-os .personal-os-dashboard .pos-card h2 {
+  margin: 0 0 0.75rem;
+  color: var(--pos-sage);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.personal-os .personal-os-dashboard .pos-main {
+  border-top: 4px solid var(--pos-gold);
+  padding: 1.5rem;
+}
+
+.personal-os .personal-os-dashboard .pos-main h3 {
+  margin: 0.25rem 0 1rem;
+  font-size: 1.4rem;
+}
+
+.personal-os .personal-os-dashboard .pos-body {
+  border-top: 3px solid var(--pos-sage);
+}
+
+.personal-os .personal-os-dashboard .pos-blank {
+  border-top: 3px solid var(--pos-line);
+}
+
+.personal-os .personal-os-dashboard .pos-task {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--pos-line);
+}
+
+.personal-os .personal-os-dashboard .pos-task span {
+  flex: 1;
+}
+
+.personal-os .personal-os-dashboard .pos-capture input,
+.personal-os .personal-os-dashboard .pos-capture select {
+  min-height: 2.4rem;
+  margin: 0 0.5rem 0.5rem 0;
+  border-color: var(--pos-line);
+  background: var(--pos-cream);
+}
+
+.personal-os .personal-os-dashboard .pos-capture input[type="text"] {
+  min-width: min(28rem, 100%);
+}
+
+.personal-os .personal-os-dashboard .pos-action {
+  margin: 0.25rem 0.4rem 0.25rem 0;
+  border: 1px solid var(--pos-line);
+  background: var(--pos-cream);
+  color: var(--pos-ink);
+}
+
+.personal-os .personal-os-dashboard .pos-action:hover,
+.personal-os .personal-os-dashboard .pos-primary {
+  border-color: var(--pos-sage);
+  background: var(--pos-sage);
+  color: var(--pos-paper);
+}
+
+.personal-os .personal-os-dashboard .pos-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.personal-os .personal-os-dashboard .pos-shortcut {
+  padding: 0.9rem;
+  border: 1px solid var(--pos-line);
+  border-radius: 12px;
+  background: var(--pos-paper);
+  color: var(--pos-sage);
+  text-align: center;
+  text-decoration: none;
+}
+
+.personal-os .personal-os-dashboard .pos-shortcut:hover {
+  border-color: var(--pos-gold);
+  color: var(--pos-ink);
+}
+
+.personal-os .personal-os-dashboard .pos-muted {
+  color: var(--pos-muted);
+}
+
+.personal-os .personal-os-dashboard .pos-error {
+  margin-top: 0.5rem;
+  color: var(--text-error);
+}
+
+.personal-os .personal-os-dashboard .pos-diagnostics {
+  color: var(--pos-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .personal-os .personal-os-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-os .personal-os-dashboard .pos-body,
+  .personal-os .personal-os-dashboard .pos-blank {
+    grid-column: 1;
+  }
+
+  .personal-os .personal-os-dashboard .pos-shortcuts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

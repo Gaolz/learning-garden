@@ -8,7 +8,8 @@
   "translucency": true,
   "enabledCssSnippets": [
     "photo-gallery",
-    "reading-home"
+    "reading-home",
+    "personal-os"
   ],
   "theme": "obsidian"
 }
