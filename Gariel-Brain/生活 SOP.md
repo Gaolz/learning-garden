@@ -103,4 +103,4 @@ Record the remaining question
 
 ---
 
-入口：[[🏠 我的知识宇宙]]
+入口：[[00 Home/Personal OS]]

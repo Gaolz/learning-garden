@@ -1646,8 +1646,8 @@ Expected: first test FAIL because the archived file does not yet exist.
 For each file printed in Step 1, replace only:
 
 ```text
-[[🏠 我的知识宇宙]]
-[[我的知识宇宙]]
+[[00 Home/Personal OS]]
+[[00 Home/Personal OS]]
 ```
 
 with:
