@@ -11,7 +11,7 @@ function parseInternalLink(value) {
 }
 
 function selectToday(tasks, date, options = {}) {
-  const enabledModules = options.enabledModules || new Set();
+  const enabledModules = options.enabledModules || new Set(tasks.map(task => task.fields?.module).filter(Boolean));
   const linkExists = options.linkExists || (() => true);
   const valid = [];
   const invalid = [];

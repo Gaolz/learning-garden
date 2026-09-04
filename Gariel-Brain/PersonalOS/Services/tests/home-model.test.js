@@ -19,6 +19,18 @@ test("selectToday separates main, body and ordinary work", () => {
   assert.deepEqual(result.others.map(x => x.fields.task_id), ["read"]);
 });
 
+test("selectToday keeps its two-argument interface", () => {
+  const result = selectToday([
+    task("main", "programming-english", "P1"),
+    task("walk", "body", "P2"),
+    task("read", "reading", "P2")
+  ], "2026-09-04");
+
+  assert.equal(result.main.fields.task_id, "main");
+  assert.equal(result.body.fields.task_id, "walk");
+  assert.deepEqual(result.others.map(item => item.fields.task_id), ["read"]);
+});
+
 test("invalid or duplicate main tasks go to diagnostics without crashing", () => {
   const result = selectToday([task("a", "reading", "P1"), task("b", "reading", "P1"), { title: "broken", done: false, fields: {} }], "2026-09-04", { enabledModules });
   assert.equal(result.main.fields.task_id, "a");
