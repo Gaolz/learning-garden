@@ -54,6 +54,61 @@
       "templater": {
         "afterCapture": "none"
       }
+    },
+    {
+      "id": "59f3c945-1066-479d-a323-42dca9cf16c9",
+      "name": "Personal OS: 添加临时任务",
+      "type": "Capture",
+      "command": true,
+      "appendLink": false,
+      "copyLinkToClipboard": false,
+      "captureTo": "PersonalOS/Tasks/{{DATE:YYYY}}/{{DATE:YYYY-MM}}",
+      "captureToActiveFile": false,
+      "captureToCanvasNodeId": "",
+      "activeFileWritePosition": "cursor",
+      "createFileIfItDoesntExist": {
+        "enabled": true,
+        "createWithTemplate": true,
+        "template": "PersonalOS/Templates/Monthly Tasks.md"
+      },
+      "format": {
+        "enabled": true,
+        "format": "- [ ] {{VALUE:任务}}\n  [task_id:: {{DATE:YYYYMMDD-HHmmssSSS}}]\n  [date:: {{DATE:YYYY-MM-DD}}]\n  [module:: temporary]\n  [priority:: P2]"
+      },
+      "insertAfter": {
+        "enabled": false,
+        "after": "",
+        "insertAtEnd": false,
+        "considerSubsections": false,
+        "createIfNotFound": false,
+        "createIfNotFoundLocation": "top",
+        "inline": false,
+        "replaceExisting": false,
+        "blankLineAfterMatchMode": "auto",
+        "promptHeading": false
+      },
+      "insertBefore": {
+        "enabled": false,
+        "before": "",
+        "createIfNotFound": false,
+        "createIfNotFoundLocation": "top"
+      },
+      "newLineCapture": {
+        "enabled": true,
+        "direction": "below"
+      },
+      "prepend": false,
+      "task": false,
+      "openFile": false,
+      "fileOpening": {
+        "location": "tab",
+        "direction": "vertical",
+        "mode": "default",
+        "focus": true
+      },
+      "templater": {
+        "afterCapture": "none"
+      }
     }
   ],
   "inputPrompt": "single-line",
