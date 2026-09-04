@@ -1,5 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
 const { dailyHighlights, dateRange, normalizeAnchor, summarize } = require("../review-model");
 
 const task = (id, date, module, priority, done) => ({
@@ -73,4 +75,14 @@ test("Daily Note highlights return payloads and ignore empty Markdown placeholde
     "普通内容"
   ].join("\n");
   assert.deepEqual(dailyHighlights(source), ["完成 [[Personal OS]]", "睡眠不足", "整理复盘"]);
+});
+
+test("review templates pass the raw Dataview anchor to the review view", () => {
+  const templates = ["Weekly Review.md", "Monthly Review.md"];
+  for (const name of templates) {
+    const source = fs.readFileSync(path.join(__dirname, "../../Templates", name), "utf8");
+    const codeBlock = source.match(/```dataviewjs\n([\s\S]*?)\n```/)?.[1] || "";
+    assert.match(codeBlock, /anchor:\s*dv\.current\(\)\.anchor\s*[,\n]/, name);
+    assert.doesNotMatch(codeBlock, /anchor:\s*String\s*\(/, name);
+  }
 });

@@ -10,7 +10,7 @@ cssclasses:
 ```dataviewjs
 await dv.view("PersonalOS/Views/review", {
   kind: dv.current().type === "personal-os-weekly-review" ? "week" : "month",
-  anchor: String(dv.current().anchor)
+  anchor: dv.current().anchor
 });
 ```
 
