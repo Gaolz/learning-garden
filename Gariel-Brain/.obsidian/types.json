@@ -1,0 +1,10 @@
+{
+  "types": {
+    "aliases": "aliases",
+    "cssclasses": "multitext",
+    "tags": "tags",
+    "note[\"分类\"]": "text",
+    "note[\"序号\"]": "number",
+    "类型": "text"
+  }
+}

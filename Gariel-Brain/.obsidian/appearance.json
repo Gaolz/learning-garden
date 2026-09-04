@@ -1,5 +1,5 @@
 {
-  "cssTheme": "OnePage",
+  "cssTheme": "",
   "accentColor": "#6eb0e2",
   "interfaceFontFamily": "Monaco",
   "textFontFamily": "Geneva",
@@ -11,5 +11,5 @@
     "reading-home",
     "personal-os"
   ],
-  "theme": "obsidian"
+  "theme": "system"
 }
