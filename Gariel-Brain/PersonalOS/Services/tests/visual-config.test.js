@@ -1,5 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -7,6 +8,7 @@ const vault = path.resolve(__dirname, "../../..");
 const cssPath = path.join(vault, ".obsidian/snippets/personal-os.css");
 const heroPath = path.join(vault, "PersonalOS/Assets/home-hero.png");
 const appearancePath = path.join(vault, ".obsidian/appearance.json");
+const homeViewPath = path.join(vault, "PersonalOS/Views/home.js");
 const allowedPrefixes = [
   ".personal-os.markdown-preview-view",
   ".personal-os.markdown-source-view",
@@ -33,16 +35,27 @@ function rules(source, context = "normal") {
     if (depth) throw new Error(`CSS rule is missing a closing brace: ${prelude}`);
 
     const body = css.slice(open + 1, close - 1);
-    if (/^@(media|supports|container|layer)\b/i.test(prelude)) {
-      found.push(...rules(body, context));
-    } else if (/^@(-[\w]+-)?keyframes\b/i.test(prelude)) {
+    if (/^@(-[\w]+-)?keyframes\b/i.test(prelude)) {
       found.push(...rules(body, "keyframes"));
+    } else if (prelude.startsWith("@")) {
+      found.push(...rules(body, context));
     } else if (context !== "keyframes" && !prelude.startsWith("@")) {
       found.push(...prelude.split(",").map(selector => selector.trim()).filter(Boolean));
     }
     cursor = close;
   }
   return found;
+}
+
+function assertScoped(source) {
+  const selectors = rules(source);
+  assert.ok(selectors.length > 0, "personal-os.css must contain style rules");
+  for (const selector of selectors) {
+    assert.ok(
+      allowedPrefixes.some(prefix => selector.startsWith(prefix)),
+      `unscoped selector: ${selector}`
+    );
+  }
 }
 
 test("selector parser handles lists, nested media rules, and keyframes", () => {
@@ -61,16 +74,16 @@ test("selector parser handles lists, nested media rules, and keyframes", () => {
   ]);
 });
 
+test("unknown block at-rules cannot hide an unscoped selector", () => {
+  assert.throws(
+    () => assertScoped("@scope (.shell) { body { color: red; } }"),
+    /unscoped selector: body/
+  );
+});
+
 test("Personal OS stylesheet is balanced and every selector stays scoped", () => {
   assert.ok(fs.existsSync(cssPath), "personal-os.css must exist");
-  const selectors = rules(fs.readFileSync(cssPath, "utf8"));
-  assert.ok(selectors.length > 0, "personal-os.css must contain style rules");
-  for (const selector of selectors) {
-    assert.ok(
-      allowedPrefixes.some(prefix => selector.startsWith(prefix)),
-      `unscoped selector: ${selector}`
-    );
-  }
+  assertScoped(fs.readFileSync(cssPath, "utf8"));
 });
 
 test("stylesheet exposes only the approved Personal OS design tokens", () => {
@@ -94,6 +107,17 @@ test("approved local Hero is a 1774 by 887 PNG", () => {
   assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
   assert.equal(png.readUInt32BE(16), 1774);
   assert.equal(png.readUInt32BE(20), 887);
+  assert.equal(
+    crypto.createHash("sha256").update(png).digest("hex"),
+    "ec917e3cd242462ce1e925a92f97f861e1b45ef388fc08a951816c79965cae79"
+  );
+});
+
+test("stylesheet and home view keep the approved Hero integrated", () => {
+  const css = fs.readFileSync(cssPath, "utf8");
+  const homeView = fs.readFileSync(homeViewPath, "utf8");
+  assert.match(css, /url\(["']\.\.\/\.\.\/PersonalOS\/Assets\/home-hero\.png["']\)/);
+  assert.match(homeView, /createDiv\(\{\s*cls:\s*["']pos-hero["']\s*\}\)/);
 });
 
 test("Obsidian enables Personal OS without dropping existing snippets", () => {
