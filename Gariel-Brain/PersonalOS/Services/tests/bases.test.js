@@ -1,19 +1,78 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { spawnSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
 
 const vault = path.resolve(__dirname, "../../..");
 const read = file => fs.readFileSync(path.join(vault, file), "utf8");
+
+const scalar = value => {
+  if (value === "") return null;
+  if (value === "true") return true;
+  if (value === "false") return false;
+  if (/^-?\d+(?:\.\d+)?$/.test(value)) return Number(value);
+  if (value.startsWith('"') && value.endsWith('"')) return JSON.parse(value);
+  return value;
+};
+
 const parseYaml = source => {
-  const result = spawnSync(
-    "ruby",
-    ["-ryaml", "-rjson", "-e", "puts JSON.generate(YAML.safe_load(STDIN.read, permitted_classes: [], aliases: false))"],
-    { input: source, encoding: "utf8" }
-  );
-  assert.equal(result.status, 0, result.stderr);
-  return JSON.parse(result.stdout);
+  const lines = source.split("\n")
+    .filter(line => line.trim() && !line.trimStart().startsWith("#"))
+    .map(line => ({ indent: line.length - line.trimStart().length, text: line.trim() }));
+
+  const keyValue = text => {
+    const separator = text.indexOf(":");
+    assert.notEqual(separator, -1, `expected mapping entry: ${text}`);
+    return [text.slice(0, separator), text.slice(separator + 1).trim()];
+  };
+
+  const parseBlock = (start, indent) => {
+    const isList = lines[start].text.startsWith("- ");
+    const value = isList ? [] : {};
+    let index = start;
+
+    while (index < lines.length && lines[index].indent === indent) {
+      const line = lines[index];
+      if (isList) {
+        assert.ok(line.text.startsWith("- "), `mixed collection at: ${line.text}`);
+        const item = line.text.slice(2);
+        if (item.includes(":")) {
+          const object = {};
+          const [key, raw] = keyValue(item);
+          object[key] = raw ? scalar(raw) : parseBlock(index + 1, lines[index + 1].indent)[0];
+          index += 1;
+          while (index < lines.length && lines[index].indent > indent) {
+            const [nested, next] = parseBlock(index, lines[index].indent);
+            Object.assign(object, nested);
+            index = next;
+          }
+          value.push(object);
+          continue;
+        }
+        value.push(scalar(item));
+        index += 1;
+        continue;
+      }
+
+      assert.ok(!line.text.startsWith("- "), `mixed collection at: ${line.text}`);
+      const [key, raw] = keyValue(line.text);
+      if (raw) {
+        value[key] = scalar(raw);
+        index += 1;
+      } else if (lines[index + 1]?.indent > indent) {
+        const [nested, next] = parseBlock(index + 1, lines[index + 1].indent);
+        value[key] = nested;
+        index = next;
+      } else {
+        value[key] = null;
+        index += 1;
+      }
+    }
+    return [value, index];
+  };
+
+  assert.ok(lines.length, "expected YAML content");
+  return parseBlock(0, lines[0].indent)[0];
 };
 const parseFrontmatter = source => {
   const match = source.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
