@@ -63,6 +63,23 @@ test("the four entry pages and review interfaces remain connected", () => {
   assert.ok(fs.existsSync(path.join(vault, "PersonalOS/Templates/Monthly Review.md")));
 });
 
+test("home shortcuts point to existing meaningful notes", () => {
+  const source = read("PersonalOS/Views/home.js");
+  for (const target of ["Book/阅读主页", "Programming/Algorithm/Binary-Search", "Challenge/Personal Challenges", "00 Home/目标中心"]) {
+    assert.match(source, new RegExp(JSON.stringify(target).slice(1, -1).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.ok(fs.existsSync(path.join(vault, `${target}.md`)), `${target}.md must exist`);
+  }
+  assert.doesNotMatch(source, /\["⌘ Programming", "Programming"\]/);
+  assert.doesNotMatch(source, /\["⚑ Challenge", "Challenge"\]/);
+});
+
+test("empty weekly goal progress is rendered as not started", () => {
+  const source = read("PersonalOS/Views/home.js");
+  assert.match(source, /linked\.length\s*\?[^:]+:\s*"尚未开始"/s);
+  assert.match(source, /goalMatches/);
+  assert.doesNotMatch(source, /includes\(activeWeek\.file\.name\)/);
+});
+
 test("task storage is constrained to canonical monthly task paths", () => {
   const model = require("../task-model");
   assert.equal(model.monthPath("2026-09-04"), "PersonalOS/Tasks/2026/2026-09.md");

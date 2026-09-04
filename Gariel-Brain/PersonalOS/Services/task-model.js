@@ -57,10 +57,20 @@ function validLink(value) {
   return value === undefined || /^\[\[[^\n]+\]\]$/.test(value);
 }
 
+function validDate(value) {
+  if (!DATE.test(String(value))) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}
+
+function assertValidDate(value) {
+  if (!validDate(value)) throw new Error("date must be YYYY-MM-DD and a real calendar date");
+}
+
 function validateTask(input, enabledModules) {
   for (const key of ["title", "task_id", "date", "module", "priority", "goal", "output", "started_at"]) assertSingleLine(input[key], key);
   if (!input.title || !input.title.trim()) throw new Error("title is required");
-  if (!DATE.test(input.date)) throw new Error("date must be YYYY-MM-DD");
+  assertValidDate(input.date);
   if (!enabledModules.has(input.module)) throw new Error("module is not enabled");
   if (!PRIORITIES.has(input.priority || "P2")) throw new Error("priority is invalid");
   if (!validLink(input.goal)) throw new Error("goal must be an internal link");
@@ -69,7 +79,7 @@ function validateTask(input, enabledModules) {
 }
 
 function monthPath(date) {
-  if (!DATE.test(date)) throw new Error("date must be YYYY-MM-DD");
+  assertValidDate(date);
   return `PersonalOS/Tasks/${date.slice(0, 4)}/${date.slice(0, 7)}.md`;
 }
 
@@ -77,4 +87,4 @@ function assertTaskPath(path) {
   if (!/^PersonalOS\/Tasks\/\d{4}\/\d{4}-\d{2}\.md$/.test(path)) throw new Error("path is outside PersonalOS Tasks");
 }
 
-module.exports = { parseTasks, formatTask, replaceField, toggleCheckbox, validateTask, monthPath, assertTaskPath };
+module.exports = { parseTasks, formatTask, replaceField, toggleCheckbox, validDate, validateTask, monthPath, assertTaskPath };

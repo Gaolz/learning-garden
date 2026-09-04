@@ -2,7 +2,16 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const { dailyHighlights, dateRange, normalizeAnchor, summarize } = require("../review-model");
+const {
+  challengeProgress,
+  completedReadings,
+  dailyHighlights,
+  dateRange,
+  normalizeAnchor,
+  repeatedBlockers,
+  summarize,
+  weeklyFocuses
+} = require("../review-model");
 
 const task = (id, date, module, priority, done) => ({
   title: id,
@@ -85,4 +94,65 @@ test("review templates pass the raw Dataview anchor to the review view", () => {
     assert.match(codeBlock, /anchor:\s*dv\.current\(\)\.anchor\s*[,\n]/, name);
     assert.doesNotMatch(codeBlock, /anchor:\s*String\s*\(/, name);
   }
+});
+
+test("Challenge progress counts checklist cells in the existing table", () => {
+  const source = [
+    "| # | Challenge | Done |",
+    "|---|---|---|",
+    "| 1 | A | [x] |",
+    "| 2 | B | [ ] |",
+    "| 3 | C | [X] |"
+  ].join("\n");
+  assert.deepEqual(challengeProgress(source), { done: 2, total: 3 });
+});
+
+test("monthly summary extracts weekly focus in anchor order", () => {
+  const reviews = [
+    { path: "PersonalOS/Reviews/Weekly/late.md", source: "---\nanchor: 2026-09-21\n---\n## 下周唯一重点\n- 发布 v1\n" },
+    { path: "PersonalOS/Reviews/Weekly/early.md", source: "---\nanchor: 2026-09-07\n---\n## 下周唯一重点\n完成首页\n" },
+    { path: "PersonalOS/Reviews/Weekly/outside.md", source: "---\nanchor: 2026-10-01\n---\n## 下周唯一重点\n十月事项\n" }
+  ];
+  assert.deepEqual(weeklyFocuses(reviews, { start: "2026-09-01", end: "2026-09-30" }), [
+    { date: "2026-09-07", text: "完成首页", path: "PersonalOS/Reviews/Weekly/early.md" },
+    { date: "2026-09-21", text: "发布 v1", path: "PersonalOS/Reviews/Weekly/late.md" }
+  ]);
+});
+
+test("monthly summary selects completed reading notes by completion date", () => {
+  const readings = [
+    { path: "Book/01_Readings/B.md", basename: "B", source: "---\n状态: 已读\n结束日期: 2026-09-20\n---\n" },
+    { path: "Book/01_Readings/A.md", basename: "A", source: "---\n状态: 已读\n结束日期: 2026-09-02\n---\n" },
+    { path: "Book/01_Readings/Reading.md", basename: "Reading", source: "---\n状态: 阅读中\n结束日期: 2026-09-03\n---\n" },
+    { path: "Book/01_Readings/Old.md", basename: "Old", source: "---\n状态: 已读\n结束日期: 2026-08-31\n---\n" }
+  ];
+  assert.deepEqual(completedReadings(readings, { start: "2026-09-01", end: "2026-09-30" }), [
+    { title: "A", date: "2026-09-02", path: "Book/01_Readings/A.md" },
+    { title: "B", date: "2026-09-20", path: "Book/01_Readings/B.md" }
+  ]);
+});
+
+test("monthly summary reports only repeated blockers from weekly and Daily Notes", () => {
+  const weekly = [
+    { path: "w1.md", source: "---\nanchor: 2026-09-07\n---\n## 本周停止什么\n- 睡眠不足\n- 临时会议\n" },
+    { path: "w2.md", source: "---\nanchor: 2026-09-14\n---\n## Blocker\n睡眠不足\n" }
+  ];
+  const daily = [
+    { path: "DailyNotes/2026-09-01.md", source: "- **Blocker:** 睡眠不足\n" },
+    { path: "DailyNotes/2026-09-02.md", source: "阻碍：需求不清\n" }
+  ];
+  assert.deepEqual(repeatedBlockers(weekly, daily, { start: "2026-09-01", end: "2026-09-30" }), [
+    { text: "睡眠不足", count: 3 }
+  ]);
+});
+
+test("review view exposes the approved weekly and monthly read-only summaries", () => {
+  const source = fs.readFileSync(path.join(__dirname, "../../Views/review.js"), "utf8");
+  for (const heading of ["Challenge 当前进度", "每周唯一重点", "当月完成的阅读记录", "重复阻碍"]) {
+    assert.match(source, new RegExp(heading));
+  }
+  assert.match(source, /Challenge\/Personal Challenges\.md/);
+  assert.match(source, /Book\/01_Readings/);
+  assert.match(source, /PersonalOS\/Reviews\/Weekly/);
+  assert.doesNotMatch(source, /vault\.(?:create|modify|delete|rename)|adapter\.(?:write|remove|mkdir)/);
 });

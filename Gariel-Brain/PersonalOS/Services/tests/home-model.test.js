@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { parseInternalLink, selectToday } = require("../home-model");
+const { goalMatches, parseInternalLink, selectToday } = require("../home-model");
 
 const enabledModules = new Set(["programming-english", "reading", "body"]);
 const task = (id, module, priority, date = "2026-09-04", done = false, extra = {}) => ({
@@ -84,4 +84,13 @@ test("missing goal or output targets are diagnostic and links keep their labels"
     target: "Book/Existing",
     label: "成果别名"
   });
+});
+
+test("goal matching compares the exact wiki-link target or basename", () => {
+  const goal = { path: "PersonalOS/Goals/完成 Rails.md", name: "完成 Rails", basename: "完成 Rails" };
+  assert.equal(goalMatches("[[完成 Rails|本周目标]]", goal), true);
+  assert.equal(goalMatches("[[PersonalOS/Goals/完成 Rails]]", goal), true);
+  assert.equal(goalMatches("[[完成 Rails 延伸]]", goal), false);
+  assert.equal(goalMatches("[[Archive/完成 Rails]]", goal), false);
+  assert.equal(goalMatches("完成 Rails", goal), false);
 });

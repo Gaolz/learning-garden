@@ -1,6 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const path = require("node:path");
+const fs = require("node:fs");
 
 const config = require(path.resolve(__dirname, "../../../.obsidian/plugins/quickadd/data.json"));
 const { parseTasks, validateTask } = require("../task-model");
@@ -21,12 +22,20 @@ test("preserves Capture idea and adds exactly one safe Personal OS inbox capture
   assert.equal(choice.newLineCapture.direction, "below");
   assert.equal(choice.prepend, false);
 
-  const rendered = choice.format.format
+  assert.doesNotMatch(choice.format.format, /SSS/);
+  assert.match(choice.format.format, /\{\{RANDOM:\d+\}\}/);
+  const quickAddSource = fs.readFileSync(path.resolve(__dirname, "../../../.obsidian/plugins/quickadd/main.js"), "utf8");
+  assert.ok(quickAddSource.includes("{{RANDOM:(\\d+)}}"), "installed QuickAdd must support RANDOM length tokens");
+
+  const render = random => choice.format.format
     .replace("{{VALUE:任务}}", "临时验证任务")
-    .replace("{{DATE:YYYYMMDD-HHmmssSSS}}", "20260904-123456789")
+    .replace("{{DATE:YYYYMMDD-HHmmss}}", "20260904-123456")
+    .replace("{{RANDOM:8}}", random)
     .replace("{{DATE:YYYY-MM-DD}}", "2026-09-04");
+  const rendered = render("a1b2c3d4");
   assert.doesNotMatch(rendered, /{{[^}]+}}/);
   const tasks = parseTasks(rendered);
   assert.equal(tasks.length, 1);
   validateTask({ title: tasks[0].title, ...tasks[0].fields }, new Set(["temporary"]));
+  assert.notEqual(tasks[0].fields.task_id, parseTasks(render("z9y8x7w6"))[0].fields.task_id);
 });

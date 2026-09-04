@@ -60,6 +60,17 @@ test("validateTask requires a stable task id", () => {
   assert.throws(() => model.validateTask({ title: "x", date: "2026-09-04", module: "reading", priority: "P2" }, new Set(["reading"])), /task_id/);
 });
 
+test("validateTask rejects impossible dates and accepts leap day", () => {
+  const base = { title: "x", task_id: "id-1", module: "reading", priority: "P2" };
+  const modules = new Set(["reading"]);
+  for (const date of ["2026-13-40", "2026-02-30", "2025-02-29"]) {
+    assert.throws(() => model.validateTask({ ...base, date }, modules), /date/);
+    assert.throws(() => model.monthPath(date), /date/);
+  }
+  assert.doesNotThrow(() => model.validateTask({ ...base, date: "2024-02-29" }, modules));
+  assert.equal(model.monthPath("2024-02-29"), "PersonalOS/Tasks/2024/2024-02.md");
+});
+
 test("validateTask rejects multiline titles and task ids", () => {
   const valid = { title: "x", task_id: "id-1", date: "2026-09-04", module: "reading", priority: "P2" };
   assert.throws(() => model.validateTask({ ...valid, title: "x\n- [ ] injected" }, new Set(["reading"])), /line break/);

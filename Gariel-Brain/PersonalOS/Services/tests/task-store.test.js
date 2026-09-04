@@ -194,6 +194,22 @@ test("invalid dates are rejected before any adapter write", async () => {
   assert.deepEqual(adapter.files, new Map());
 });
 
+test("all task write operations reject impossible calendar dates before writing", async () => {
+  const adapter = memoryAdapter();
+  const store = createTaskStore(adapter, {
+    enabledModules: new Set(["reading"]),
+    idFactory: () => "id-1"
+  });
+
+  await assert.rejects(store.create({ title: "x", date: "2026-02-30", module: "reading" }), /date/);
+  await assert.rejects(store.setPriority("id-1", "2026-13-40", "P1"), /date/);
+  await assert.rejects(store.setDone("id-1", "2026-02-30", true), /date/);
+  await assert.rejects(store.start("id-1", "2025-02-29", "2026-09-04T09:15:00Z"), /date/);
+  await assert.rejects(store.move("id-1", "2026-02-30", "2026-03-01"), /date/);
+  await assert.rejects(store.move("id-1", "2026-03-01", "2026-13-01"), /date/);
+  assert.deepEqual(adapter.writes, []);
+});
+
 test("Obsidian adapter creates missing directory segments", async () => {
   const entries = new Set(["PersonalOS"]);
   const created = [];

@@ -73,7 +73,7 @@
       },
       "format": {
         "enabled": true,
-        "format": "- [ ] {{VALUE:任务}}\n  [task_id:: {{DATE:YYYYMMDD-HHmmssSSS}}]\n  [date:: {{DATE:YYYY-MM-DD}}]\n  [module:: temporary]\n  [priority:: P2]"
+        "format": "- [ ] {{VALUE:任务}}\n  [task_id:: {{DATE:YYYYMMDD-HHmmss}}-{{RANDOM:8}}]\n  [date:: {{DATE:YYYY-MM-DD}}]\n  [module:: temporary]\n  [priority:: P2]"
       },
       "insertAfter": {
         "enabled": false,

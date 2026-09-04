@@ -142,8 +142,8 @@ async function render() {
   const shortcuts = root.createDiv({ cls: "pos-shortcuts" });
   for (const [label, href] of [
     ["📚 阅读主页", "Book/阅读主页"],
-    ["⌘ Programming", "Programming"],
-    ["⚑ Challenge", "Challenge"],
+    ["⌘ Programming", "Programming/Algorithm/Binary-Search"],
+    ["⚑ Challenge", "Challenge/Personal Challenges"],
     ["◎ 目标中心", "00 Home/目标中心"]
   ]) {
     shortcuts.createEl("a", { text: label, href, cls: "internal-link pos-shortcut" });
@@ -158,9 +158,11 @@ async function render() {
   if (!activeWeek) {
     week.createEl("p", { text: "尚未设置" });
   } else {
-    const linked = tasks.filter(task => String(task.fields.goal || "").includes(activeWeek.file.name));
+    const linked = tasks.filter(task => homeModel.goalMatches(task.fields.goal, activeWeek.file));
     week.createEl("p", { text: activeWeek.file.name });
-    week.createEl("small", { text: `${linked.filter(task => task.done).length} / ${linked.length}` });
+    week.createEl("small", {
+      text: linked.length ? `${linked.filter(task => task.done).length} / ${linked.length}` : "尚未开始"
+    });
   }
 
   if (state.invalid.length) {

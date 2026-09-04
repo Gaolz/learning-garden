@@ -10,6 +10,14 @@ function parseInternalLink(value) {
     : { target: content.slice(0, separator).trim(), label: content.slice(separator + 1).trim() };
 }
 
+function goalMatches(value, goalFile) {
+  if (typeof value !== "string" || !/^\[\[[^\n]+\]\]$/.test(value)) return false;
+  const target = parseInternalLink(value).target.replace(/\.md$/i, "");
+  const path = String(goalFile?.path || "").replace(/\.md$/i, "");
+  const basename = String(goalFile?.basename || goalFile?.name || "").replace(/\.md$/i, "");
+  return target.includes("/") ? target === path : target === basename;
+}
+
 function selectToday(tasks, date, options = {}) {
   const enabledModules = options.enabledModules || new Set(tasks.map(task => task.fields?.module).filter(Boolean));
   const linkExists = options.linkExists || (() => true);
@@ -41,4 +49,4 @@ function selectToday(tasks, date, options = {}) {
   return { main, body, others, invalid };
 }
 
-module.exports = { parseInternalLink, selectToday };
+module.exports = { goalMatches, parseInternalLink, selectToday };
