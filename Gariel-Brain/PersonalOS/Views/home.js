@@ -16,7 +16,7 @@ async function loadModule(name, dependencies = {}) {
 const taskModel = await loadModule("task-model");
 const taskStoreModule = await loadModule("task-store", { "task-model": taskModel });
 const adapterModule = await loadModule("obsidian-adapter");
-const homeModel = await loadModule("home-model");
+const homeModel = await loadModule("home-model", { "task-model": taskModel });
 const today = window.moment().format("YYYY-MM-DD");
 const settings = dv.page("PersonalOS/Settings");
 const modules = dv.pages('"PersonalOS/Module Registry"')
@@ -56,7 +56,10 @@ async function render() {
   dv.container.empty();
   const root = dv.container.createDiv({ cls: "personal-os-dashboard" });
   const tasks = await readTasks();
-  const state = homeModel.selectToday(tasks, today);
+  const state = homeModel.selectToday(tasks, today, {
+    enabledModules,
+    linkExists: (target, task) => Boolean(app.metadataCache.getFirstLinkpathDest(target, task.sourcePath || ""))
+  });
 
   const top = root.createDiv({ cls: "pos-top" });
   top.createEl("strong", { text: today });
@@ -78,8 +81,8 @@ async function render() {
   } else {
     main.createEl("h3", { text: state.main.title });
     if (state.main.fields.output) {
-      const outputPath = state.main.fields.output.replace(/^\[\[/, "").replace(/\]\]$/, "").split("|")[0];
-      main.createEl("a", { text: "打开成果 ↗", href: outputPath, cls: "internal-link" });
+      const output = homeModel.parseInternalLink(state.main.fields.output);
+      main.createEl("a", { text: `${output.label} ↗`, href: output.target, cls: "internal-link" });
     }
     action(main, state.main.done ? "恢复" : "完成", () =>
       store.setDone(state.main.fields.task_id, state.main.fields.date, !state.main.done)
@@ -165,7 +168,7 @@ async function render() {
     details.createEl("summary", { text: `待整理（${state.invalid.length}）` });
     for (const task of state.invalid) {
       details.createEl("p", {
-        text: `${task.title} · ${task.sourcePath || "未知来源"} · ${task.fields.task_id || "缺少 task_id"}`
+        text: `${task.title} · ${task.sourcePath || "未知来源"} · ${task.diagnostic || "需要整理"}`
       });
     }
   }
