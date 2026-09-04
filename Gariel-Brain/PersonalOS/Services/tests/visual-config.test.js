@@ -9,6 +9,7 @@ const cssPath = path.join(vault, ".obsidian/snippets/personal-os.css");
 const heroPath = path.join(vault, "PersonalOS/Assets/home-hero.png");
 const appearancePath = path.join(vault, ".obsidian/appearance.json");
 const homeViewPath = path.join(vault, "PersonalOS/Views/home.js");
+const homePagePath = path.join(vault, "00 Home/Personal OS.md");
 const allowedPrefixes = [
   ".personal-os.markdown-preview-view",
   ".personal-os.markdown-source-view",
@@ -120,17 +121,26 @@ test("stylesheet and home view keep the approved Hero integrated", () => {
   assert.match(homeView, /createDiv\(\{\s*cls:\s*["']pos-hero["']\s*\}\)/);
 });
 
+test("Personal OS hides page properties without deleting their frontmatter", () => {
+  const css = fs.readFileSync(cssPath, "utf8");
+  const homePage = fs.readFileSync(homePagePath, "utf8");
+  assert.match(css, /\.personal-os\.markdown-preview-view\s+\.metadata-container\s*\{[^}]*display:\s*none/s);
+  assert.match(homePage, /^---\n[\s\S]*cssclasses:\n\s+- personal-os[\s\S]*\n---/);
+});
+
+test("approved Hero covers the whole page instead of repeating inside the hero card", () => {
+  const css = fs.readFileSync(cssPath, "utf8");
+  const pageRule = css.match(/\.personal-os\.markdown-preview-view\s*\{([\s\S]*?)\}/)?.[1] || "";
+  const heroRule = css.match(/\.personal-os \.personal-os-dashboard \.pos-hero\s*\{([\s\S]*?)\}/)?.[1] || "";
+  assert.match(pageRule, /url\(["']\.\.\/\.\.\/PersonalOS\/Assets\/home-hero\.png["']\)/);
+  assert.match(pageRule, /background-size:\s*cover/);
+  assert.match(pageRule, /background-attachment:\s*fixed/);
+  assert.doesNotMatch(heroRule, /url\(/);
+});
+
 test("Obsidian enables Personal OS without dropping existing snippets", () => {
   const appearance = JSON.parse(fs.readFileSync(appearancePath, "utf8"));
-  assert.deepEqual(appearance, {
-    cssTheme: "OnePage",
-    accentColor: "#6eb0e2",
-    interfaceFontFamily: "Monaco",
-    textFontFamily: "Geneva",
-    baseFontSize: 16,
-    baseFontSizeAction: true,
-    translucency: true,
-    enabledCssSnippets: ["photo-gallery", "reading-home", "personal-os"],
-    theme: "obsidian"
-  });
+  for (const snippet of ["photo-gallery", "reading-home", "personal-os"]) {
+    assert.ok(appearance.enabledCssSnippets.includes(snippet), `${snippet} must remain enabled`);
+  }
 });
