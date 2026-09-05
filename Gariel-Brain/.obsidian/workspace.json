@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Photo/Year Gallery.md",
+                "file": "DailyNotes/2026-09-05.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Year Gallery"
+              "title": "2026-09-05"
             }
           }
         ]
@@ -79,11 +79,13 @@
               "title": "书签"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 346.20709228515625
+    "width": 346.20709228515625,
+    "collapsed": true
   },
   "right": {
     "id": "6c4d696463714be5",
@@ -222,22 +224,33 @@
       "bases:新建数据库": false,
       "markdown-importer:打开 Markdown 格式转换器": false,
       "templater-obsidian:Templater": false,
-      "realclaudian:Open Claudian": false,
-      "homepage:Open homepage": false
+      "realclaudian:Open Claudian": false
     }
   },
-  "active": "9f2133919f06d9e2",
+  "active": "ba933e879be2d765",
   "lastOpenFiles": [
-    "Photo/README.md",
+    "Photo/Month Gallery.md",
+    "Photo/Year Gallery.md",
+    "Photo/2026/09/2026-09-05.md",
+    "DailyNotes/2026-09-05.md",
+    "assets/photo/2026/09/2026-09-05.jpg",
+    "每日古诗词/诗词笔记/2026-09-05_丑奴儿·书博山道中壁.md",
+    "每日古诗词/诗词笔记/2026-09-04_浣溪沙·游蕲水清泉寺.md",
+    "每日古诗词/模板.md",
     "Templates/Daily Note Template.md",
+    "DailyNotes/2026-09-04.md",
+    "Photo/2026/09/2026-09-04.md",
+    "assets/photo/2026/09/2026-09-04.png",
+    "每日古诗词/诗词总览.md",
+    "每日古诗词/诗词笔记",
+    "每日古诗词",
+    "Photo/README.md",
     "Templates/Photo Note Template.md",
     "Templates/Process Photo Drop.md",
-    "DailyNotes/2026-09-04.md",
     "Templates/Tech Article Note Template.md",
     "Templates/Challenge Template.md",
     "Templates/CodeReading-SubNote.md",
     "Templates/CodeReading-MOC.md",
-    "Photo/Month Gallery.md",
     "Challenge/11 No AV 100 Days.md",
     "Challenge/Personal Challenges.md",
     "Challenge/01 Photo a Day.md",
@@ -245,16 +258,7 @@
     "RoadMap/Computer-Science-Roadmap.md",
     "生活 SOP.md",
     "00 Home/未命名.md",
-    "Book/00_Templates/template_book.md",
-    "Book/INDEX.md",
-    "Book/SKILL.md",
-    "Book/阅读主页.md",
     "Book/阅读书库.base",
-    "Book/01_Readings/时间游戏.md",
-    "00 Home/Personal OS.md",
-    "Book/01_Readings/四川 田野中的汉灵.md",
-    "00 Home/目标中心.md",
-    "00 Home/模块中心.md",
     "PersonalOS/Assets/home-hero.png",
     "未命名",
     "docs/superpowers/specs",
@@ -270,10 +274,6 @@
     "Book/01_Readings/时间游戏.md.tmp.9759.1788071209413",
     "assets/photo/2026/08/2026-08-29.jpg",
     "assets/photo/2026/08/2026-08-27.jpg",
-    "assets/photo/2026/08/2026-08-28.jpg",
-    "assets/photo/2026/08/2026-08-26.jpg",
-    "Programming/CodeReading/httparty/httparty-source-code-book/examples/03_facade_and_forwarding.rb",
-    "Programming/CodeReading/httparty/httparty-source-code-book/examples/02_trace_httparty_get.rb",
     "未命名 1.canvas",
     "未命名.canvas"
   ]

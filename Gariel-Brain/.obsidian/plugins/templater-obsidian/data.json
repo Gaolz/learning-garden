@@ -12,6 +12,10 @@
     {
       "folder": "DailyNotes",
       "template": "Templates/Daily Note Template.md"
+    },
+    {
+      "folder": "每日古诗词/诗词笔记",
+      "template": "每日古诗词/模板.md"
     }
   ],
   "file_templates": [],
